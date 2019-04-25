@@ -79,14 +79,15 @@
 
 
 
-<meta name="description" content="Introduction to Algorithms If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you can">
+<meta name="description" content="Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you ca">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Introduction to Algorithms">
 <meta property="og:url" content="https://Tishacy.github.io/2019/04/25/algorithm-introduction-notes/index.html">
 <meta property="og:site_name" content="Tishacy">
-<meta property="og:description" content="Introduction to Algorithms If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you can">
+<meta property="og:description" content="Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you ca">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Insertion-sort-example-300px.gif/220px-Insertion-sort-example-300px.gif">
 <meta property="og:image" content="https://mjd507.github.io/images/Algorithm/InsertionSort.png">
 <meta property="og:image" content="https://he-s3.s3.amazonaws.com/media/uploads/06e770e.png">
@@ -98,11 +99,11 @@
 <meta property="og:image" content="https://images.slideplayer.com/27/8903843/slides/slide_2.jpg">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg/240px-Hash_table_4_1_1_0_0_0_0_LL.svg.png">
 <meta property="og:image" content="http://www.cs.cmu.edu/~clo/www/CMU/DataStructures/Lessons/lesson11_2_files/image010.jpg">
-<meta property="og:updated_time" content="2019-04-25T06:16:59.130Z">
+<meta property="og:updated_time" content="2019-04-25T06:49:04.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction to Algorithms">
-<meta name="twitter:description" content="Introduction to Algorithms If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you can">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Insertion-sort-example-300px.gif/220px-Insertion-sort-example-300px.gif">
+<meta name="twitter:description" content="Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you ca">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png">
 
 
 
@@ -415,7 +416,8 @@
       
 
       
-        <h1 id="Introduction-to-Algorithms"><a href="#Introduction-to-Algorithms" class="headerlink" title="Introduction to Algorithms"></a>Introduction to Algorithms</h1><blockquote>
+        <h1 id="Introduction-to-Algorithms"><a href="#Introduction-to-Algorithms" class="headerlink" title="Introduction to Algorithms"></a>Introduction to Algorithms</h1><p><img src="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png" alt></p>
+<blockquote>
 <p>If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you can program every day for ten years, or you can program every day for two years and take an algorithm class.</p>
 <p><em>Charles Leiserson</em></p>
 </blockquote>
@@ -466,7 +468,7 @@
 <blockquote>
 <p>Ex: $2n^2 = \mathbb{O}(n^3)$</p>
 </blockquote>
-<p>Set definition: $\mathbb{O}(g(n))={ f(n): \text{ there are some constants } c&gt;0 \text{ and } n_0&gt;0, \ \text{such that } 0 \le f(n) \le c \cdot g(n) \text{for all } n \ge n_0 }$</p>
+<p>Set definition: $\mathbb{O}(g(n))= f(n):$ there are some constants $c&gt;0$ and $n_0&gt;0$, such that $0 \le f(n) \le c \cdot g(n)$ for all $n \ge n_0$.</p>
 <blockquote>
 <p>Ex: $f(n) = n^3 + \mathbb{O}(n^2)$ means there is a function $h(n) \in \mathbb{O}(n^2)$, such that $f(n) = n^3 + h(n)$. This $h(n)$ is also considered  the error term.</p>
 </blockquote>
@@ -474,7 +476,7 @@
 <p>Ex: $n^2 + \mathbb{O}(n) = \mathbb{O}(n^2)$ means for any $f(n) \in \mathbb{O}(n)$, there is an $h(n) \in \mathbb{O}(n^2)$, such that $ n^2 + f(n) = h(n)$.</p>
 </blockquote>
 <h3 id="Omega-notation"><a href="#Omega-notation" class="headerlink" title="$\Omega$-notation"></a>$\Omega$-notation</h3><p>Demonstrate the <strong>lower-bound</strong> of time running an algorithm.</p>
-<p>Definition: $\Omega(g(n))={ f(n): \text{ there exist } c&gt;0 \text{and} n_0&gt;0, \ \text{such that} 0 \le c \cdot g(n)  \le f(n) \text{for all} n \ge n_0 }$</p>
+<p>Definition: $\Omega(g(n))=f(n):$ there exist $c&gt;0$ and $n_0&gt;0$, such that $0 \le c \cdot g(n) \le f(n)$ for all $n \ge n_0$.</p>
 <blockquote>
 <p>Ex: $\sqrt{n} = \Omega(\lg n)$</p>
 </blockquote>
@@ -909,7 +911,8 @@
 <h4 id="Bottom-up-algorithm"><a href="#Bottom-up-algorithm" class="headerlink" title="Bottom-up algorithm"></a>Bottom-up algorithm</h4><p>Compute for $F_1, F_2, F_3, \cdots, F_n$ one by one:</p>
 <p>Time complexity: $\Theta(n)$</p>
 <h4 id="Naive-recursive-squaring-algorithm"><a href="#Naive-recursive-squaring-algorithm" class="headerlink" title="Naive recursive squaring algorithm"></a>Naive recursive squaring algorithm</h4><p>$F_n = \frac{\psi^n}{\sqrt{5}}$ rounded to its nearest integer, where $\psi = \frac{1+\sqrt{5}}{2}$ (the golden ratio). Given that the $\psi^n$ will cost $\Theta(\log n)$ time by using ($\ref{power}$), this algorithm’s time complexity is also  $\Theta(\log n)$.</p>
-<h4 id="Recursive-squaring-algorithm"><a href="#Recursive-squaring-algorithm" class="headerlink" title="Recursive squaring algorithm"></a>Recursive squaring algorithm</h4><p>Theorem:<br>$$<br>\begin{align}<br>\begin{pmatrix}<br>F_{n+1} &amp; F_{n}    \\<br>F_{n} &amp; F_{n-1}<br>\end{pmatrix}<br>=<br>\begin{pmatrix}<br>1 &amp; 1 \\<br>1 &amp; 0<br>\end{pmatrix}<br>^n<br>\label{fib_matrix}<br>\end{align}<br>$$<br>The fibonacci number is solved by ($\ref{fib_matrix}$), which spends $\Theta(\log n )$ time for powering the $2 \times 2$ matrix (each multiplication of a $2 \times 2$ matrix costs the constant time).</p>
+<h4 id="Recursive-squaring-algorithm"><a href="#Recursive-squaring-algorithm" class="headerlink" title="Recursive squaring algorithm"></a>Recursive squaring algorithm</h4><p>Theorem:<br>$$<br>\begin{align}<br>\begin{pmatrix}<br>F_{n+1} &amp; F_{n}    \\<br>F_{n} &amp; F_{n-1}<br>\end{pmatrix}<br>=<br>\begin{pmatrix}<br>1 &amp; 1 \\<br>1 &amp; 0<br>\end{pmatrix}<br>^n<br>\end{align}<br>\label{fib_matrix}<br>$$</p>
+<p>The fibonacci number is solved by ($\ref{fib_matrix}$), which spends $\Theta(\log n )$ time for powering the $2 \times 2$ matrix (each multiplication of a $2 \times 2$ matrix costs the constant time).</p>
 
       
     </div>
