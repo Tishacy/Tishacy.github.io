@@ -1,7 +1,10 @@
 
-This repo stores code of my blog: [Tishacy's blog](https://tishacy.github.io), which is established by [hexo](https://hexo.io/).
+This repo stores code of my blog, powered by [hexo](https://hexo.io/).
+
+### link
+- [http://tishacy.com](http://tishacy.com)
 
 ### branch
 
-- `hexo` branch: source files.
-- `master` branch: deployed files.
+- `hexo`: source files.
+- `master`: deployed files.
