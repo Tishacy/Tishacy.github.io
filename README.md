@@ -2,7 +2,7 @@
 This repo stores code of my blog, powered by [hexo](https://hexo.io/).
 
 ### link
-- [http://tishacy.com](http://tishacy.com)
+- [https://tishacy.github.io](https://tishacy.github.io)
 
 ### branch
 
