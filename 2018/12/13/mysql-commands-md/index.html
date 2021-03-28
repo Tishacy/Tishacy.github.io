@@ -1,401 +1,222 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="author" content="Tishacy">
 
 
-  
+    <meta name="subtitle" content="dive into code">
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
+    <meta name="description" content="dive into code">
 
 
+    <meta name="keywords" content="Tishacy, tishacy, blog, hexo.">
 
 
+<title>MySQL Learning Notes | Tishacy</title>
 
 
 
+    <link rel="icon" href="/favicon.ico">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="database, mysql,">
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="Data Definition Language (DDL)Database SHOW DATABASES; USE &amp;lt;name of database&amp;gt;; CREATE DATABASE &amp;lt;name of database&amp;gt;; DROP DATABASE &amp;lt;name of database&amp;gt;;  Table SHOW TABLES; 12345CREATE T">
-<meta name="keywords" content="database, mysql">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MySQL Learning Notes">
-<meta property="og:url" content="http://tishacy.com/2018/12/13/mysql-commands-md/index.html">
-<meta property="og:site_name" content="Tishacy">
-<meta property="og:description" content="Data Definition Language (DDL)Database SHOW DATABASES; USE &amp;lt;name of database&amp;gt;; CREATE DATABASE &amp;lt;name of database&amp;gt;; DROP DATABASE &amp;lt;name of database&amp;gt;;  Table SHOW TABLES; 12345CREATE T">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-25T05:53:20.822Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL Learning Notes">
-<meta name="twitter:description" content="Data Definition Language (DDL)Database SHOW DATABASES; USE &amp;lt;name of database&amp;gt;; CREATE DATABASE &amp;lt;name of database&amp;gt;; DROP DATABASE &amp;lt;name of database&amp;gt;;  Table SHOW TABLES; 12345CREATE T">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://tishacy.com/2018/12/13/mysql-commands-md/">
-
-
-
-
-
-  <title>MySQL Learning Notes | Tishacy</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
+    <!-- stylesheets list from _config.yml -->
     
-  
-
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+    <link rel="stylesheet" href="/css/style.css">
     
 
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Tishacy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">dive into code</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
 
 
-
-    </div>
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
     
 
-  
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tishacy.com/2018/12/13/mysql-commands-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tishacy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tishacy">
-    </span>
 
     
-      <header class="post-header">
-
+    
         
-        
-          <h1 class="post-title" itemprop="name headline">MySQL Learning Notes</h1>
-        
+    
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T15:48:28+08:00">
-                2018-12-13
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Bentham&#39;s Blog</a></div>
+            <div class="menu navbar-right">
                 
+                    <a class="menu-item" href="/archives">Posts</a>
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
         </div>
-      </header>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Bentham&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">MySQL Learning Notes</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Tishacy</a>
+                    
 
-      
-      
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 13, 2018&nbsp;&nbsp;15:48:28</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/database/">database</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
 
-      
-        <h2 id="Data-Definition-Language-DDL"><a href="#Data-Definition-Language-DDL" class="headerlink" title="Data Definition Language (DDL)"></a>Data Definition Language (DDL)</h2><h3 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h3><ul>
+        <div class="post-content">
+            <h2 id="data-definition-language-ddl">Data Definition Language (DDL)</h2>
+<h3 id="database">Database</h3>
+<ul>
 <li><code>SHOW DATABASES;</code></li>
 <li><code>USE &lt;name of database&gt;;</code></li>
 <li><code>CREATE DATABASE &lt;name of database&gt;;</code></li>
 <li><code>DROP DATABASE &lt;name of database&gt;;</code></li>
 </ul>
-<h3 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h3><ul>
+<h3 id="table">Table</h3>
+<ul>
 <li><code>SHOW TABLES</code>;</li>
-<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> &lt;<span class="keyword">name</span> <span class="keyword">of</span> <span class="keyword">table</span>&gt;(</span><br><span class="line"> ​	&lt;<span class="keyword">column</span> name1&gt;  &lt;<span class="keyword">column</span> type1&gt;  &lt;extra&gt;,</span><br><span class="line">   	&lt;<span class="keyword">column</span> name2&gt;  &lt;<span class="keyword">column</span> type2&gt;  &lt;extra&gt;,</span><br><span class="line">   	PRIMARY <span class="keyword">KEY</span>(&lt;a <span class="keyword">column</span> <span class="keyword">name</span>&gt;)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>DROP TABLE &lt;name of table&gt;;</code></p>
-</li>
+<li><code>Sql   CREATE TABLE &lt;name of table&gt;(    ​    &lt;column name1&gt;  &lt;column type1&gt;  &lt;extra&gt;,         &lt;column name2&gt;  &lt;column type2&gt;  &lt;extra&gt;,         PRIMARY KEY(&lt;a column name&gt;)    );</code></li>
+<li><code>DROP TABLE &lt;name of table&gt;;</code></li>
 <li><code>ALTER TABLE &lt;name of table&gt; ADD &lt;column name&gt; &lt;column type&gt; AFTER &lt;another column name&gt;;</code></li>
 <li><code>ALTER TABLE &lt;name of table&gt; DROP &lt;column name&gt;;</code></li>
 <li><code>ALTER TABLE &lt;name of table&gt; MODIFY &lt;column name&gt; &lt;column type&gt;;</code></li>
@@ -403,969 +224,300 @@
 <li><code>ALTER TABLE &lt;name of table&gt; RENAME (TO) &lt;new name of table&gt;;</code></li>
 </ul>
 <p><strong>An Example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##################### DATABASE #####################</span></span><br><span class="line"><span class="comment"># show all databases in mysql</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">| Database           |</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">| information_schema |</span></span><br><span class="line"><span class="comment">| mysql              |</span></span><br><span class="line"><span class="comment">| performance_schema |</span></span><br><span class="line"><span class="comment">| shop               |</span></span><br><span class="line"><span class="comment">| sys                |</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">5 rows in set (0.00 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># choose a database</span></span><br><span class="line"><span class="keyword">USE</span> shop;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Reading table information for completion of table and column names</span></span><br><span class="line"><span class="comment">You can turn off this feature to get a quicker startup with -A</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Database changed</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># create a new database named "new_set"</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> new_set;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Query OK, 1 row affected (0.03 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># delete the database named "new_set"</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> new_set;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Query OK, 0 row affected (0.03 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##################### TABLE #####################</span></span><br><span class="line"><span class="comment"># create a table in database "shop"</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span>(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'id'</span>,</span><br><span class="line">    user_name <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户名'</span>,</span><br><span class="line">    email <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'邮箱'</span>,</span><br><span class="line">    age <span class="built_in">TINYINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户年龄'</span>,</span><br><span class="line">    fee <span class="built_in">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0.00</span> <span class="keyword">COMMENT</span><span class="string">'余额'</span>，</span><br><span class="line">    created_at <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'注册时间'</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment"># show all tables in database 'shop'</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">| Tables_in_shop |</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">| user           |</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">1 row in set (0.00 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># show the information of the table</span></span><br><span class="line">DESC user;</span><br><span class="line"></span><br><span class="line"><span class="comment"># add one column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">ADD</span> <span class="keyword">password</span> <span class="built_in">CHAR</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'Password'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete one column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">DROP</span> <span class="keyword">password</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># change the type of one column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">MODIFY</span> <span class="keyword">password</span> <span class="built_in">CHAR</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'Password'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># change the name of one column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">CHANGE</span> <span class="keyword">password</span> password1 <span class="built_in">CHAR</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'Password1'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># change the name of the table 'user' to 'User'</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">RENAME</span> <span class="keyword">User</span>;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">RENAME</span> <span class="keyword">TO</span> <span class="keyword">User</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">##################### DATABASE #####################</span><br><span class="line"># <span class="keyword">show</span> <span class="keyword">all</span> databases <span class="keyword">in</span> mysql</span><br><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">| Database           |</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">| information_schema |</span></span><br><span class="line"><span class="comment">| mysql              |</span></span><br><span class="line"><span class="comment">| performance_schema |</span></span><br><span class="line"><span class="comment">| shop               |</span></span><br><span class="line"><span class="comment">| sys                |</span></span><br><span class="line"><span class="comment">+--------------------+</span></span><br><span class="line"><span class="comment">5 rows in set (0.00 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># choose a database</span><br><span class="line">USE shop;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Reading table information for completion of table and column names</span></span><br><span class="line"><span class="comment">You can turn off this feature to get a quicker startup with -A</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Database changed</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">create</span> a <span class="keyword">new</span> database named &quot;new_set&quot;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE new_set;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Query OK, 1 row affected (0.03 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">delete</span> the database named &quot;new_set&quot;</span><br><span class="line"><span class="keyword">DROP</span> DATABASE new_set;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Query OK, 0 row affected (0.03 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">##################### <span class="keyword">TABLE</span> #####################</span><br><span class="line"># <span class="keyword">create</span> a <span class="keyword">table</span> <span class="keyword">in</span> database &quot;shop&quot;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span>(</span><br><span class="line">    id <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;id&#x27;</span>,</span><br><span class="line">    user_name <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">    email <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">    age TINYINT UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;用户年龄&#x27;</span>,</span><br><span class="line">    fee <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0.00</span> COMMENT<span class="string">&#x27;余额&#x27;</span>，</span><br><span class="line">    created_at <span class="type">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;注册时间&#x27;</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY(id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># <span class="keyword">show</span> <span class="keyword">all</span> tables <span class="keyword">in</span> database <span class="string">&#x27;shop&#x27;</span></span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">| Tables_in_shop |</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">| user           |</span></span><br><span class="line"><span class="comment">+----------------+</span></span><br><span class="line"><span class="comment">1 row in set (0.00 sec)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">show</span> the information <span class="keyword">of</span> the <span class="keyword">table</span></span><br><span class="line"><span class="keyword">DESC</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">add</span> <span class="keyword">one</span> <span class="keyword">column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">ADD</span> password <span class="type">CHAR</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;Password&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">delete</span> <span class="keyword">one</span> <span class="keyword">column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">DROP</span> password;</span><br><span class="line"></span><br><span class="line"># change the type <span class="keyword">of</span> <span class="keyword">one</span> <span class="keyword">column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> MODIFY password <span class="type">CHAR</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;Password&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># change the name <span class="keyword">of</span> <span class="keyword">one</span> <span class="keyword">column</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> CHANGE password password1 <span class="type">CHAR</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;Password1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># change the name <span class="keyword">of</span> the <span class="keyword">table</span> <span class="string">&#x27;user&#x27;</span> <span class="keyword">to</span> <span class="string">&#x27;User&#x27;</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> RENAME <span class="keyword">User</span>;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> RENAME <span class="keyword">TO</span> <span class="keyword">User</span>;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Data-Manipulation-Language-DML"><a href="#Data-Manipulation-Language-DML" class="headerlink" title="Data Manipulation Language (DML)"></a>Data Manipulation Language (DML)</h2><h3 id="Insert-New-Data-into-Table"><a href="#Insert-New-Data-into-Table" class="headerlink" title="Insert New Data into Table"></a>Insert New Data into Table</h3><ul>
+<h2 id="data-manipulation-language-dml">Data Manipulation Language (DML)</h2>
+<h3 id="insert-new-data-into-table">Insert New Data into Table</h3>
+<ul>
 <li><p><code>INSERT INTO &lt;name of table&gt; (&lt;column1&gt;,  &lt;column2&gt;, &lt;column3&gt;) VALUES (&lt;value1&gt;, &lt;value2&gt;, &lt;value3&gt;);</code></p>
 <ul>
 <li><p><code>INSERT INTO &lt;name of table&gt; VALUES (&lt;value1&gt;, &lt;value2&gt;, &lt;value3&gt;);</code></p>
 <blockquote>
 <p>This will insert a data with values in order with columns.</p>
-</blockquote>
-</li>
+</blockquote></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Update-Data-in-Table"><a href="#Update-Data-in-Table" class="headerlink" title="Update Data in Table"></a>Update Data in Table</h3><ul>
+<h3 id="update-data-in-table">Update Data in Table</h3>
+<ul>
 <li><p><code>UPDATE &lt;name of table&gt; SET &lt;column1&gt;=&lt;value1&gt;, &lt;column2&gt;=&lt;value2&gt; WHERE &lt;conditions&gt;;</code></p>
 <ul>
 <li><code>UPDATE &lt;name of table&gt; SET &lt;column1&gt;=&lt;value1&gt;, &lt;column2&gt;=&lt;value2&gt; ;</code></li>
 </ul>
 <blockquote>
 <p>This will update the columns of all data in the table.</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
-<h3 id="Delete-Data-from-Table"><a href="#Delete-Data-from-Table" class="headerlink" title="Delete Data from Table"></a>Delete Data from Table</h3><ul>
+<h3 id="delete-data-from-table">Delete Data from Table</h3>
+<ul>
 <li><p><code>DELETE FROM &lt;name of table&gt; WHERE &lt;conditions&gt;;</code></p>
 <ul>
 <li><p><code>DELETE FROM &lt;name of table&gt;;</code></p>
 <blockquote>
 <p><strong>WARNING</strong>: This would clear all the data of the table, but the id won’t be clear.</p>
-</blockquote>
-</li>
-</ul>
-</li>
+</blockquote></li>
+</ul></li>
 <li><p><code>TRUNCATE &lt;name of table&gt;;</code></p>
 <blockquote>
 <p><strong>WARNING</strong>: This would clear all the data of the table, with id also cleared.</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
 <p><strong>An Example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show the contents of the table user</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># insert data</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span>(user_name, user_email) <span class="keyword">VALUES</span>(<span class="string">'mike'</span>, <span class="string">'mike@gmail.com'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># update data</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> mobile_phone=<span class="string">'13888888888'</span>, fee=<span class="string">'123.45'</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">BETWEEN</span> <span class="number">2</span> <span class="keyword">AND</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete the data with id=5</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete all the data without id</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete all the data, as well as id</span></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">show</span> the contents <span class="keyword">of</span> the <span class="keyword">table</span> <span class="keyword">user</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">insert</span> data</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span>(user_name, user_email) <span class="keyword">VALUES</span>(<span class="string">&#x27;mike&#x27;</span>, <span class="string">&#x27;mike@gmail.com&#x27;</span>);</span><br><span class="line"></span><br><span class="line"># update data</span><br><span class="line">UPDATE <span class="keyword">user</span> <span class="keyword">SET</span> mobile_phone<span class="operator">=</span><span class="string">&#x27;13888888888&#x27;</span>, fee<span class="operator">=</span><span class="string">&#x27;123.45&#x27;</span> <span class="keyword">WHERE</span> id <span class="keyword">BETWEEN</span> <span class="number">2</span> <span class="keyword">AND</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">delete</span> the data <span class="keyword">with</span> id<span class="operator">=</span><span class="number">5</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">delete</span> <span class="keyword">all</span> the data <span class="keyword">without</span> id</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">delete</span> <span class="keyword">all</span> the data, <span class="keyword">as</span> well <span class="keyword">as</span> id</span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Data-Control-Language-DCL"><a href="#Data-Control-Language-DCL" class="headerlink" title="Data Control Language (DCL)"></a>Data Control Language (DCL)</h2><h3 id="Change-Password"><a href="#Change-Password" class="headerlink" title="Change Password"></a>Change Password</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># change password</span></span><br><span class="line"><span class="keyword">USE</span> mysql;</span><br><span class="line"></span><br><span class="line"><span class="comment"># if the version of mysql is 5.7 or older, use:</span></span><br><span class="line"><span class="comment">-- SELECT user, host, authentication_string FROM user;</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> authentication_string=<span class="keyword">PASSWORD</span>(<span class="string">'new_password'</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span>=<span class="string">'root'</span> <span class="keyword">AND</span> host=<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># elif the version of mysql is less than 5.7, use:</span></span><br><span class="line"><span class="comment">-- SELECT user, host, password FROM user;</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> <span class="keyword">password</span>=<span class="keyword">PASSWORD</span>(<span class="string">'new_password'</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span>=<span class="string">'root'</span> <span class="keyword">AND</span> host=<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># then flush the privileges;</span></span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
-<h3 id="Create-User"><a href="#Create-User" class="headerlink" title="Create User"></a>Create User</h3><ul>
+<h2 id="data-control-language-dcl">Data Control Language (DCL)</h2>
+<h3 id="change-password">Change Password</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># change password</span><br><span class="line">USE mysql;</span><br><span class="line"></span><br><span class="line"># if the version <span class="keyword">of</span> mysql <span class="keyword">is</span> <span class="number">5.7</span> <span class="keyword">or</span> older, use:</span><br><span class="line"><span class="comment">-- SELECT user, host, authentication_string FROM user;</span></span><br><span class="line">UPDATE <span class="keyword">user</span> <span class="keyword">SET</span> authentication_string<span class="operator">=</span>PASSWORD(<span class="string">&#x27;new_password&#x27;</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span> <span class="keyword">AND</span> host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># elif the version <span class="keyword">of</span> mysql <span class="keyword">is</span> less than <span class="number">5.7</span>, use:</span><br><span class="line"><span class="comment">-- SELECT user, host, password FROM user;</span></span><br><span class="line">UPDATE <span class="keyword">user</span> <span class="keyword">SET</span> password<span class="operator">=</span>PASSWORD(<span class="string">&#x27;new_password&#x27;</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span> <span class="keyword">AND</span> host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">then</span> flush the privileges;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+<h3 id="create-user">Create User</h3>
+<ul>
 <li><code>CREATE USER &lt;user name&gt;@&lt;user IP&gt; IDENTIFIED BY &lt;user passoword&gt;;</code></li>
 </ul>
-<h3 id="Grant-Privileges-to-User"><a href="#Grant-Privileges-to-User" class="headerlink" title="Grant Privileges to User"></a>Grant Privileges to User</h3><ul>
+<h3 id="grant-privileges-to-user">Grant Privileges to User</h3>
+<ul>
 <li><p><code>GRANT &lt;privilege1&gt;, &lt;privilege2&gt; ON &lt;database&gt;.&lt;table&gt; TO &lt;user&gt;@&lt;user IP&gt;;</code></p>
 <ul>
 <li>Granting all privileges uses <code>ALL</code> or <code>ALL PRIVILEGES</code> instead of <code>&lt;privilege1&gt;, &lt;privilege2&gt;</code>.</li>
 <li>Granting all tables of a database uses <code>&lt;database&gt;.*</code> instead of <code>&lt;database&gt;.&lt;table&gt;</code>.</li>
 <li>Granting all databases uses <code>*.*</code> instead of <code>&lt;database&gt;.&lt;table&gt;</code>.</li>
-</ul>
-</li>
+</ul></li>
 <li><p>Combining ‘create user’ and ‘grant privileges’ uses:</p>
-<p><code>GRANT &lt;privilege1&gt;, &lt;privilege2&gt; ON &lt;database&gt;.&lt;table&gt; TO &lt;new username&gt;@&lt;new user IP&gt; IDENTIFIED BY &#39;new user password&#39;;</code></p>
-</li>
+<p><code>GRANT &lt;privilege1&gt;, &lt;privilege2&gt; ON &lt;database&gt;.&lt;table&gt; TO &lt;new username&gt;@&lt;new user IP&gt; IDENTIFIED BY 'new user password';</code></p></li>
 </ul>
-<h3 id="Revoke-Privileges-from-User"><a href="#Revoke-Privileges-from-User" class="headerlink" title="Revoke Privileges from User"></a>Revoke Privileges from User</h3><ul>
-<li><code>REVOKE &lt;privilege1&gt;, &lt;privilege2&gt; ON &lt;database&gt;.&lt;table&gt; FROM &lt;user&gt;@&lt;user IP&gt;;</code><ul>
-<li>Revoking privileges from all IP uses <code>&lt;user&gt;@&#39;%&#39;</code> instead of <code>&lt;user&gt;@&lt;user IP&gt;</code>.</li>
+<h3 id="revoke-privileges-from-user">Revoke Privileges from User</h3>
+<ul>
+<li><code>REVOKE &lt;privilege1&gt;, &lt;privilege2&gt; ON &lt;database&gt;.&lt;table&gt; FROM &lt;user&gt;@&lt;user IP&gt;;</code>
+<ul>
+<li>Revoking privileges from all IP uses <code>&lt;user&gt;@'%'</code> instead of <code>&lt;user&gt;@&lt;user IP&gt;</code>.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Show-Privileges-for-User"><a href="#Show-Privileges-for-User" class="headerlink" title="Show Privileges for User"></a>Show Privileges for User</h3><ul>
+<h3 id="show-privileges-for-user">Show Privileges for User</h3>
+<ul>
 <li><code>SHOW GRANTS FOR</code><user>@<user ip>;</user></user></li>
 </ul>
-<h3 id="Delete-User"><a href="#Delete-User" class="headerlink" title="Delete User"></a>Delete User</h3><ul>
+<h3 id="delete-user">Delete User</h3>
+<ul>
 <li><code>DROP USER</code><user>@<user ip>;</user></user></li>
 </ul>
 <hr>
-<h2 id="Data-Query-Language-DQL"><a href="#Data-Query-Language-DQL" class="headerlink" title="Data Query Language (DQL)"></a>Data Query Language (DQL)</h2><h3 id="Basic-Query-Display"><a href="#Basic-Query-Display" class="headerlink" title="Basic Query Display"></a>Basic Query Display</h3><ul>
+<h2 id="data-query-language-dql">Data Query Language (DQL)</h2>
+<h3 id="basic-query-display">Basic Query Display</h3>
+<ul>
 <li><p><code>SELECT &lt;column1&gt; (AS &lt;shorthand1&gt;), &lt;column2&gt; (AS &lt;shorthand2&gt;), &lt;column3&gt; (AS &lt;shorthand3&gt;) FROM &lt;table&gt; WHERE &lt;conditions&gt;;</code></p>
 <ul>
-<li><p><code>WHERE &lt;conditions&gt;</code> could be omitted.</p>
-</li>
+<li><p><code>WHERE &lt;conditions&gt;</code> could be omitted.</p></li>
 <li><p>Listing all the data in the table uses:</p>
-<p><code>SELECT * FROM &lt;table&gt;;</code></p>
-</li>
+<p><code>SELECT * FROM &lt;table&gt;;</code></p></li>
 </ul>
 <p><strong>An Example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list user_name, user_email, mobile_phone of all data from user table.</span></span><br><span class="line"><span class="keyword">SELECT</span> user_name, user_email, mobile_phone <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email     | mobile_phone |</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">| jack      | jack@163.com   | 12555555555  |</span></span><br><span class="line"><span class="comment">| mike      | mike@gmail.com | 13888888888  |</span></span><br><span class="line"><span class="comment">| 马克      | haha@gmail.com | 13888888888  |</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># list the item where user_name is 'jack'.</span></span><br><span class="line"><span class="keyword">SELECT</span> user_name, user_emial, mobile_phone <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> user_name=<span class="string">'jack'</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email   | mobile_phone |</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">| jack      | jack@163.com | 12555555555  |</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># using shorthands</span></span><br><span class="line"><span class="keyword">SELECT</span> user_name <span class="keyword">as</span> <span class="keyword">name</span>, user_email <span class="keyword">as</span> email <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">| name | email          |</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">| jack | jack@163.com   |</span></span><br><span class="line"><span class="comment">| mike | mike@gmail.com |</span></span><br><span class="line"><span class="comment">| 马克 | haha@gmail.com |</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># list user_name, user_email, mobile_phone <span class="keyword">of</span> <span class="keyword">all</span> data <span class="keyword">from</span> <span class="keyword">user</span> table.</span><br><span class="line"><span class="keyword">SELECT</span> user_name, user_email, mobile_phone <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email     | mobile_phone |</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">| jack      | jack@163.com   | 12555555555  |</span></span><br><span class="line"><span class="comment">| mike      | mike@gmail.com | 13888888888  |</span></span><br><span class="line"><span class="comment">| 马克      | haha@gmail.com | 13888888888  |</span></span><br><span class="line"><span class="comment">+-----------+----------------+--------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># list the item <span class="keyword">where</span> user_name <span class="keyword">is</span> <span class="string">&#x27;jack&#x27;</span>.</span><br><span class="line"><span class="keyword">SELECT</span> user_name, user_emial, mobile_phone <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> user_name<span class="operator">=</span><span class="string">&#x27;jack&#x27;</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email   | mobile_phone |</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">| jack      | jack@163.com | 12555555555  |</span></span><br><span class="line"><span class="comment">+-----------+--------------+--------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">using</span> shorthands</span><br><span class="line"><span class="keyword">SELECT</span> user_name <span class="keyword">as</span> name, user_email <span class="keyword">as</span> email <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">| name | email          |</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">| jack | jack@163.com   |</span></span><br><span class="line"><span class="comment">| mike | mike@gmail.com |</span></span><br><span class="line"><span class="comment">| 马克 | haha@gmail.com |</span></span><br><span class="line"><span class="comment">+------+----------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Query-Filtered-Repeated-Data"><a href="#Query-Filtered-Repeated-Data" class="headerlink" title="Query Filtered Repeated Data"></a>Query Filtered Repeated Data</h3><ul>
+<h3 id="query-filtered-repeated-data">Query Filtered Repeated Data</h3>
+<ul>
 <li><code>SELECT DISTINCT &lt;only one column&gt; FROM &lt;table&gt;;</code></li>
 </ul>
-<h3 id="Query-Concatenated-Columns"><a href="#Query-Concatenated-Columns" class="headerlink" title="Query Concatenated Columns"></a>Query Concatenated Columns</h3><ul>
+<h3 id="query-concatenated-columns">Query Concatenated Columns</h3>
+<ul>
 <li><p><code>SELECT CONCAT(&lt;column1&gt;, &lt;column2&gt;, .........., &lt;columnN&gt;) AS &lt;concated_name&gt; FROM &lt;table&gt;;</code></p>
 <ul>
 <li><code>SELECT CONCAT_WS(&lt;seperator&gt;, &lt;column1&gt;, &lt;column2&gt;, ..., &lt;columnN&gt;) AS &lt;concated_name&gt; FROM &lt;table&gt;</code>;</li>
 </ul>
 <p><strong>An Example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(user_name, user_emial, mobile_phone) <span class="keyword">AS</span> <span class="string">'user_name_email_phone'</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">| user_name_email_phone         |</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">| jackjack@163.com12555555555   |</span></span><br><span class="line"><span class="comment">| mikemike@gmail.com13888888888 |</span></span><br><span class="line"><span class="comment">| 马克haha@gmail.com13888888888 |</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a seperator.</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT_WS</span>(<span class="string">'::'</span>, user_name, user_emial, mobile_phone) <span class="keyword">AS</span> <span class="string">'user_name_email_phone'</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">| user_name_email_phone             |</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">| jack::jack@163.com::12555555555   |</span></span><br><span class="line"><span class="comment">| mike::mike@gmail.com::13888888888 |</span></span><br><span class="line"><span class="comment">| 马克::haha@gmail.com::13888888888 |</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONCAT(user_name, user_emial, mobile_phone) <span class="keyword">AS</span> <span class="string">&#x27;user_name_email_phone&#x27;</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">| user_name_email_phone         |</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">| jackjack@163.com12555555555   |</span></span><br><span class="line"><span class="comment">| mikemike@gmail.com13888888888 |</span></span><br><span class="line"><span class="comment">| 马克haha@gmail.com13888888888 |</span></span><br><span class="line"><span class="comment">+-------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">Add</span> a seperator.</span><br><span class="line"><span class="keyword">SELECT</span> CONCAT_WS(<span class="string">&#x27;::&#x27;</span>, user_name, user_emial, mobile_phone) <span class="keyword">AS</span> <span class="string">&#x27;user_name_email_phone&#x27;</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">| user_name_email_phone             |</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">| jack::jack@163.com::12555555555   |</span></span><br><span class="line"><span class="comment">| mike::mike@gmail.com::13888888888 |</span></span><br><span class="line"><span class="comment">| 马克::haha@gmail.com::13888888888 |</span></span><br><span class="line"><span class="comment">+-----------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Query-by-Fuzzy-Search"><a href="#Query-by-Fuzzy-Search" class="headerlink" title="Query by Fuzzy Search"></a>Query by Fuzzy Search</h3><ul>
+<h3 id="query-by-fuzzy-search">Query by Fuzzy Search</h3>
+<ul>
 <li><p><code>SELECT &lt;column1&gt;, &lt;column2&gt; FROM &lt;table&gt; WHERE &lt;one column&gt; LIKE &lt;%something%&gt;;</code></p>
 <blockquote>
-<p><code>Where &lt;one column&gt; LIKE &lt;%something%&gt;</code> could only be used when the size of the dataset is not so large. If the dataset is so large that we don’t use <code>LIKE</code> command which would costs several seconds, one way is using <a href="https://en.wikipedia.org/wiki/Sphinx_(search_engine" target="_blank" rel="noopener">Sphinx</a>).</p>
+<p><code>Where &lt;one column&gt; LIKE &lt;%something%&gt;</code> could only be used when the size of the dataset is not so large. If the dataset is so large that we don’t use <code>LIKE</code> command which would costs several seconds, one way is using <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sphinx_(search_engine)">Sphinx</a>.</p>
 </blockquote>
 <p><strong>An Example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> user_name, user_email <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> user_email <span class="keyword">like</span> <span class="string">'%gmail%'</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email     |</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">| mike      | mike@gmail.com |</span></span><br><span class="line"><span class="comment">| 马克      | haha@gmail.com |</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> user_name, user_email <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> user_email <span class="keyword">like</span> <span class="string">&#x27;%gmail%&#x27;</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">| user_name | user_email     |</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">| mike      | mike@gmail.com |</span></span><br><span class="line"><span class="comment">| 马克      | haha@gmail.com |</span></span><br><span class="line"><span class="comment">+-----------+----------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Query-by-Sorting-Data"><a href="#Query-by-Sorting-Data" class="headerlink" title="Query by Sorting Data"></a>Query by Sorting Data</h3><ul>
-<li><p><strong>Ascending</strong>: <code>SELECT &lt;column1&gt;, &lt;column2&gt; FROM &lt;table&gt; ORDER BY &lt;one column&gt; (ASC);</code></p>
-</li>
-<li><p><strong>Descending</strong>: <code>SELECT &lt;column1&gt;, &lt;column2&gt; FROM &lt;table&gt; ORDER BY &lt;one column&gt; DESC;</code></p>
-</li>
+<h3 id="query-by-sorting-data">Query by Sorting Data</h3>
+<ul>
+<li><p><strong>Ascending</strong>: <code>SELECT &lt;column1&gt;, &lt;column2&gt; FROM &lt;table&gt; ORDER BY &lt;one column&gt; (ASC);</code></p></li>
+<li><p><strong>Descending</strong>: <code>SELECT &lt;column1&gt;, &lt;column2&gt; FROM &lt;table&gt; ORDER BY &lt;one column&gt; DESC;</code></p></li>
 </ul>
-<h3 id="Query-by-using-Aggregate-Function"><a href="#Query-by-using-Aggregate-Function" class="headerlink" title="Query by using Aggregate Function"></a>Query by using Aggregate Function</h3><ul>
+<h3 id="query-by-using-aggregate-function">Query by using Aggregate Function</h3>
+<ul>
 <li><strong>Count</strong>: <code>SELECT COUNT(&lt;column&gt;) FROM &lt;table&gt;;</code></li>
 <li><strong>Sum</strong>: <code>SELECT SUM(&lt;column&gt;) FROM &lt;table&gt;;</code></li>
 <li><strong>Average</strong>: <code>SELECT AVG(&lt;column&gt;) FROM &lt;table&gt;;</code></li>
 <li><strong>Maximum</strong>: <code>SELECT MAX(&lt;column&gt;) FROM &lt;table&gt;;</code></li>
 <li><strong>Minimum</strong>: <code>SELECT MIN(&lt;column&gt;) FROM &lt;table&gt;;</code></li>
 </ul>
-<h3 id="Group-Query"><a href="#Group-Query" class="headerlink" title="Group Query"></a>Group Query</h3><ul>
-<li><p><code>SELECT COUNT(*) FROM &lt;table&gt; GROUP BY &lt;one column&gt;;</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Group by 'mobile_phone'.</span></span><br><span class="line"><span class="keyword">SELECT</span> mobile_phone, <span class="keyword">COUNT</span>(*) <span class="keyword">as</span> totals <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> mobile_phone;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">| mobile_phone | totals |</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">| 12555555555  | 1      |</span></span><br><span class="line"><span class="comment">| 13888888888  | 2      |</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>SELECT &lt;one column&gt; FROM &lt;table&gt; GROUP BY &lt;one column&gt; HAVING COUNT(*)&lt;conditions&gt; ;</code></p>
-</li>
+<h3 id="group-query">Group Query</h3>
+<ul>
+<li><code>SELECT COUNT(*) FROM &lt;table&gt; GROUP BY &lt;one column&gt;;</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Group by age and display the age(s) that are counted to be bigger than 2.</span></span><br><span class="line"><span class="keyword">SELECT</span> age <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age <span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*)&gt;<span class="number">2</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">| age |</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">| 0   |</span></span><br><span class="line"><span class="comment">| 21  |</span></span><br><span class="line"><span class="comment">| 23  |</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="Query-by-connecting-two-tables"><a href="#Query-by-connecting-two-tables" class="headerlink" title="Query by connecting two tables"></a>Query by connecting two tables</h3><ul>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Group</span> <span class="keyword">by</span> <span class="string">&#x27;mobile_phone&#x27;</span>.</span><br><span class="line"><span class="keyword">SELECT</span> mobile_phone, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> totals <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> mobile_phone;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">| mobile_phone | totals |</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">| 12555555555  | 1      |</span></span><br><span class="line"><span class="comment">| 13888888888  | 2      |</span></span><br><span class="line"><span class="comment">+--------------+--------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>SELECT &lt;one column&gt; FROM &lt;table&gt; GROUP BY &lt;one column&gt; HAVING COUNT(*)&lt;conditions&gt; ;</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Group</span> <span class="keyword">by</span> age <span class="keyword">and</span> display the age(s) that <span class="keyword">are</span> counted <span class="keyword">to</span> be bigger than <span class="number">2.</span></span><br><span class="line"><span class="keyword">SELECT</span> age <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> age <span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">2</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">| age |</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">| 0   |</span></span><br><span class="line"><span class="comment">| 21  |</span></span><br><span class="line"><span class="comment">| 23  |</span></span><br><span class="line"><span class="comment">+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="query-by-connecting-two-tables">Query by connecting two tables</h3>
+<ul>
 <li><p><strong>Inner join: </strong> <code>SELECT &lt;table 1&gt;.&lt;one column&gt;, &lt;table 2&gt;.&lt;one column&gt; from &lt;table 1&gt;, &lt;table 2&gt; where &lt;conditions&gt;;</code></p>
 <ul>
 <li>another form: <code>SELECT &lt;table 1&gt;.&lt;one column&gt;, &lt;table 2&gt;.&lt;one column&gt; from &lt;table 1&gt; INNER JOIN &lt;table 2&gt; where &lt;conditions&gt;;</code></li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>Left join: </strong> <code>SELECT &lt;table 1&gt;.&lt;one column&gt;, &lt;table 2&gt;.&lt;one column&gt; from &lt;table 1&gt; LEFT JOIN &lt;table 2&gt; where &lt;conditions&gt;;</code></p>
 <blockquote>
 <p>Left join means to show the whole selected column of the left table (table 1), and then join the selected column of the right table (table 2).</p>
-</blockquote>
-</li>
+</blockquote></li>
 <li><p><strong>Right join: </strong> <code>SELECT &lt;table 1&gt;.&lt;one column&gt;, &lt;table 2&gt;.&lt;one column&gt; from &lt;table 1&gt; RIGHT JOIN &lt;table 2&gt; where &lt;conditions&gt;;</code></p>
 <blockquote>
 <p>Right join is just the opposite with the left join, which is to show the whole selected column from the right table (table 2), and then join the selected column from the left table (table 1).</p>
-</blockquote>
-</li>
-<li><p><strong>Union all: </strong> <code>SELECT &lt;column&gt; FROM &lt;table 1&gt; UNION ALL SELECT &lt;column&gt; FROM &lt;table 2&gt;;</code></p>
-</li>
-<li><strong>Sub query: </strong> <code>SELECT &lt;column 1&gt; FROM &lt;table 1&gt; where &lt;column 2&gt; in (SELECT &lt;column 2&gt; FROM &lt;table 2&gt;);</code></li>
+</blockquote></li>
+<li><p><strong>Union all: </strong> <code>SELECT &lt;column&gt; FROM &lt;table 1&gt; UNION ALL SELECT &lt;column&gt; FROM &lt;table 2&gt;;</code></p></li>
+<li><p><strong>Sub query: </strong> <code>SELECT &lt;column 1&gt; FROM &lt;table 1&gt; where &lt;column 2&gt; in (SELECT &lt;column 2&gt; FROM &lt;table 2&gt;);</code></p></li>
 </ul>
-<h3 id="Limit-Query"><a href="#Limit-Query" class="headerlink" title="Limit Query"></a>Limit Query</h3><ul>
+<h3 id="limit-query">Limit Query</h3>
+<ul>
 <li><p><code>SELECT &lt;column&gt; FROM &lt;table&gt; LIMIT &lt;number&gt;;</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">name</span>, age <span class="keyword">FROM</span> student <span class="keyword">LIMIT</span> <span class="number">3</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">| id | name | age |</span></span><br><span class="line"><span class="comment">+----+------+-----+</span></span><br><span class="line"><span class="comment">| 1  | wang | 16  |</span></span><br><span class="line"><span class="comment">| 2  | hong | 17  |</span></span><br><span class="line"><span class="comment">| 3  | li   | 17  |</span></span><br><span class="line"><span class="comment">+----+------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id, name, age <span class="keyword">FROM</span> student LIMIT <span class="number">3</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">| id | name | age |</span></span><br><span class="line"><span class="comment">+----+------+-----+</span></span><br><span class="line"><span class="comment">| 1  | wang | 16  |</span></span><br><span class="line"><span class="comment">| 2  | hong | 17  |</span></span><br><span class="line"><span class="comment">| 3  | li   | 17  |</span></span><br><span class="line"><span class="comment">+----+------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Getting the length of the table could use:</p>
 <p><code>SELECT id FROM student ORDER BY id DESC LIMIT 1;</code></p>
 <p>instead of:</p>
 <p><code>SELECT count(*) FROM student;</code></p>
 <p>Because the former one is far more efficient.</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
 <hr>
-<h2 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h2><ul>
+<h2 id="transaction">Transaction</h2>
+<ul>
 <li><strong>Start transaction</strong>: <code>START TRANSACTION;</code></li>
 <li><strong>Roll back:</strong> <code>ROLLBACK;</code></li>
 <li><strong>Commit the transaction:</strong> <code>COMMIT;</code></li>
 </ul>
 <p><strong>An example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using transaction to achieve a transfer service.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USE</span> shop;</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> fee=fee<span class="number">-100</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> fee=fee+<span class="number">100</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># If the transaction goes wrong</span></span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"><span class="comment"># If the transaction accomplished</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Using</span> transaction <span class="keyword">to</span> achieve a transfer service.</span><br><span class="line"></span><br><span class="line">USE shop;</span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line">UPDATE <span class="keyword">user</span> <span class="keyword">SET</span> fee<span class="operator">=</span>fee<span class="number">-100</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">2</span>;</span><br><span class="line">UPDATE <span class="keyword">user</span> <span class="keyword">SET</span> fee<span class="operator">=</span>fee<span class="operator">+</span><span class="number">100</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"># If the transaction goes wrong</span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"># If the transaction accomplished</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><p>View is used as a query table.</p>
+<h2 id="view">View</h2>
+<p>View is used as a query table.</p>
 <ul>
-<li><strong>Create a view</strong>:  <code>CREATE VIEW &lt;name of view&gt; (column1, column2, ...) AS &lt;SELECT commands&gt;;</code></li>
+<li><strong>Create a view</strong>: <code>CREATE VIEW &lt;name of view&gt; (column1, column2, ...) AS &lt;SELECT commands&gt;;</code></li>
 <li><strong>Show the creating information:</strong> <code>SHOW CREATE VIEW &lt;name of view&gt;;</code></li>
 <li><strong>Alter a view:</strong> <code>ALTER VIEW &lt;name of view&gt; (column1, column2, ...) AS &lt;SELECT commands&gt;;</code></li>
 <li><strong>Query the view:</strong> <code>SELECT * FROM &lt;name of view&gt;;</code></li>
 <li><strong>Delete a view:</strong> <code>DROP VIEW &lt;name of view&gt;;</code></li>
 </ul>
 <p><strong>An example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a view named 'test_view'</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> test_view(<span class="keyword">id</span>, <span class="keyword">name</span>, mark) <span class="keyword">as</span> <span class="keyword">select</span> s.id, s.name, m.mark <span class="keyword">from</span> student <span class="keyword">as</span> s, mark <span class="keyword">as</span> m <span class="keyword">where</span> s.id=m.stu_id;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show the creating information</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">view</span> test_view\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">***************************[ 1. row ]***************************</span></span><br><span class="line"><span class="comment">View                 | test_view</span></span><br><span class="line"><span class="comment">Create View          | CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `test_view` AS select `s`.`id` AS `id`,`s`.`name` AS `name`,`m`.`mark` AS `mark` from (`student` `s` join `mark` `m`) where (`s`.`id` = `m`.`stu_id`)</span></span><br><span class="line"><span class="comment">character_set_client | utf8</span></span><br><span class="line"><span class="comment">collation_connection | utf8_general_ci</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Query the view</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> test_view;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">| id | name    | mark |</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">| 2  | bruce   | 66   |</span></span><br><span class="line"><span class="comment">| 4  | timothy | 86   |</span></span><br><span class="line"><span class="comment">| 6  | mike    | 90   |</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">3 rows in set</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete the view</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> test_view;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Create</span> a <span class="keyword">view</span> named <span class="string">&#x27;test_view&#x27;</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> test_view(id, name, mark) <span class="keyword">as</span> <span class="keyword">select</span> s.id, s.name, m.mark <span class="keyword">from</span> student <span class="keyword">as</span> s, mark <span class="keyword">as</span> m <span class="keyword">where</span> s.id<span class="operator">=</span>m.stu_id;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">Show</span> the creating information</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">view</span> test_view\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">***************************[ 1. row ]***************************</span></span><br><span class="line"><span class="comment">View                 | test_view</span></span><br><span class="line"><span class="comment">Create View          | CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `test_view` AS select `s`.`id` AS `id`,`s`.`name` AS `name`,`m`.`mark` AS `mark` from (`student` `s` join `mark` `m`) where (`s`.`id` = `m`.`stu_id`)</span></span><br><span class="line"><span class="comment">character_set_client | utf8</span></span><br><span class="line"><span class="comment">collation_connection | utf8_general_ci</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># Query the <span class="keyword">view</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> test_view;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">| id | name    | mark |</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">| 2  | bruce   | 66   |</span></span><br><span class="line"><span class="comment">| 4  | timothy | 86   |</span></span><br><span class="line"><span class="comment">| 6  | mike    | 90   |</span></span><br><span class="line"><span class="comment">+----+---------+------+</span></span><br><span class="line"><span class="comment">3 rows in set</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">Delete</span> the <span class="keyword">view</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> test_view;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h2><p>Trigger a series of operations before or after some operations (insert, update, delete) on a table.</p>
+<h2 id="trigger">Trigger</h2>
+<p>Trigger a series of operations before or after some operations (insert, update, delete) on a table.</p>
 <ul>
 <li><strong>Create a trigger:</strong></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> &lt;<span class="keyword">name</span> <span class="keyword">of</span> <span class="keyword">trigger</span>&gt; <span class="keyword">AFTER</span>|<span class="keyword">BEFORE</span> <span class="keyword">INSERT</span>|<span class="keyword">UPDATE</span>|<span class="keyword">DELETE</span> <span class="keyword">ON</span> &lt;<span class="keyword">name</span> <span class="keyword">of</span> <span class="keyword">table</span>&gt; <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">SQL</span> commands</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> <span class="operator">&lt;</span>name <span class="keyword">of</span> <span class="keyword">trigger</span><span class="operator">&gt;</span> AFTER<span class="operator">|</span>BEFORE <span class="keyword">INSERT</span><span class="operator">|</span>UPDATE<span class="operator">|</span><span class="keyword">DELETE</span> <span class="keyword">ON</span> <span class="operator">&lt;</span>name <span class="keyword">of</span> <span class="keyword">table</span><span class="operator">&gt;</span> <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">SQL</span> commands</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>Show the creating information:</strong> <code>SHOW CREATE TRIGGER &lt;name of trigger&gt;;</code></li>
 <li><strong>Delete the trigger:</strong> <code>DROP TRIGGER &lt;name of trigger&gt;;</code></li>
 </ul>
 <p><strong>An example</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The total_num table shows the numbers of rows of each table.</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student;	<span class="comment"># student table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">| id | name      | age |</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">| 1  | jack      | 18  |</span></span><br><span class="line"><span class="comment">| 2  | bruce     | 19  |</span></span><br><span class="line"><span class="comment">| 3  | emma      | 19  |</span></span><br><span class="line"><span class="comment">| 4  | timothy   | 20  |</span></span><br><span class="line"><span class="comment">| 5  | chayatish | 20  |</span></span><br><span class="line"><span class="comment">| 6  | mike      | 20  |</span></span><br><span class="line"><span class="comment">| 7  | alice     | 18  |</span></span><br><span class="line"><span class="comment">| 8  | hong      | 18  |</span></span><br><span class="line"><span class="comment">| 9  | 王        | 18  |</span></span><br><span class="line"><span class="comment">| 10 | 李        | 18  |</span></span><br><span class="line"><span class="comment">| 11 | hey       | 19  |</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> mark;		<span class="comment"># mark table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">| id | mark | stu_id |</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">| 1  | 66   | 2      |</span></span><br><span class="line"><span class="comment">| 2  | 86   | 4      |</span></span><br><span class="line"><span class="comment">| 3  | 90   | 6      |</span></span><br><span class="line"><span class="comment">| 4  | 85   | 7      |</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> total_num;	<span class="comment"># total number of each table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 11  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define triggers that could sync the total_num table to student table and mark table.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Increase the number of student after insert a student.</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_insert_stu <span class="keyword">after</span> <span class="keyword">insert</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">update</span> total_num <span class="keyword">set</span> <span class="keyword">num</span>=<span class="keyword">num</span>+<span class="number">1</span> <span class="keyword">where</span> <span class="keyword">type</span>=<span class="string">'student'</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Increase the number of mark after insert a mark.</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_insert_mark <span class="keyword">after</span> <span class="keyword">insert</span> <span class="keyword">on</span> mark <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">update</span> total_num <span class="keyword">set</span> <span class="keyword">num</span>=<span class="keyword">num</span>+<span class="number">1</span> <span class="keyword">where</span> <span class="keyword">type</span>=<span class="string">'mark'</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Decrease the number of student after delete a student.</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_delete_stu <span class="keyword">after</span> <span class="keyword">delete</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">update</span> total_num <span class="keyword">set</span> <span class="keyword">num</span>=<span class="keyword">num</span><span class="number">-1</span> <span class="keyword">where</span> <span class="keyword">type</span>=<span class="string">'student'</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Decrease the number of mark after delete a mark.</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_delete_mark <span class="keyword">after</span> <span class="keyword">delete</span> <span class="keyword">on</span> mark <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">update</span> total_num <span class="keyword">set</span> <span class="keyword">num</span>=<span class="keyword">num</span><span class="number">-1</span> <span class="keyword">where</span> <span class="keyword">type</span>=<span class="string">'mark'</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Test of the triggers</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> total_num;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 11  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student(<span class="keyword">name</span>, age) <span class="keyword">values</span>(<span class="string">'tish'</span>, <span class="number">17</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> total_num;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 12  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"># The total_num <span class="keyword">table</span> shows the numbers <span class="keyword">of</span> <span class="keyword">rows</span> <span class="keyword">of</span> <span class="keyword">each</span> table.</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student;	# student <span class="keyword">table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">| id | name      | age |</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">| 1  | jack      | 18  |</span></span><br><span class="line"><span class="comment">| 2  | bruce     | 19  |</span></span><br><span class="line"><span class="comment">| 3  | emma      | 19  |</span></span><br><span class="line"><span class="comment">| 4  | timothy   | 20  |</span></span><br><span class="line"><span class="comment">| 5  | chayatish | 20  |</span></span><br><span class="line"><span class="comment">| 6  | mike      | 20  |</span></span><br><span class="line"><span class="comment">| 7  | alice     | 18  |</span></span><br><span class="line"><span class="comment">| 8  | hong      | 18  |</span></span><br><span class="line"><span class="comment">| 9  | 王        | 18  |</span></span><br><span class="line"><span class="comment">| 10 | 李        | 18  |</span></span><br><span class="line"><span class="comment">| 11 | hey       | 19  |</span></span><br><span class="line"><span class="comment">+----+-----------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mark;		# mark <span class="keyword">table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">| id | mark | stu_id |</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">| 1  | 66   | 2      |</span></span><br><span class="line"><span class="comment">| 2  | 86   | 4      |</span></span><br><span class="line"><span class="comment">| 3  | 90   | 6      |</span></span><br><span class="line"><span class="comment">| 4  | 85   | 7      |</span></span><br><span class="line"><span class="comment">+----+------+--------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> total_num;	# total number <span class="keyword">of</span> <span class="keyword">each</span> <span class="keyword">table</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 11  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">Define</span> triggers that could sync the total_num <span class="keyword">table</span> <span class="keyword">to</span> student <span class="keyword">table</span> <span class="keyword">and</span> mark table.</span><br><span class="line"></span><br><span class="line"># Increase the number <span class="keyword">of</span> student after <span class="keyword">insert</span> a student.</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_insert_stu after <span class="keyword">insert</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	update total_num <span class="keyword">set</span> num<span class="operator">=</span>num<span class="operator">+</span><span class="number">1</span> <span class="keyword">where</span> type<span class="operator">=</span><span class="string">&#x27;student&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"># Increase the number <span class="keyword">of</span> mark after <span class="keyword">insert</span> a mark.</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_insert_mark after <span class="keyword">insert</span> <span class="keyword">on</span> mark <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	update total_num <span class="keyword">set</span> num<span class="operator">=</span>num<span class="operator">+</span><span class="number">1</span> <span class="keyword">where</span> type<span class="operator">=</span><span class="string">&#x27;mark&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"># Decrease the number <span class="keyword">of</span> student after <span class="keyword">delete</span> a student.</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_delete_stu after <span class="keyword">delete</span> <span class="keyword">on</span> student <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	update total_num <span class="keyword">set</span> num<span class="operator">=</span>num<span class="number">-1</span> <span class="keyword">where</span> type<span class="operator">=</span><span class="string">&#x27;student&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"># Decrease the number <span class="keyword">of</span> mark after <span class="keyword">delete</span> a mark.</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">trigger</span> after_delete_mark after <span class="keyword">delete</span> <span class="keyword">on</span> mark <span class="keyword">for</span> <span class="keyword">each</span> <span class="type">row</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	update total_num <span class="keyword">set</span> num<span class="operator">=</span>num<span class="number">-1</span> <span class="keyword">where</span> type<span class="operator">=</span><span class="string">&#x27;mark&#x27;</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Test <span class="keyword">of</span> the triggers</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> total_num;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 11  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student(name, age) <span class="keyword">values</span>(<span class="string">&#x27;tish&#x27;</span>, <span class="number">17</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> total_num;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| id | type    | num |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">| 1  | student | 12  |</span></span><br><span class="line"><span class="comment">| 2  | mark    | 4   |</span></span><br><span class="line"><span class="comment">+----+---------+-----+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="Import-and-export-file"><a href="#Import-and-export-file" class="headerlink" title="Import and export file"></a>Import and export file</h2><ul>
+<h2 id="import-and-export-file">Import and export file</h2>
+<ul>
 <li><p><strong>Export SQL file:</strong></p>
 <ul>
 <li><code>$ mysqldump -u &lt;username&gt; -p &lt;password&gt; &lt;database&gt; &lt;table name&gt; &gt; &lt;filename.sql&gt;</code></li>
 <li>Using navicat: <code>Dump SQL File</code></li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>Import SQL file:</strong></p>
 <ul>
 <li><code>$ mysql -u &lt;username&gt; -p &lt;password&gt; &lt;database&gt; &lt; &lt;filename.sql&gt;</code></li>
 <li>Using navicat: <code>Execute SQL File</code></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <hr>
-<h2 id="Optimization-of-MySQL"><a href="#Optimization-of-MySQL" class="headerlink" title="Optimization of MySQL"></a>Optimization of MySQL</h2><ul>
+<h2 id="optimization-of-mysql">Optimization of MySQL</h2>
+<ul>
 <li>Explain the query: <code>explain &lt;query command&gt;;</code></li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use shop</span></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">10</span>\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">id            | 1</span></span><br><span class="line"><span class="comment">select_type   | SIMPLE</span></span><br><span class="line"><span class="comment">table         | student</span></span><br><span class="line"><span class="comment">partitions    | &lt;null&gt;</span></span><br><span class="line"><span class="comment">type          | const</span></span><br><span class="line"><span class="comment">possible_keys | PRIMARY</span></span><br><span class="line"><span class="comment">key           | PRIMARY</span></span><br><span class="line"><span class="comment">key_len       | 4</span></span><br><span class="line"><span class="comment">ref           | const</span></span><br><span class="line"><span class="comment">rows          | 1</span></span><br><span class="line"><span class="comment">filtered      | 100.0</span></span><br><span class="line"><span class="comment">Extra         | &lt;null&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'王'</span>\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">id            | 1</span></span><br><span class="line"><span class="comment">select_type   | SIMPLE</span></span><br><span class="line"><span class="comment">table         | student</span></span><br><span class="line"><span class="comment">partitions    | &lt;null&gt;</span></span><br><span class="line"><span class="comment">type          | ALL</span></span><br><span class="line"><span class="comment">possible_keys | &lt;null&gt;</span></span><br><span class="line"><span class="comment">key           | &lt;null&gt;</span></span><br><span class="line"><span class="comment">key_len       | &lt;null&gt;</span></span><br><span class="line"><span class="comment">ref           | &lt;null&gt;</span></span><br><span class="line"><span class="comment">rows          | 13</span></span><br><span class="line"><span class="comment">filtered      | 10.0</span></span><br><span class="line"><span class="comment">Extra         | Using where</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># use shop</span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> id<span class="operator">=</span><span class="number">10</span>\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">id            | 1</span></span><br><span class="line"><span class="comment">select_type   | SIMPLE</span></span><br><span class="line"><span class="comment">table         | student</span></span><br><span class="line"><span class="comment">partitions    | &lt;null&gt;</span></span><br><span class="line"><span class="comment">type          | const</span></span><br><span class="line"><span class="comment">possible_keys | PRIMARY</span></span><br><span class="line"><span class="comment">key           | PRIMARY</span></span><br><span class="line"><span class="comment">key_len       | 4</span></span><br><span class="line"><span class="comment">ref           | const</span></span><br><span class="line"><span class="comment">rows          | 1</span></span><br><span class="line"><span class="comment">filtered      | 100.0</span></span><br><span class="line"><span class="comment">Extra         | &lt;null&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;王&#x27;</span>\G;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">id            | 1</span></span><br><span class="line"><span class="comment">select_type   | SIMPLE</span></span><br><span class="line"><span class="comment">table         | student</span></span><br><span class="line"><span class="comment">partitions    | &lt;null&gt;</span></span><br><span class="line"><span class="comment">type          | ALL</span></span><br><span class="line"><span class="comment">possible_keys | &lt;null&gt;</span></span><br><span class="line"><span class="comment">key           | &lt;null&gt;</span></span><br><span class="line"><span class="comment">key_len       | &lt;null&gt;</span></span><br><span class="line"><span class="comment">ref           | &lt;null&gt;</span></span><br><span class="line"><span class="comment">rows          | 13</span></span><br><span class="line"><span class="comment">filtered      | 10.0</span></span><br><span class="line"><span class="comment">Extra         | Using where</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>Profiles of the query commands:<ul>
+<li>Profiles of the query commands:
+<ul>
 <li>Open the <code>profiling</code>: <code>set profiling=ON;</code></li>
 <li>Show profiles: <code>show profiles;</code></li>
 <li>Show the detailed duration of a query: <code>show profile for query &lt;Query_ID&gt;;</code></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"%profil%"</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| Variable_name          | Value |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| have_profiling         | YES   |</span></span><br><span class="line"><span class="comment">| profiling              | OFF   |</span></span><br><span class="line"><span class="comment">| profiling_history_size | 15    |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># open the profiling</span></span><br><span class="line"><span class="keyword">set</span> profiling=<span class="keyword">ON</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># check whether profiling is on</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"%profil%"</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| Variable_name          | Value |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| have_profiling         | YES   |</span></span><br><span class="line"><span class="comment">| profiling              | ON    |</span></span><br><span class="line"><span class="comment">| profiling_history_size | 15    |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># execute a few queries</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'王'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># show profiles</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">profiles</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">| Query_ID | Duration   | Query                                 |</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">| 1        | 0.000132   | SHOW WARNINGS                         |</span></span><br><span class="line"><span class="comment">| 2        | 0.00154275 | show variables like '%profil%'        |</span></span><br><span class="line"><span class="comment">| 3        | 3.85e-05   | SHOW WARNINGS                         |</span></span><br><span class="line"><span class="comment">| 4        | 0.000186   | select * from student where id=3      |</span></span><br><span class="line"><span class="comment">| 5        | 0.000284   | select * from student where name='王' |</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># show the detailed information of query 5;</span></span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> <span class="keyword">query</span> <span class="number">5</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">| Status               | Duration |</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">| starting             | 0.000070 |</span></span><br><span class="line"><span class="comment">| checking permissions | 0.000009 |</span></span><br><span class="line"><span class="comment">| Opening tables       | 0.000017 |</span></span><br><span class="line"><span class="comment">| init                 | 0.000025 |</span></span><br><span class="line"><span class="comment">| System lock          | 0.000010 |</span></span><br><span class="line"><span class="comment">| optimizing           | 0.000010 |</span></span><br><span class="line"><span class="comment">| statistics           | 0.000016 |</span></span><br><span class="line"><span class="comment">| preparing            | 0.000013 |</span></span><br><span class="line"><span class="comment">| executing            | 0.000004 |</span></span><br><span class="line"><span class="comment">| Sending data         | 0.000051 |</span></span><br><span class="line"><span class="comment">| end                  | 0.000005 |</span></span><br><span class="line"><span class="comment">| query end            | 0.000008 |</span></span><br><span class="line"><span class="comment">| closing tables       | 0.000008 |</span></span><br><span class="line"><span class="comment">| freeing items        | 0.000019 |</span></span><br><span class="line"><span class="comment">| cleaning up          | 0.000019 |</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> &quot;%profil%&quot;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| Variable_name          | Value |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| have_profiling         | YES   |</span></span><br><span class="line"><span class="comment">| profiling              | OFF   |</span></span><br><span class="line"><span class="comment">| profiling_history_size | 15    |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">open</span> the profiling</span><br><span class="line"><span class="keyword">set</span> profiling<span class="operator">=</span><span class="keyword">ON</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">check</span> whether profiling <span class="keyword">is</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> &quot;%profil%&quot;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| Variable_name          | Value |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">| have_profiling         | YES   |</span></span><br><span class="line"><span class="comment">| profiling              | ON    |</span></span><br><span class="line"><span class="comment">| profiling_history_size | 15    |</span></span><br><span class="line"><span class="comment">+------------------------+-------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">execute</span> a few queries</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> id<span class="operator">=</span><span class="number">3</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;王&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">show</span> profiles</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">| Query_ID | Duration   | Query                                 |</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">| 1        | 0.000132   | SHOW WARNINGS                         |</span></span><br><span class="line"><span class="comment">| 2        | 0.00154275 | show variables like &#x27;%profil%&#x27;        |</span></span><br><span class="line"><span class="comment">| 3        | 3.85e-05   | SHOW WARNINGS                         |</span></span><br><span class="line"><span class="comment">| 4        | 0.000186   | select * from student where id=3      |</span></span><br><span class="line"><span class="comment">| 5        | 0.000284   | select * from student where name=&#x27;王&#x27; |</span></span><br><span class="line"><span class="comment">+----------+------------+---------------------------------------+</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">show</span> the detailed information <span class="keyword">of</span> query <span class="number">5</span>;</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query <span class="number">5</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">| Status               | Duration |</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">| starting             | 0.000070 |</span></span><br><span class="line"><span class="comment">| checking permissions | 0.000009 |</span></span><br><span class="line"><span class="comment">| Opening tables       | 0.000017 |</span></span><br><span class="line"><span class="comment">| init                 | 0.000025 |</span></span><br><span class="line"><span class="comment">| System lock          | 0.000010 |</span></span><br><span class="line"><span class="comment">| optimizing           | 0.000010 |</span></span><br><span class="line"><span class="comment">| statistics           | 0.000016 |</span></span><br><span class="line"><span class="comment">| preparing            | 0.000013 |</span></span><br><span class="line"><span class="comment">| executing            | 0.000004 |</span></span><br><span class="line"><span class="comment">| Sending data         | 0.000051 |</span></span><br><span class="line"><span class="comment">| end                  | 0.000005 |</span></span><br><span class="line"><span class="comment">| query end            | 0.000008 |</span></span><br><span class="line"><span class="comment">| closing tables       | 0.000008 |</span></span><br><span class="line"><span class="comment">| freeing items        | 0.000019 |</span></span><br><span class="line"><span class="comment">| cleaning up          | 0.000019 |</span></span><br><span class="line"><span class="comment">+----------------------+----------+</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>If there is one status that costs too much time, perhaps it’s where the problem exists, and then you could come up with some solutions to it.</p>
 </blockquote>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/database-mysql/" rel="tag"># database, mysql</a>
-          
         </div>
-      
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/02/ubuntu-common-commands/" rel="next" title="Ubuntu常用命令">
-                <i class="fa fa-chevron-left"></i> Ubuntu常用命令
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/25/algorithm-introduction-notes/" rel="prev" title="Introduction to Algorithms">
-                Introduction to Algorithms <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Tishacy">
-            
-              <p class="site-author-name" itemprop="name">Tishacy</p>
-              <p class="site-description motion-element" itemprop="description">dive into code</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
+            <section class="post-copyright">
                 
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/Tishacy" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Tishacy</span>
+                    </p>
                 
-                  <span class="links-of-author-item">
-                    <a href="tishacy@gmail.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
                 
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://tishacy.github.io/2018/12/13/mysql-commands-md/">https://tishacy.github.io/2018/12/13/mysql-commands-md/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/database-mysql/"># database, mysql</a>
+                    
+                        
+                </span>
             </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Definition-Language-DDL"><span class="nav-number">1.</span> <span class="nav-text">Data Definition Language (DDL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Database"><span class="nav-number">1.1.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Table"><span class="nav-number">1.2.</span> <span class="nav-text">Table</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Manipulation-Language-DML"><span class="nav-number">2.</span> <span class="nav-text">Data Manipulation Language (DML)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-New-Data-into-Table"><span class="nav-number">2.1.</span> <span class="nav-text">Insert New Data into Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-Data-in-Table"><span class="nav-number">2.2.</span> <span class="nav-text">Update Data in Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete-Data-from-Table"><span class="nav-number">2.3.</span> <span class="nav-text">Delete Data from Table</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Control-Language-DCL"><span class="nav-number">3.</span> <span class="nav-text">Data Control Language (DCL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-Password"><span class="nav-number">3.1.</span> <span class="nav-text">Change Password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-User"><span class="nav-number">3.2.</span> <span class="nav-text">Create User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grant-Privileges-to-User"><span class="nav-number">3.3.</span> <span class="nav-text">Grant Privileges to User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Revoke-Privileges-from-User"><span class="nav-number">3.4.</span> <span class="nav-text">Revoke Privileges from User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Show-Privileges-for-User"><span class="nav-number">3.5.</span> <span class="nav-text">Show Privileges for User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete-User"><span class="nav-number">3.6.</span> <span class="nav-text">Delete User</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Query-Language-DQL"><span class="nav-number">4.</span> <span class="nav-text">Data Query Language (DQL)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Query-Display"><span class="nav-number">4.1.</span> <span class="nav-text">Basic Query Display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-Filtered-Repeated-Data"><span class="nav-number">4.2.</span> <span class="nav-text">Query Filtered Repeated Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-Concatenated-Columns"><span class="nav-number">4.3.</span> <span class="nav-text">Query Concatenated Columns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-by-Fuzzy-Search"><span class="nav-number">4.4.</span> <span class="nav-text">Query by Fuzzy Search</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-by-Sorting-Data"><span class="nav-number">4.5.</span> <span class="nav-text">Query by Sorting Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-by-using-Aggregate-Function"><span class="nav-number">4.6.</span> <span class="nav-text">Query by using Aggregate Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-Query"><span class="nav-number">4.7.</span> <span class="nav-text">Group Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-by-connecting-two-tables"><span class="nav-number">4.8.</span> <span class="nav-text">Query by connecting two tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit-Query"><span class="nav-number">4.9.</span> <span class="nav-text">Limit Query</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction"><span class="nav-number">5.</span> <span class="nav-text">Transaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View"><span class="nav-number">6.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trigger"><span class="nav-number">7.</span> <span class="nav-text">Trigger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Import-and-export-file"><span class="nav-number">8.</span> <span class="nav-text">Import and export file</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization-of-MySQL"><span class="nav-number">9.</span> <span class="nav-text">Optimization of MySQL</span></a></li></ol></div>
-            
-
-          </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
         </section>
-      <!--/noindex-->
-      
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/04/25/algorithm-introduction-notes/">Introduction to Algorithms</a>
+            
+            
+            <a class="next" rel="next" href="/2018/12/02/ubuntu-common-commands/">Ubuntu常用命令</a>
+            
+        </section>
 
-      
 
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Tishacy</span>
-
-  
+    </article>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  
-
-
-  
-
-  
-
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Tishacy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
 </body>
 </html>

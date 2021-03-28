@@ -1,1638 +1,1091 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="author" content="Tishacy">
 
 
-  
+    <meta name="subtitle" content="dive into code">
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
+    <meta name="description" content="dive into code">
 
 
+    <meta name="keywords" content="Tishacy, tishacy, blog, hexo.">
 
 
+<title>Introduction to Algorithms | Tishacy</title>
 
 
 
+    <link rel="icon" href="/favicon.ico">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
 
 
 
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
 
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="algorithm,">
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="This is the learning notes of MIT Course 6.006 Introduction to Algorithms. Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be">
-<meta name="keywords" content="algorithm">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Introduction to Algorithms">
-<meta property="og:url" content="http://tishacy.com/2019/04/25/algorithm-introduction-notes/index.html">
-<meta property="og:site_name" content="Tishacy">
-<meta property="og:description" content="This is the learning notes of MIT Course 6.006 Introduction to Algorithms. Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Insertion-sort-example-300px.gif/220px-Insertion-sort-example-300px.gif">
-<meta property="og:image" content="https://mjd507.github.io/images/Algorithm/InsertionSort.png">
-<meta property="og:image" content="https://he-s3.s3.amazonaws.com/media/uploads/06e770e.png">
-<meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif">
-<meta property="og:image" content="https://raw.githubusercontent.com/pooyahatami/Algorithm-Sort-Radix/master/img/radix-sort-algorithms.jpg">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/04/Selecting_quickselect_frames.gif">
-<meta property="og:image" content="https://i.stack.imgur.com/IVK74.png">
-<meta property="og:image" content="https://images.slideplayer.com/27/8903843/slides/slide_2.jpg">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg/240px-Hash_table_4_1_1_0_0_0_0_LL.svg.png">
-<meta property="og:image" content="http://www.cs.cmu.edu/~clo/www/CMU/DataStructures/Lessons/lesson11_2_files/image010.jpg">
-<meta property="og:updated_time" content="2019-04-25T06:58:59.747Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Introduction to Algorithms">
-<meta name="twitter:description" content="This is the learning notes of MIT Course 6.006 Introduction to Algorithms. Introduction to Algorithms  If you want to be a good programmer, you can just program every day for two years, and you’ll be">
-<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
     },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 
-
-  <link rel="canonical" href="http://tishacy.com/2019/04/25/algorithm-introduction-notes/">
-
-
-
-
-
-  <title>Introduction to Algorithms | Tishacy</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
-    
-  
-
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+        
     
 
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Tishacy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">dive into code</p>
-      
-  </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tishacy.com/2019/04/25/algorithm-introduction-notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tishacy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tishacy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Introduction to Algorithms</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-25T13:57:24+08:00">
-                2019-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
-                  </a>
-                </span>
-
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Bentham&#39;s Blog</a></div>
+            <div class="menu navbar-right">
                 
+                    <a class="menu-item" href="/archives">Posts</a>
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
         </div>
-      </header>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Bentham&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Introduction to Algorithms</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Tishacy</a>
+                    
 
-      
-      
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 25, 2019&nbsp;&nbsp;13:57:24</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/algorithm/">algorithm</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
 
-      
-        <p><em>This is the learning notes of <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/" target="_blank" rel="noopener">MIT Course 6.006 Introduction to Algorithms</a></em>.</p>
-<h1 id="Introduction-to-Algorithms"><a href="#Introduction-to-Algorithms" class="headerlink" title="Introduction to Algorithms"></a>Introduction to Algorithms</h1><p><img src="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png" alt></p>
+        <div class="post-content">
+            <p><em>This is the learning notes of <a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/">MIT Course 6.006 Introduction to Algorithms</a></em>.</p>
+<h1 id="introduction-to-algorithms">Introduction to Algorithms</h1>
+<p><img src="https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png"></p>
 <blockquote>
-<p>If you want to be a good programmer, you can just program every day for two years, and you’ll be an excellent programmer. If you want to be a world-class programmer, you can program every day for ten years, or you can program every day for two years and take an algorithm class.</p>
+<p>If you want to be a good programmer, you can just program every day for two years, and you'll be an excellent programmer. If you want to be a world-class programmer, you can program every day for ten years, or you can program every day for two years and take an algorithm class.</p>
 <p><em>Charles Leiserson</em></p>
 </blockquote>
 <p>The analysis of algorithm is the theoretical study of computer program <strong>performance</strong> and <strong>resource usage</strong>.</p>
 <ul>
-<li><p>What’s more important than performance?</p>
-<p>Modularity, Security, Scalability, Simplicity, Robustness, User-friendliness…</p>
-</li>
+<li><p>What's more important than performance?</p>
+<p>Modularity, Security, Scalability, Simplicity, Robustness, User-friendliness...</p></li>
 <li><p>Why study algorithms and performance?</p>
 <ul>
 <li><p>Performance measures the line between <strong>feasible</strong> and the <strong>infeasible</strong>.</p>
-<p>If the program is not fast enough, it’s simply not functional.</p>
-</li>
+<p>If the program is not fast enough, it's simply not functional.</p></li>
 <li><p>Algorithms give you a <strong>theoretical language</strong> for talking about program behavior, which is adopted by all the practitioners.</p>
-<p>Performance is like the money in economy. You have to pay some performance for other things like security, user-friendly.</p>
-</li>
-<li><p>We all like fast games.</p>
-</li>
+<p>Performance is like the money in economy. You have to pay some performance for other things like security, user-friendly.</p></li>
+<li><p>We all like fast games.</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Running-time"><a href="#Running-time" class="headerlink" title="Running time"></a>Running time</h2><ul>
+<h2 id="running-time">Running time</h2>
+<ul>
 <li>Depends on input itself. (e.g. already sorted)</li>
-<li>Depends on input size. (e.g. $6$ elements v.s. $6 \times 10^9$ elements)<ul>
-<li>parameterize the input size to $n$</li>
+<li>Depends on input size. (e.g. <span class="math inline">\(6\)</span> elements v.s. <span class="math inline">\(6 \times 10^9\)</span> elements)
+<ul>
+<li>parameterize the input size to <span class="math inline">\(n\)</span></li>
+</ul></li>
+<li>Want upper bounds of running time
+<ul>
+<li>because it's a guarantee to user. For example, the program would spend 0.3 seconds at most.</li>
+</ul></li>
 </ul>
-</li>
-<li>Want upper bounds of running time<ul>
-<li>because it’s a guarantee to user. For example, the program would spend 0.3 seconds at most.</li>
-</ul>
-</li>
-</ul>
-<h2 id="Kinds-of-analysis"><a href="#Kinds-of-analysis" class="headerlink" title="Kinds of analysis"></a>Kinds of analysis</h2><ul>
-<li><p>Worst-case (usually)<br>$$<br>T(n) = \text{max time on any input of size $n$}<br>$$</p>
-</li>
-<li><p>Average-case (sometimes)<br>$$<br>T(n) = \text{expected time over all inputs of size $n$}<br>$$<br>(Need assumption of statistical distribution of inputs (e.g. uniform distribution), so that we can calculate the $\mathbb{E}(t)$ of all inputs)</p>
-</li>
+<h2 id="kinds-of-analysis">Kinds of analysis</h2>
+<ul>
+<li><p>Worst-case (usually) <span class="math display">\[
+T(n) = \text{max time on any input of size $n$}
+\]</span></p></li>
+<li><p>Average-case (sometimes) <span class="math display">\[
+T(n) = \text{expected time over all inputs of size $n$}
+\]</span> (Need assumption of statistical distribution of inputs (e.g. uniform distribution), so that we can calculate the <span class="math inline">\(\mathbb{E}(t)\)</span> of all inputs)</p></li>
 <li><p>Best-case (bogus, useless, meaningless)</p>
-<p>You could cheat by using a slow algorithm with some specific inputs getting pretty good performance, but it’s useless.</p>
-</li>
+<p>You could cheat by using a slow algorithm with some specific inputs getting pretty good performance, but it's useless.</p></li>
 </ul>
-<h2 id="BIG-IDEA-of-Algorithm-Analysis"><a href="#BIG-IDEA-of-Algorithm-Analysis" class="headerlink" title="BIG IDEA of Algorithm Analysis"></a>BIG IDEA of Algorithm Analysis</h2><ol>
+<h2 id="big-idea-of-algorithm-analysis">BIG IDEA of Algorithm Analysis</h2>
+<ol type="1">
 <li>Ignore machine dependent conditions</li>
-<li>Look at <strong>growth</strong> of $T(n)$ as $n \to \infty$</li>
+<li>Look at <strong>growth</strong> of <span class="math inline">\(T(n)\)</span> as <span class="math inline">\(n \to \infty\)</span></li>
 </ol>
-<h2 id="Asymptotic-Notations"><a href="#Asymptotic-Notations" class="headerlink" title="Asymptotic Notations"></a>Asymptotic Notations</h2><h3 id="mathbb-O-notation"><a href="#mathbb-O-notation" class="headerlink" title="$\mathbb{O}$-notation"></a>$\mathbb{O}$-notation</h3><p>Demonstrates <strong>the upper bound</strong> of time running an algorithm.</p>
-<p>$f(n) = \mathbb{O}(g(n))$ means there are some suitable constants $c&gt;0$ and $n_0 &gt; 0 $, such that $0 \le f(n) \le c\cdot g(n)$ for all $n \ge n_0$.</p>
+<h2 id="asymptotic-notations">Asymptotic Notations</h2>
+<h3 id="mathbbo-notation"><span class="math inline">\(\mathbb{O}\)</span>-notation</h3>
+<p>Demonstrates <strong>the upper bound</strong> of time running an algorithm.</p>
+<p><span class="math inline">\(f(n) = \mathbb{O}(g(n))\)</span> means there are some suitable constants <span class="math inline">\(c&gt;0\)</span> and $n_0 &gt; 0 $, such that <span class="math inline">\(0 \le f(n) \le c\cdot g(n)\)</span> for all <span class="math inline">\(n \ge n_0\)</span>.</p>
 <blockquote>
-<p>Ex: $2n^2 = \mathbb{O}(n^3)$</p>
+<p>Ex: <span class="math inline">\(2n^2 = \mathbb{O}(n^3)\)</span></p>
 </blockquote>
-<p>Set definition: $\mathbb{O}(g(n))= f(n):$ there are some constants $c&gt;0$ and $n_0&gt;0$, such that $0 \le f(n) \le c \cdot g(n)$ for all $n \ge n_0$.</p>
+<p>Set definition: <span class="math inline">\(\mathbb{O}(g(n))= f(n):\)</span> there are some constants <span class="math inline">\(c&gt;0\)</span> and <span class="math inline">\(n_0&gt;0\)</span>, such that <span class="math inline">\(0 \le f(n) \le c \cdot g(n)\)</span> for all <span class="math inline">\(n \ge n_0\)</span>.</p>
 <blockquote>
-<p>Ex: $f(n) = n^3 + \mathbb{O}(n^2)$ means there is a function $h(n) \in \mathbb{O}(n^2)$, such that $f(n) = n^3 + h(n)$. This $h(n)$ is also considered  the error term.</p>
+<p>Ex: <span class="math inline">\(f(n) = n^3 + \mathbb{O}(n^2)\)</span> means there is a function <span class="math inline">\(h(n) \in \mathbb{O}(n^2)\)</span>, such that <span class="math inline">\(f(n) = n^3 + h(n)\)</span>. This <span class="math inline">\(h(n)\)</span> is also considered the error term.</p>
 </blockquote>
 <blockquote>
-<p>Ex: $n^2 + \mathbb{O}(n) = \mathbb{O}(n^2)$ means for any $f(n) \in \mathbb{O}(n)$, there is an $h(n) \in \mathbb{O}(n^2)$, such that $ n^2 + f(n) = h(n)$.</p>
+<p>Ex: <span class="math inline">\(n^2 + \mathbb{O}(n) = \mathbb{O}(n^2)\)</span> means for any <span class="math inline">\(f(n) \in \mathbb{O}(n)\)</span>, there is an <span class="math inline">\(h(n) \in \mathbb{O}(n^2)\)</span>, such that $ n^2 + f(n) = h(n)$.</p>
 </blockquote>
-<h3 id="Omega-notation"><a href="#Omega-notation" class="headerlink" title="$\Omega$-notation"></a>$\Omega$-notation</h3><p>Demonstrate the <strong>lower-bound</strong> of time running an algorithm.</p>
-<p>Definition: $\Omega(g(n))=f(n):$ there exist $c&gt;0$ and $n_0&gt;0$, such that $0 \le c \cdot g(n) \le f(n)$ for all $n \ge n_0$.</p>
+<h3 id="omega-notation"><span class="math inline">\(\Omega\)</span>-notation</h3>
+<p>Demonstrate the <strong>lower-bound</strong> of time running an algorithm.</p>
+<p>Definition: <span class="math inline">\(\Omega(g(n))=f(n):\)</span> there exist <span class="math inline">\(c&gt;0\)</span> and <span class="math inline">\(n_0&gt;0\)</span>, such that <span class="math inline">\(0 \le c \cdot g(n) \le f(n)\)</span> for all <span class="math inline">\(n \ge n_0\)</span>.</p>
 <blockquote>
-<p>Ex: $\sqrt{n} = \Omega(\lg n)$</p>
+<p>Ex: <span class="math inline">\(\sqrt{n} = \Omega(\lg n)\)</span></p>
 </blockquote>
-<h3 id="Theta-notation"><a href="#Theta-notation" class="headerlink" title="$\Theta$-notation"></a>$\Theta$-notation</h3><h4 id="In-Engineering"><a href="#In-Engineering" class="headerlink" title="In Engineering"></a>In Engineering</h4><p>$\Theta$-notation: <strong>Drop low-order terms, Ignore leading constants</strong>.</p>
+<h3 id="theta-notation"><span class="math inline">\(\Theta\)</span>-notation</h3>
+<h4 id="in-engineering">In Engineering</h4>
+<p><span class="math inline">\(\Theta\)</span>-notation: <strong>Drop low-order terms, Ignore leading constants</strong>.</p>
 <blockquote>
-<p>Ex:  $3n^3+90n^2-5n+6046 = \mathbb{\Theta}(n^3)$</p>
+<p>Ex: <span class="math inline">\(3n^3+90n^2-5n+6046 = \mathbb{\Theta}(n^3)\)</span></p>
 </blockquote>
-<p>As $n \to \infty$, $\mathbb{\Theta}(n^2)$ algorithm always beats the  $\mathbb{\Theta}(n^3)$ algorithm.</p>
-<h4 id="In-Mathematics"><a href="#In-Mathematics" class="headerlink" title="In Mathematics"></a>In Mathematics</h4><p>Definition: $f(n) = \Theta(g(n))$ means there are some suitable constants $c_1&gt;0, c_2&gt;0$ and $n_0 &gt; 0 $, such that $c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)$ for all $n \ge n_0$.</p>
-<p>In other words, $\Theta(g(n)) = \mathbb{O}(g(n)) \cap \Omega(g(n))$.</p>
+<p>As <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\mathbb{\Theta}(n^2)\)</span> algorithm always beats the <span class="math inline">\(\mathbb{\Theta}(n^3)\)</span> algorithm.</p>
+<h4 id="in-mathematics">In Mathematics</h4>
+<p>Definition: <span class="math inline">\(f(n) = \Theta(g(n))\)</span> means there are some suitable constants <span class="math inline">\(c_1&gt;0, c_2&gt;0\)</span> and $n_0 &gt; 0 $, such that <span class="math inline">\(c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)\)</span> for all <span class="math inline">\(n \ge n_0\)</span>.</p>
+<p>In other words, <span class="math inline">\(\Theta(g(n)) = \mathbb{O}(g(n)) \cap \Omega(g(n))\)</span>.</p>
 <blockquote>
-<p>Ex: $n^3+2n^2 = \Theta(n^3) = \mathbb{O}(n^4) = \mathbb{O}(n^3) = \Omega(n^2) = \Omega(n)$</p>
+<p>Ex: <span class="math inline">\(n^3+2n^2 = \Theta(n^3) = \mathbb{O}(n^4) = \mathbb{O}(n^3) = \Omega(n^2) = \Omega(n)\)</span></p>
 </blockquote>
-<h3 id="Other-Notations"><a href="#Other-Notations" class="headerlink" title="Other Notations"></a>Other Notations</h3><ul>
-<li>$o$-notation:  &gt;</li>
-<li>$\omega$-notation: &lt;</li>
+<h3 id="other-notations">Other Notations</h3>
+<ul>
+<li><span class="math inline">\(o\)</span>-notation: &gt;</li>
+<li><span class="math inline">\(\omega\)</span>-notation: &lt;</li>
 </ul>
 <blockquote>
-<p>Ex: $2n^2  = o(n^3) = \omega(n)$</p>
+<p>Ex: <span class="math inline">\(2n^2 = o(n^3) = \omega(n)\)</span></p>
 </blockquote>
-<h2 id="Solving-Recurrences"><a href="#Solving-Recurrences" class="headerlink" title="Solving Recurrences"></a>Solving Recurrences</h2><p>There are 3 main methods to solve recurrences, which are <em>substitution method</em>, <em>recursion-tree method</em> and <em>master method</em>. Usually, we solve recurrences applying <em>recursion-tree method</em> or <em>master method</em>, and validate the result using <em>substitution method</em>.</p>
-<h3 id="Substitution-Method"><a href="#Substitution-Method" class="headerlink" title="Substitution Method"></a>Substitution Method</h3><ol>
+<h2 id="solving-recurrences">Solving Recurrences</h2>
+<p>There are 3 main methods to solve recurrences, which are <em>substitution method</em>, <em>recursion-tree method</em> and <em>master method</em>. Usually, we solve recurrences applying <em>recursion-tree method</em> or <em>master method</em>, and validate the result using <em>substitution method</em>.</p>
+<h3 id="substitution-method">Substitution Method</h3>
+<ol type="1">
 <li><strong>Guess</strong> the form of the solution.</li>
 <li>Verify by induction.</li>
 <li>Solve for constants.</li>
 </ol>
-<h3 id="Recursion-tree-Method"><a href="#Recursion-tree-Method" class="headerlink" title="Recursion-tree Method"></a>Recursion-tree Method</h3><p>Always useful but a little bit non-rigorous.</p>
+<h3 id="recursion-tree-method">Recursion-tree Method</h3>
+<p>Always useful but a little bit non-rigorous.</p>
 <blockquote>
-<p>Ex: $T(n) = T(n/4) + T(n/2) + n^2$</p>
+<p>Ex: <span class="math inline">\(T(n) = T(n/4) + T(n/2) + n^2\)</span></p>
 </blockquote>
-<h3 id="Master-Method"><a href="#Master-Method" class="headerlink" title="Master Method"></a>Master Method</h3><p>Applies to recurrences of the form $T(n) = aT(n/b) + f(n)$, where $a \ge 1$, $b &gt; 1$, $f(n)$should be asymptotically positive.</p>
-<p>The recurrence satisfied:<br>$$<br>T(n) \le<br>\begin{cases}<br>constant &amp; \text{for small $n$}    \\<br>aT(n/b) + \Theta(n^d) &amp; \text{for general $n$}<br>\end{cases}<br>$$</p>
+<h3 id="master-method">Master Method</h3>
+<p>Applies to recurrences of the form <span class="math inline">\(T(n) = aT(n/b) + f(n)\)</span>, where <span class="math inline">\(a \ge 1\)</span>, <span class="math inline">\(b &gt; 1\)</span>, <span class="math inline">\(f(n)\)</span>should be asymptotically positive.</p>
+<p>The recurrence satisfied: <span class="math display">\[
+T(n) \le
+\begin{cases}
+constant &amp; \text{for small $n$} \\
+aT(n/b) + \Theta(n^d) &amp; \text{for general $n$}
+\end{cases}
+\]</span></p>
 <ul>
-<li>$a$ —— number of sub-problems</li>
-<li>$b$ —— decay coefficient of the sub-problem</li>
-<li>$d$ —— coefficient related to <em>merge</em> the sub-problems</li>
-<li>$a, b, d$ is independent from $n$</li>
+<li><span class="math inline">\(a\)</span> —— number of sub-problems</li>
+<li><span class="math inline">\(b\)</span> —— decay coefficient of the sub-problem</li>
+<li><span class="math inline">\(d\)</span> —— coefficient related to <em>merge</em> the sub-problems</li>
+<li><span class="math inline">\(a, b, d\)</span> is independent from <span class="math inline">\(n\)</span></li>
 </ul>
-<p>In this case, according to <em>master method</em>, the time complexity of recurrence is as follows:<br>$$<br>T(n) =<br>\begin{cases}<br>\Theta(n^d) &amp; \text{if $a &lt; b^d$, case 1}    \\<br>\Theta(n^d\log n) &amp; \text{if $a = b^d$, case 2}    \\<br>\Theta(n^{\log_ba}) &amp; \text{if $a &gt; b^d$, case 3}<br>\end{cases}<br>$$</p>
+<p>In this case, according to <em>master method</em>, the time complexity of recurrence is as follows: <span class="math display">\[
+T(n) =
+\begin{cases}
+\Theta(n^d) &amp; \text{if $a &lt; b^d$, case 1}   \\
+\Theta(n^d\log n) &amp; \text{if $a = b^d$, case 2} \\
+\Theta(n^{\log_ba}) &amp; \text{if $a &gt; b^d$, case 3}
+\end{cases}
+\]</span></p>
 <blockquote>
-<p>Ex: $T(n)=9T(n/3) + n$<br>$$<br>\begin{split}<br>&amp;\because a=9, b=3, d=1    \\<br>&amp;\therefore a=9 &gt; b^d=3    \\<br>&amp;\therefore T(n) = \Theta(n^{\log_b a}) = \Theta(n^2)<br>\end{split}<br>$$<br>Ex: $T(n) = T(2n/3) + 1$<br>$$<br>\begin{split}<br>&amp;\because a=1, b=\frac{2}{3}, d=0    \\<br>&amp;\therefore a=1 = b^d=\left(\frac{2}{3}\right)^0    \\<br>&amp;\therefore T(n) = \Theta(n^d \log n) = \Theta(\log n)<br>\end{split}<br>$$<br>Ex: $T(n) = 3T(n/4) + n \log n$<br>$$<br>\begin{split}<br>&amp;\because n^d = n \log n, n &lt; n \log n &lt; n^2    \\<br>&amp;\therefore n &lt; n^d &lt; n^2    \\<br>&amp;\therefore 1 &lt; d &lt;2    \\<br>&amp;\therefore 4 &lt; b^d &lt; 16    \\<br>&amp;\therefore a = 3 &lt; b^d    \\<br>&amp;\therefore T(n) = \Theta(n^d) = \Theta(n\log n)<br>\end{split}<br>$$<br>Ex: $T(n) = 2T(n/2) + n\log n$<br>$$<br>\begin{split}<br>&amp;\because n^d = n \log n, n &lt; n\log n &lt; n^2    \\<br>&amp;\therefore n &lt; n^d &lt; n^2    \\<br>&amp;\therefore 1 &lt; d &lt; 2    \\<br>&amp;\therefore 2 &lt; b^d &lt; 4 \\<br>\end{split}<br>$$<br>Given that $a=3$, we cannot tell $a$ is larger than $b^d$, or $b^d$ is larger than $a$. Therefore, we cannot apply the <strong>master method</strong> in this case.</p>
+<p>Ex: <span class="math inline">\(T(n)=9T(n/3) + n\)</span> <span class="math display">\[
+\begin{split}
+&amp;\because a=9, b=3, d=1   \\
+&amp;\therefore a=9 &gt; b^d=3   \\
+&amp;\therefore T(n) = \Theta(n^{\log_b a}) = \Theta(n^2)
+\end{split}
+\]</span> Ex: <span class="math inline">\(T(n) = T(2n/3) + 1\)</span> <span class="math display">\[
+\begin{split}
+&amp;\because a=1, b=\frac{2}{3}, d=0 \\
+&amp;\therefore a=1 = b^d=\left(\frac{2}{3}\right)^0  \\
+&amp;\therefore T(n) = \Theta(n^d \log n) = \Theta(\log n)
+\end{split}
+\]</span> Ex: <span class="math inline">\(T(n) = 3T(n/4) + n \log n\)</span> <span class="math display">\[
+\begin{split}
+&amp;\because n^d = n \log n, n &lt; n \log n &lt; n^2  \\
+&amp;\therefore n &lt; n^d &lt; n^2 \\
+&amp;\therefore 1 &lt; d &lt;2  \\
+&amp;\therefore 4 &lt; b^d &lt; 16  \\
+&amp;\therefore a = 3 &lt; b^d   \\
+&amp;\therefore T(n) = \Theta(n^d) = \Theta(n\log n)
+\end{split}
+\]</span> Ex: <span class="math inline">\(T(n) = 2T(n/2) + n\log n\)</span> <span class="math display">\[
+\begin{split}
+&amp;\because n^d = n \log n, n &lt; n\log n &lt; n^2   \\
+&amp;\therefore n &lt; n^d &lt; n^2 \\
+&amp;\therefore 1 &lt; d &lt; 2 \\
+&amp;\therefore 2 &lt; b^d &lt; 4 \\
+\end{split}
+\]</span> Given that <span class="math inline">\(a=3\)</span>, we cannot tell <span class="math inline">\(a\)</span> is larger than <span class="math inline">\(b^d\)</span>, or <span class="math inline">\(b^d\)</span> is larger than <span class="math inline">\(a\)</span>. Therefore, we cannot apply the <strong>master method</strong> in this case.</p>
 </blockquote>
-<h2 id="Problem-Sorting"><a href="#Problem-Sorting" class="headerlink" title="Problem: Sorting"></a>Problem: Sorting</h2><p><strong>Input</strong>: sequence $&lt;a_1, a_2, \cdots, a_n&gt;$ of numbers</p>
-<p><strong>Output</strong>: permutation (rearrangement) of $&lt;a_1’, a_2’,\cdots,a_n’&gt;$ to make:<br>$$<br>a_1’ \le a_2’ \le \cdots \le a_n’<br>$$</p>
-<h3 id="Sorting-Model"><a href="#Sorting-Model" class="headerlink" title="Sorting Model"></a>Sorting Model</h3><h4 id="Comparison-Sorting-Model"><a href="#Comparison-Sorting-Model" class="headerlink" title="Comparison Sorting Model"></a>Comparison Sorting Model</h4><p>Comparison sorting model is that <strong>only use comparisons</strong> ($&lt;, \le, =, \ge, &gt;$) to determine the relevant order of elements.</p>
-<h5 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h5><p>No comparison sorting algorithm runs better than $\Theta(n \log n)$.</p>
-<h4 id="Non-comparison-Sorting-Model"><a href="#Non-comparison-Sorting-Model" class="headerlink" title="Non-comparison Sorting Model"></a>Non-comparison Sorting Model</h4><p>Assume they are integers in a particular range. There are two algorithms here that’s faster than $\Theta(n \log n)$, <strong>counting sort</strong> and <strong>radix sort</strong>, which are $\mathbb{O}(n)$. These sorting algorithm could be seen in <em>Chapter Sorting</em>.</p>
-<h3 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h3><h4 id="Pseudo-Code"><a href="#Pseudo-Code" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Insertion-Sort(A, n) <span class="comment">//Sort A[1,...,n]</span></span><br><span class="line">	<span class="keyword">for</span> j &lt;- <span class="number">2</span> to n</span><br><span class="line">		<span class="keyword">do</span> key &lt;- A[j]	<span class="comment">//Take the key element out</span></span><br><span class="line">			i &lt;- j<span class="number">-1</span></span><br><span class="line">			<span class="keyword">while</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> A[i]&gt;key	<span class="comment">//Compare the key &amp; A[i]</span></span><br><span class="line">				<span class="keyword">do</span> A[i+<span class="number">1</span>] &lt;- A[i]</span><br><span class="line">					i &lt;- i<span class="number">-1</span></span><br><span class="line">			A[i+<span class="number">1</span>] &lt;- key	<span class="comment">//Insert the key</span></span><br></pre></td></tr></table></figure>
-<h4 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h4><p>The core of this algorithm is to take out the <em>key</em> element from the array, compare it with it’s former elements until it’s correctly ordered, and then <strong>insert</strong> the <em>key</em> element to that place.</p>
+<h2 id="problem-sorting">Problem: Sorting</h2>
+<p><strong>Input</strong>: sequence <span class="math inline">\(&lt;a_1, a_2, \cdots, a_n&gt;\)</span> of numbers</p>
+<p><strong>Output</strong>: permutation (rearrangement) of <span class="math inline">\(&lt;a_1&#39;, a_2&#39;,\cdots,a_n&#39;&gt;\)</span> to make: <span class="math display">\[
+a_1&#39; \le a_2&#39; \le \cdots \le a_n&#39;
+\]</span></p>
+<h3 id="sorting-model">Sorting Model</h3>
+<h4 id="comparison-sorting-model">Comparison Sorting Model</h4>
+<p>Comparison sorting model is that <strong>only use comparisons</strong> (<span class="math inline">\(&lt;, \le, =, \ge, &gt;\)</span>) to determine the relevant order of elements.</p>
+<h5 id="theorem">Theorem</h5>
+<p>No comparison sorting algorithm runs better than <span class="math inline">\(\Theta(n \log n)\)</span>.</p>
+<h4 id="non-comparison-sorting-model">Non-comparison Sorting Model</h4>
+<p>Assume they are integers in a particular range. There are two algorithms here that's faster than <span class="math inline">\(\Theta(n \log n)\)</span>, <strong>counting sort</strong> and <strong>radix sort</strong>, which are <span class="math inline">\(\mathbb{O}(n)\)</span>. These sorting algorithm could be seen in <em>Chapter Sorting</em>.</p>
+<h3 id="insertion-sort">Insertion Sort</h3>
+<h4 id="pseudo-code">Pseudo Code</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Insertion-Sort(A, n) <span class="comment">//Sort A[1,...,n]</span></span><br><span class="line">	<span class="keyword">for</span> j &lt;- <span class="number">2</span> to n</span><br><span class="line">		<span class="keyword">do</span> key &lt;- A[j]	<span class="comment">//Take the key element out</span></span><br><span class="line">			i &lt;- j<span class="number">-1</span></span><br><span class="line">			<span class="keyword">while</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> A[i]&gt;key	<span class="comment">//Compare the key &amp; A[i]</span></span><br><span class="line">				<span class="keyword">do</span> A[i+<span class="number">1</span>] &lt;- A[i]</span><br><span class="line">					i &lt;- i<span class="number">-1</span></span><br><span class="line">			A[i+<span class="number">1</span>] &lt;- key	<span class="comment">//Insert the key</span></span><br></pre></td></tr></table></figure>
+<h4 id="explanation">Explanation</h4>
+<p>The core of this algorithm is to take out the <em>key</em> element from the array, compare it with it's former elements until it's correctly ordered, and then <strong>insert</strong> the <em>key</em> element to that place.</p>
 <ul>
 <li>Animation</li>
 </ul>
-<center><br>    <img width="300px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Insertion-sort-example-300px.gif/220px-Insertion-sort-example-300px.gif"><br><br>    Animation explanation of insertion algorithm<br></center>
-
+<center>
+<img width="300px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Insertion-sort-example-300px.gif/220px-Insertion-sort-example-300px.gif"><br> Animation explanation of insertion algorithm
+</center>
 <ul>
 <li>Diagram</li>
 </ul>
-<center><br>    <img width="400px" src="https://mjd507.github.io/images/Algorithm/InsertionSort.png" height="300px"><br><br>    Diagram of insertion algorithm<br></center>
-
-<h4 id="Insertion-Sort-Analysis"><a href="#Insertion-Sort-Analysis" class="headerlink" title="Insertion Sort Analysis"></a>Insertion Sort Analysis</h4><ul>
-<li><p>Worst case: input reverse sorted array<br>$$<br>T(n) = \sum_{j=2}^{n}{\Theta(j)} = \Theta(n^2)<br>$$</p>
-</li>
+<center>
+<img width="400px" src="https://mjd507.github.io/images/Algorithm/InsertionSort.png" height="300px"><br> Diagram of insertion algorithm
+</center>
+<h4 id="insertion-sort-analysis">Insertion Sort Analysis</h4>
+<ul>
+<li><p>Worst case: input reverse sorted array <span class="math display">\[
+T(n) = \sum_{j=2}^{n}{\Theta(j)} = \Theta(n^2)
+\]</span></p></li>
 <li><blockquote>
-<p> Is insertion sort fast?</p>
+<p>Is insertion sort fast?</p>
 <ul>
-<li>Moderately fast for small $n$</li>
-<li>Not at all for large $n$</li>
+<li>Moderately fast for small <span class="math inline">\(n\)</span></li>
+<li>Not at all for large <span class="math inline">\(n\)</span></li>
 </ul>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
-<h3 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h3><h4 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation"></a>Explanation</h4><p>Given an unsorted list $A[1 … n]$</p>
-<ol>
-<li><p>If $n = 1$, done   —— $\Theta(1)$</p>
-</li>
-<li><p>Recursively sort<br>$A[1 … n/2]$ and $A[n/2+1 … n]$  —— $2T(n/2)$</p>
-</li>
-<li><p>Merge 2 sorted lists      —— $\Theta(n)$</p>
+<h3 id="merge-sort">Merge Sort</h3>
+<h4 id="explanation-1">Explanation</h4>
+<p>Given an unsorted list <span class="math inline">\(A[1 ... n]\)</span></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(n = 1\)</span>, done —— <span class="math inline">\(\Theta(1)\)</span></p></li>
+<li><p>Recursively sort <span class="math inline">\(A[1 ... n/2]\)</span> and <span class="math inline">\(A[n/2+1 ... n]\)</span> —— <span class="math inline">\(2T(n/2)\)</span></p></li>
+<li><p>Merge 2 sorted lists —— <span class="math inline">\(\Theta(n)\)</span></p>
 <blockquote>
-<p>Ex:  merge the following sorted subsequences:</p>
-<p>​    1 5 9 13    </p>
-<p>​    2 6 8 11</p>
+<p>Ex: merge the following sorted subsequences:</p>
+<p>​ 1 5 9 13</p>
+<p>​ 2 6 8 11</p>
 <p>Compare the heads of 2 sequences, take away the smaller one and move the header (pointer) to the next element, and you will get:</p>
-<p>​    1 2 5 6 8 9 11 15</p>
-</blockquote>
-</li>
+<p>​ 1 2 5 6 8 9 11 15</p>
+</blockquote></li>
 </ol>
-<h4 id="Code-in-Python"><a href="#Code-in-Python" class="headerlink" title="Code in Python:"></a>Code in Python:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MergeSort</span><span class="params">(A)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> len(A) &lt;= <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> A</span><br><span class="line">    num = int(len(A) / <span class="number">2</span>)</span><br><span class="line">    left = MergeSort(A[:num])	<span class="comment"># left tree</span></span><br><span class="line">    right = MergeSort(A[num:])	<span class="comment"># right tree</span></span><br><span class="line">    <span class="keyword">return</span> Merge(left, right)	<span class="comment"># merge them</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Merge</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    temp = []</span><br><span class="line">    l, r = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> l &lt; len(left) <span class="keyword">and</span> r &lt; len(right):</span><br><span class="line">		<span class="keyword">if</span> left[l] &lt;= right[r]:</span><br><span class="line">            temp.append(left[l])</span><br><span class="line">            l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp.append(right[r])</span><br><span class="line">            r += <span class="number">1</span></span><br><span class="line">    temp += list(left[l:])</span><br><span class="line">    temp += list(right[r:])</span><br><span class="line">    <span class="keyword">return</span> temp</span><br></pre></td></tr></table></figure>
-<h4 id="Analysis-of-Merge-Sort"><a href="#Analysis-of-Merge-Sort" class="headerlink" title="Analysis of Merge Sort"></a>Analysis of Merge Sort</h4><p>From the <em>Explanation</em>, we can get:<br>$$<br>T(n) = \cases{<br>    \Theta(1)                 &amp; $n=1$    \\<br>    2 T(n/2) + \Theta(n)     &amp; $n \neq 1$<br>}<br>$$<br>Because $n=1$ is not so meaningful in engineering, so the case of $n=1$ is usually omitted, and $T(n)$ is as follows:<br>$$<br>T(n) = 2T(n/2) + \Theta(n)<br>$$<br>This recurrence could be solved by using <em>Master Method</em>.<br>$$<br>\begin{split}<br>&amp;\because a = 2, b = 2, d = 1    \\<br>&amp;\therefore a = 2 = b^d    \\<br>&amp;\therefore T(n) = \Theta(n^d\log n) = \Theta(n \log n)<br>\end{split}<br>$$</p>
+<h4 id="code-in-python">Code in Python:</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MergeSort</span>(<span class="params">A</span>):</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(A) &lt;= <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> A</span><br><span class="line">    num = <span class="built_in">int</span>(<span class="built_in">len</span>(A) / <span class="number">2</span>)</span><br><span class="line">    left = MergeSort(A[:num])	<span class="comment"># left tree</span></span><br><span class="line">    right = MergeSort(A[num:])	<span class="comment"># right tree</span></span><br><span class="line">    <span class="keyword">return</span> Merge(left, right)	<span class="comment"># merge them</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Merge</span>(<span class="params">left, right</span>):</span></span><br><span class="line">    temp = []</span><br><span class="line">    l, r = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> l &lt; <span class="built_in">len</span>(left) <span class="keyword">and</span> r &lt; <span class="built_in">len</span>(right):</span><br><span class="line">		<span class="keyword">if</span> left[l] &lt;= right[r]:</span><br><span class="line">            temp.append(left[l])</span><br><span class="line">            l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp.append(right[r])</span><br><span class="line">            r += <span class="number">1</span></span><br><span class="line">    temp += <span class="built_in">list</span>(left[l:])</span><br><span class="line">    temp += <span class="built_in">list</span>(right[r:])</span><br><span class="line">    <span class="keyword">return</span> temp</span><br></pre></td></tr></table></figure>
+<h4 id="analysis-of-merge-sort">Analysis of Merge Sort</h4>
+<p>From the <em>Explanation</em>, we can get: <span class="math display">\[
+T(n) = \cases{
+    \Theta(1)               &amp; $n=1$ \\
+    2 T(n/2) + \Theta(n)    &amp; $n \neq 1$
+}
+\]</span> Because <span class="math inline">\(n=1\)</span> is not so meaningful in engineering, so the case of <span class="math inline">\(n=1\)</span> is usually omitted, and <span class="math inline">\(T(n)\)</span> is as follows: <span class="math display">\[
+T(n) = 2T(n/2) + \Theta(n)
+\]</span> This recurrence could be solved by using <em>Master Method</em>. <span class="math display">\[
+\begin{split}
+&amp;\because a = 2, b = 2, d = 1   \\
+&amp;\therefore a = 2 = b^d \\
+&amp;\therefore T(n) = \Theta(n^d\log n) = \Theta(n \log n)
+\end{split}
+\]</span></p>
 <blockquote>
-<p>$\Theta(n \log n)$ is faster than $\Theta(n^2)$. Actually merge sort is faster than insertion sort when $n$ is bigger than 30 or so.</p>
+<p><span class="math inline">\(\Theta(n \log n)\)</span> is faster than <span class="math inline">\(\Theta(n^2)\)</span>. Actually merge sort is faster than insertion sort when <span class="math inline">\(n\)</span> is bigger than 30 or so.</p>
 </blockquote>
-<h3 id="Quicksort"><a href="#Quicksort" class="headerlink" title="Quicksort"></a>Quicksort</h3><p>Quicksort was invented by Tony Hoare in 1962.</p>
+<h3 id="quicksort">Quicksort</h3>
+<p>Quicksort was invented by Tony Hoare in 1962.</p>
 <ul>
-<li>It’s a <strong>Divide and conquer </strong>algorithm</li>
-<li>It sorts “<strong>in place</strong>“</li>
+<li>It's a <strong>Divide and conquer </strong>algorithm</li>
+<li>It sorts "<strong>in place</strong>"</li>
 <li>Very practical (with tuning)</li>
 </ul>
-<h4 id="Divide-and-conquer"><a href="#Divide-and-conquer" class="headerlink" title="Divide and conquer"></a>Divide and conquer</h4><ol>
-<li>Divide: Partition array into 2 subarrays around pivot $x$, such that elements in lower subarray $\le x \le$ elements in upper subarray.</li>
+<h4 id="divide-and-conquer">Divide and conquer</h4>
+<ol type="1">
+<li>Divide: Partition array into 2 subarrays around pivot <span class="math inline">\(x\)</span>, such that elements in lower subarray <span class="math inline">\(\le x \le\)</span> elements in upper subarray.</li>
 <li>Conquer: Recursively partition 2 subarrays.</li>
 <li>Combine: Trivial.</li>
 </ol>
-<h4 id="Pseudo-Code-1"><a href="#Pseudo-Code-1" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h4><h5 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Partition(A, start, end)	<span class="comment">// A[start...end]</span></span><br><span class="line">	pivot &lt;- A[start] 		<span class="comment">// pivot A[p]</span></span><br><span class="line">	i &lt;- start</span><br><span class="line">	<span class="keyword">for</span> j &lt;- start+<span class="number">1</span> to end</span><br><span class="line">		<span class="keyword">do</span> <span class="keyword">if</span> A[j] &lt;= pivot</span><br><span class="line">			then i &lt;- i+<span class="number">1</span></span><br><span class="line">				 exchange A[i] &lt;-&gt; A[j]</span><br><span class="line">	exchange A[start] &lt;-&gt; A[i]</span><br><span class="line">	<span class="keyword">return</span> i</span><br></pre></td></tr></table></figure>
-<center><br>    <img width="400px" src="https://he-s3.s3.amazonaws.com/media/uploads/06e770e.png"><br><br>    Diagram explanation of partition<br></center>
-
+<h4 id="pseudo-code-1">Pseudo Code</h4>
+<h5 id="partition">Partition</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Partition(A, start, end)	<span class="comment">// A[start...end]</span></span><br><span class="line">	pivot &lt;- A[start] 		<span class="comment">// pivot A[p]</span></span><br><span class="line">	i &lt;- start</span><br><span class="line">	<span class="keyword">for</span> j &lt;- start+<span class="number">1</span> to end</span><br><span class="line">		<span class="keyword">do</span> <span class="keyword">if</span> A[j] &lt;= pivot</span><br><span class="line">			then i &lt;- i+<span class="number">1</span></span><br><span class="line">				 exchange A[i] &lt;-&gt; A[j]</span><br><span class="line">	exchange A[start] &lt;-&gt; A[i]</span><br><span class="line">	<span class="keyword">return</span> i</span><br></pre></td></tr></table></figure>
+<center>
+<img width="400px" src="https://he-s3.s3.amazonaws.com/media/uploads/06e770e.png"><br> Diagram explanation of partition
+</center>
 <ul>
-<li>$pivot$ means the pivot element.</li>
-<li>$i$ means the pointer pointing the boundary of the lower subarray, and the index of $pivot$ in the end.</li>
-<li>$j$ means the pointer pointing boundary of the upper subarray.</li>
+<li><span class="math inline">\(pivot\)</span> means the pivot element.</li>
+<li><span class="math inline">\(i\)</span> means the pointer pointing the boundary of the lower subarray, and the index of <span class="math inline">\(pivot\)</span> in the end.</li>
+<li><span class="math inline">\(j\)</span> means the pointer pointing boundary of the upper subarray.</li>
 </ul>
-<p>The time complexity of <em>“Patition”</em> is  $\Theta(n)$, because you just go through the array once, compare each element with the <em>pivot</em> and put the element in the right zone.</p>
-<h5 id="QuickSort"><a href="#QuickSort" class="headerlink" title="QuickSort"></a>QuickSort</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QuickSort(A, left, right)</span><br><span class="line">	<span class="keyword">if</span> left &lt; right</span><br><span class="line">		then pivot_index &lt;- Partition(A, left, right)</span><br><span class="line">			 QuickSort(A, left, pivot_index)</span><br><span class="line">			 QuickSort(A, pivot_index+<span class="number">1</span>, right)</span><br><span class="line"></span><br><span class="line">Initial call: QuickSort(A, <span class="number">1</span>, n)</span><br></pre></td></tr></table></figure>
-<h4 id="Animation-Explanation"><a href="#Animation-Explanation" class="headerlink" title="Animation Explanation"></a>Animation Explanation</h4><center><br>    <img width="350px" src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif"><br><br>    Animation explanation of quick sort algorithm.<br></center>
-
-
-<ol>
-<li><p>Partition the array into left and right, two subarrays.</p>
-</li>
+<p>The time complexity of <em>"Patition"</em> is <span class="math inline">\(\Theta(n)\)</span>, because you just go through the array once, compare each element with the <em>pivot</em> and put the element in the right zone.</p>
+<h5 id="quicksort-1">QuickSort</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QuickSort(A, left, right)</span><br><span class="line">	<span class="keyword">if</span> left &lt; right</span><br><span class="line">		then pivot_index &lt;- Partition(A, left, right)</span><br><span class="line">			 QuickSort(A, left, pivot_index)</span><br><span class="line">			 QuickSort(A, pivot_index+<span class="number">1</span>, right)</span><br><span class="line"></span><br><span class="line">Initial call: QuickSort(A, <span class="number">1</span>, n)</span><br></pre></td></tr></table></figure>
+<h4 id="animation-explanation">Animation Explanation</h4>
+<center>
+<img width="350px" src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif"><br> Animation explanation of quick sort algorithm.
+</center>
+<ol type="1">
+<li><p>Partition the array into left and right, two subarrays.</p></li>
 <li><p>Recursively partition the left subarray and the right subarray.</p>
-<p><em>(Explained the same in the “Divide and Conquer” of this section)</em></p>
-</li>
+<p><em>(Explained the same in the "Divide and Conquer" of this section)</em></p></li>
 </ol>
-<h4 id="Analysis-of-Quicksort-Algorithm"><a href="#Analysis-of-Quicksort-Algorithm" class="headerlink" title="Analysis of Quicksort Algorithm"></a>Analysis of Quicksort Algorithm</h4><h5 id="Worst-case-time"><a href="#Worst-case-time" class="headerlink" title="Worst case time"></a>Worst case time</h5><p>If we are unlucky, which means to consider the worst case of the quicksort:</p>
+<h4 id="analysis-of-quicksort-algorithm">Analysis of Quicksort Algorithm</h4>
+<h5 id="worst-case-time">Worst case time</h5>
+<p>If we are unlucky, which means to consider the worst case of the quicksort:</p>
 <ul>
 <li>input sorted or reverse sorted</li>
 <li>one side of partition has no elements</li>
 </ul>
-<p>$$<br>\begin{align}<br>T(n)<br>&amp; = T(0) + T(n-1) + \Theta(n)    \nonumber\\<br>&amp; = \Theta(1) + T(n-1) + \Theta(n)    \\<br>&amp; = T(n-1) + \Theta(n)    \nonumber\\<br>\end{align}<br>$$</p>
-<p>By applying <em>Recursive Tree Method</em>, we could solve this recurrence to be:<br>$$<br>T(n) = \Theta(n^2)<br>$$</p>
-<h5 id="Best-case-time-for-intuition-only"><a href="#Best-case-time-for-intuition-only" class="headerlink" title="Best case time (for intuition only)"></a>Best case time (for intuition only)</h5><p>If we are really lucky, <em>Partition</em> splits the array $n/2 : n/2$.<br>$$<br>T(n) = 2T(n/2) + \Theta(n) = \Theta(n \log n)<br>$$</p>
-<h5 id="Average-case-time"><a href="#Average-case-time" class="headerlink" title="Average case time"></a>Average case time</h5><p>Suppose we alternate lucky, unlucky, lucky, … , the recurrence would be:<br>$$<br>\begin{align}<br>&amp; L(n) = 2U(n/2) + \Theta(n) &amp; \text{(lucky)} \label{lucky}\\<br>&amp; U(n) = L(n-1) + \Theta(n)     &amp; \text{(unlucky)} \label{unlucky}<br>\end{align}<br>$$<br>Then substitute ($\ref{unlucky}$) into ($\ref{lucky}$), we get:<br>$$<br>\begin{align}<br>L(n)<br>&amp; = 2[L(n/2-1)+\Theta(n/2)] + \Theta(n)    \nonumber\\<br>&amp; = 2L(n/2-1) + 2\Theta(n)    \nonumber\\<br>&amp; = 2L(n/2) + \Theta(n)    \\<br>&amp; = \Theta(n \log n) \nonumber<br>\end{align}<br>$$<br>So we are lucky in this case.</p>
-<h4 id="Randomized-Quicksort"><a href="#Randomized-Quicksort" class="headerlink" title="Randomized Quicksort"></a>Randomized Quicksort</h4><p>Choose <strong>a random pivot</strong> or <strong>randomly shuffle the input</strong> to avoid the worst case.</p>
-<h5 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h5><ul>
-<li><p>running time is independent from input ordering</p>
-</li>
-<li><p>no assumptions about input distribution</p>
-</li>
+<p><span class="math display">\[
+\begin{align}
+T(n)
+&amp; = T(0) + T(n-1) + \Theta(n)   \nonumber\\
+&amp; = \Theta(1) + T(n-1) + \Theta(n)  \\
+&amp; = T(n-1) + \Theta(n)  \nonumber\\
+\end{align}
+\]</span></p>
+<p>By applying <em>Recursive Tree Method</em>, we could solve this recurrence to be: <span class="math display">\[
+T(n) = \Theta(n^2)
+\]</span></p>
+<h5 id="best-case-time-for-intuition-only">Best case time (for intuition only)</h5>
+<p>If we are really lucky, <em>Partition</em> splits the array <span class="math inline">\(n/2 : n/2\)</span>. <span class="math display">\[
+T(n) = 2T(n/2) + \Theta(n) = \Theta(n \log n)
+\]</span></p>
+<h5 id="average-case-time">Average case time</h5>
+<p>Suppose we alternate lucky, unlucky, lucky, ... , the recurrence would be: <span class="math display">\[
+\begin{align}
+&amp; L(n) = 2U(n/2) + \Theta(n) &amp; \text{(lucky)} \label{lucky}\\
+&amp; U(n) = L(n-1) + \Theta(n)  &amp; \text{(unlucky)} \label{unlucky}
+\end{align}
+\]</span> Then substitute (<span class="math inline">\(\ref{unlucky}\)</span>) into (<span class="math inline">\(\ref{lucky}\)</span>), we get: <span class="math display">\[
+\begin{align}
+L(n)
+&amp; = 2[L(n/2-1)+\Theta(n/2)] + \Theta(n) \nonumber\\
+&amp; = 2L(n/2-1) + 2\Theta(n)  \nonumber\\
+&amp; = 2L(n/2) + \Theta(n) \\
+&amp; = \Theta(n \log n) \nonumber
+\end{align}
+\]</span> So we are lucky in this case.</p>
+<h4 id="randomized-quicksort">Randomized Quicksort</h4>
+<p>Choose <strong>a random pivot</strong> or <strong>randomly shuffle the input</strong> to avoid the worst case.</p>
+<h5 id="advantages">Advantages</h5>
+<ul>
+<li><p>running time is independent from input ordering</p></li>
+<li><p>no assumptions about input distribution</p></li>
 <li><p>no specific input can elicit the worst behaviour</p>
 <blockquote>
 <p>The worst case is determined only by the random number generator, rather than the input distribution.</p>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
-<h5 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h5><p>$T(n) = r.v$ for running time assuming random numbers are independent.</p>
-<p>For $k=0,1, \cdots, n-1$, let<br>$$<br>X_k =<br>\begin{cases}<br>1 &amp; \text{if partition generates a $k:n-k-1$ split}    \\<br>0 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<h5 id="analysis">Analysis</h5>
+<p><span class="math inline">\(T(n) = r.v\)</span> for running time assuming random numbers are independent.</p>
+<p>For <span class="math inline">\(k=0,1, \cdots, n-1\)</span>, let <span class="math display">\[
+X_k =
+\begin{cases}
+1 &amp; \text{if partition generates a $k:n-k-1$ split} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
 <blockquote>
-<p>$X_k$ is an indicator random variable ($r.v$).</p>
+<p><span class="math inline">\(X_k\)</span> is an indicator random variable (<span class="math inline">\(r.v\)</span>).</p>
 </blockquote>
-<p>$$<br>\begin{align}<br>\mathbb{E}[X_k]<br>&amp; = 0 \times P{X_k=0} + 1\times P{X_k=1}    \nonumber\\<br>&amp; = P{X_k=1}    \\<br>&amp; = 1/n    \nonumber<br>\end{align}<br>$$</p>
-<p>$$<br>\begin{align}<br>T(n)<br>&amp; =<br>\begin{cases}<br>T(0) + T(n-1) + \Theta(n) &amp; \text{if $0:n-1$ split}    \\<br>T(1) + T(n-2) + \Theta(n) &amp; \text{if $1:n-2$ split}    \\<br>\cdots \cdots    \\<br>T(n-1) + T(0) + \Theta(n) &amp; \text{if $n-1:0$ split}    \\<br>\end{cases}    \nonumber\\<br>&amp; = \sum_{k=0}^{n-1}X_k(T(k)+T(n-k-1)+\Theta(n)) \nonumber<br>\end{align}<br>$$</p>
-<p>$$<br>\begin{align}<br>\mathbb{E}[T(n)]<br>&amp; = \mathbb{E}\left[\sum_{k=0}^{n-1}X_k(T(k)+T(n-k-1)+\Theta(n))\right]    \nonumber\\<br>&amp; = \sum_{k=0}^{n-1}\mathbb{E}[X_k(T(k)+T(n-k-1)+\Theta(n))]    \nonumber\\<br>&amp; = \sum_{k=0}^{n-1}\mathbb{E}[X_k] \cdot \mathbb{E}[(T(k)+T(n-k-1)+\Theta(n))]    \nonumber\\<br>&amp; = \frac{1}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(k)] + \frac{1}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(n-k-1)] + \frac{1}{n} \sum_{k=0}^{n-1}\Theta(n)    \nonumber    \\<br>&amp; = \frac{2}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(k)] + \Theta(n)    \nonumber    \\<br>\end{align}<br>$$</p>
-<p>Absorb $k=0,1$ terms into $\Theta(n)$ for technical convenience.<br>$$<br>\mathbb{E}[T(n)] = \frac{2}{n} \sum_{k=2}^{n-1}\mathbb{E}[(T(k)] + \Theta(n)    \\<br>$$<br>Applying <em>Substitution Method</em>, $\mathbb{E}[T(n)] = n \log n $.</p>
+<p><span class="math display">\[
+\begin{align}
+\mathbb{E}[X_k]
+&amp; = 0 \times P\{X_k=0\} + 1\times P\{X_k=1\}    \nonumber\\
+&amp; = P\{X_k=1\}  \\
+&amp; = 1/n \nonumber
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+T(n)
+&amp; =
+\begin{cases}
+T(0) + T(n-1) + \Theta(n) &amp; \text{if $0:n-1$ split} \\
+T(1) + T(n-2) + \Theta(n) &amp; \text{if $1:n-2$ split} \\
+\cdots \cdots   \\
+T(n-1) + T(0) + \Theta(n) &amp; \text{if $n-1:0$ split} \\
+\end{cases} \nonumber\\
+&amp; = \sum_{k=0}^{n-1}X_k(T(k)+T(n-k-1)+\Theta(n)) \nonumber
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\mathbb{E}[T(n)]
+&amp; = \mathbb{E}\left[\sum_{k=0}^{n-1}X_k(T(k)+T(n-k-1)+\Theta(n))\right] \nonumber\\
+&amp; = \sum_{k=0}^{n-1}\mathbb{E}[X_k(T(k)+T(n-k-1)+\Theta(n))]    \nonumber\\
+&amp; = \sum_{k=0}^{n-1}\mathbb{E}[X_k] \cdot \mathbb{E}[(T(k)+T(n-k-1)+\Theta(n))] \nonumber\\
+&amp; = \frac{1}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(k)] + \frac{1}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(n-k-1)] + \frac{1}{n} \sum_{k=0}^{n-1}\Theta(n)   \nonumber   \\
+&amp; = \frac{2}{n} \sum_{k=0}^{n-1}\mathbb{E}[(T(k)] + \Theta(n)   \nonumber   \\
+\end{align}
+\]</span></p>
+<p>Absorb <span class="math inline">\(k=0,1\)</span> terms into <span class="math inline">\(\Theta(n)\)</span> for technical convenience. <span class="math display">\[
+\mathbb{E}[T(n)] = \frac{2}{n} \sum_{k=2}^{n-1}\mathbb{E}[(T(k)] + \Theta(n)    \\
+\]</span> Applying <em>Substitution Method</em>, $[T(n)] = n n $.</p>
 <blockquote>
 <p>Typically, randomized quicksort is about 3 times faster than merge sort.</p>
 </blockquote>
-<h5 id="Pseudo-code"><a href="#Pseudo-code" class="headerlink" title="Pseudo code"></a>Pseudo code</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Partition(A, start, end)	<span class="comment">// A[start...end]</span></span><br><span class="line">	exchagne A[start] &lt;-&gt; A[random choose index] <span class="comment">// randomly choose the pivot</span></span><br><span class="line">    pivot &lt;- A[start] 		<span class="comment">// pivot A[p]</span></span><br><span class="line">	i &lt;- start</span><br><span class="line">	<span class="keyword">for</span> j &lt;- start+<span class="number">1</span> to end</span><br><span class="line">		<span class="keyword">do</span> <span class="keyword">if</span> A[j] &lt;= pivot</span><br><span class="line">			then i &lt;- i+<span class="number">1</span></span><br><span class="line">				 exchange A[i] &lt;-&gt; A[j]</span><br><span class="line">	exchange A[start] &lt;-&gt; A[i]</span><br><span class="line">	<span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line">QuickSort(A, start, end)	<span class="comment">// [start...end]</span></span><br><span class="line">	<span class="keyword">if</span> start &lt; end:</span><br><span class="line">		pivot_index = Partition(A, start, end)</span><br><span class="line">        QuickSort(A, start, pivot_index)</span><br><span class="line">        QuickSort(A, pivot_index, end)</span><br></pre></td></tr></table></figure>
-<h3 id="Heapsort"><a href="#Heapsort" class="headerlink" title="Heapsort"></a>Heapsort</h3><h4 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h4><ol>
+<h5 id="pseudo-code-2">Pseudo code</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Partition(A, start, end)	<span class="comment">// A[start...end]</span></span><br><span class="line">	exchagne A[start] &lt;-&gt; A[random choose index] <span class="comment">// randomly choose the pivot</span></span><br><span class="line">    pivot &lt;- A[start] 		<span class="comment">// pivot A[p]</span></span><br><span class="line">	i &lt;- start</span><br><span class="line">	<span class="keyword">for</span> j &lt;- start+<span class="number">1</span> to end</span><br><span class="line">		<span class="keyword">do</span> <span class="keyword">if</span> A[j] &lt;= pivot</span><br><span class="line">			then i &lt;- i+<span class="number">1</span></span><br><span class="line">				 exchange A[i] &lt;-&gt; A[j]</span><br><span class="line">	exchange A[start] &lt;-&gt; A[i]</span><br><span class="line">	<span class="keyword">return</span> i</span><br><span class="line"></span><br><span class="line">QuickSort(A, start, end)	<span class="comment">// [start...end]</span></span><br><span class="line">	<span class="keyword">if</span> start &lt; end:</span><br><span class="line">		pivot_index = Partition(A, start, end)</span><br><span class="line">        QuickSort(A, start, pivot_index)</span><br><span class="line">        QuickSort(A, pivot_index, end)</span><br></pre></td></tr></table></figure>
+<h3 id="heapsort">Heapsort</h3>
+<h4 id="algorithm">Algorithm</h4>
+<ol type="1">
 <li>Build a <strong>max heap</strong> based on the given list.</li>
 <li>Take the root node and swap the first element (root node) of the list with the final element (last leaf).</li>
 <li>Decrease the range of the list by one.</li>
 <li>Heapify the new first element (root node).</li>
 <li>Go to step 2 unless the considered range of the list is one element.</li>
 </ol>
-<h4 id="Explanation-2"><a href="#Explanation-2" class="headerlink" title="Explanation"></a>Explanation</h4><h5 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h5><center><br>    <img width="350px" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif"><br><br>    A run of heapsort sorting an array of randomly permuted values<br></center>
-
-
-<h4 id="Code-in-Python-1"><a href="#Code-in-Python-1" class="headerlink" title="Code in Python"></a>Code in Python</h4><h5 id="Basic-knowledge-of-a-heap"><a href="#Basic-knowledge-of-a-heap" class="headerlink" title="Basic knowledge of a heap"></a>Basic knowledge of a heap</h5><p>A heap is a complete binary tree, which could map its relevant list. Given a list with index started from 0, the indexes of the $i$ node’s left child, right child and parent nodes are:<br>$$<br>\begin{cases}<br>    left(i) = 2(i+1)-1    \\<br>    right(i) = 2(i+1)    \\<br>    parent(i) = floor((i-1)/2)    \\<br>\end{cases}<br>$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">left</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*(i+<span class="number">1</span>)<span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">right</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>(i+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parent</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (i<span class="number">-1</span>)//<span class="number">2</span></span><br></pre></td></tr></table></figure>
-<h5 id="Max-heapify"><a href="#Max-heapify" class="headerlink" title="Max heapify"></a>Max heapify</h5><ol>
+<h4 id="explanation-2">Explanation</h4>
+<h5 id="animation">Animation</h5>
+<center>
+<img width="350px" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif"><br> A run of heapsort sorting an array of randomly permuted values
+</center>
+<h4 id="code-in-python-1">Code in Python</h4>
+<h5 id="basic-knowledge-of-a-heap">Basic knowledge of a heap</h5>
+<p>A heap is a complete binary tree, which could map its relevant list. Given a list with index started from 0, the indexes of the <span class="math inline">\(i\)</span> node's left child, right child and parent nodes are: <span class="math display">\[
+\begin{cases}
+    left(i) = 2(i+1)-1  \\
+    right(i) = 2(i+1)   \\
+    parent(i) = floor((i-1)/2)  \\
+\end{cases}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">left</span>(<span class="params">i</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*(i+<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">right</span>(<span class="params">i</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>(i+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parent</span>(<span class="params">i</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (i-<span class="number">1</span>)//<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h5 id="max-heapify">Max heapify</h5>
+<ol type="1">
 <li>Compare the root node with its left child and right child, and find the largest node. (need to make sure if the left child or right child exists)</li>
-<li>If the largest node is not the root node:<ol>
+<li>If the largest node is not the root node:
+<ol type="1">
 <li>Swap the root node and the largest node (left child or right child)</li>
 <li>Let the largest node be the new root and recursively run this function .</li>
+</ol></li>
 </ol>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_heapify</span><span class="params">(A, i)</span>:</span></span><br><span class="line">    l, r = left(i), right(i)</span><br><span class="line">    largets = i</span><br><span class="line">    <span class="keyword">if</span> l &lt; len(A) <span class="keyword">and</span> A[l] &gt;= A[largest]:</span><br><span class="line">        <span class="comment"># if left child exists and left child is larger</span></span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; len(A) <span class="keyword">and</span> A[r] &gt;= A[largest]:</span><br><span class="line">        <span class="comment"># if right child exists and right child is larger</span></span><br><span class="line">        largest = r</span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        A[i], A[largest] = A[largest], A[i]</span><br><span class="line">        max_heapify(A, largest)</span><br></pre></td></tr></table></figure>
-<h5 id="Build-max-heap"><a href="#Build-max-heap" class="headerlink" title="Build max heap"></a>Build max heap</h5><p>To build a max heap, a binary tree should run <code>max_heapify()</code> from its last parent node to the root node, which is called <strong>Bottom-up Build Max Heap</strong>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_max_heap</span><span class="params">(A)</span>:</span></span><br><span class="line">    i = parent(A[<span class="number">-1</span>])</span><br><span class="line">   	<span class="keyword">while</span> i &gt;= <span class="number">0</span>:</span><br><span class="line">        max_heapify(A)</span><br><span class="line">        i += <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<h5 id="Heapsort-1"><a href="#Heapsort-1" class="headerlink" title="Heapsort"></a>Heapsort</h5><p>The algorithm is shown in <em>Algorithm</em>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapsort</span><span class="params">(A)</span>:</span></span><br><span class="line">    build_max_heap(A)</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> len(A) &gt; <span class="number">1</span>:</span><br><span class="line">        result.append(A[<span class="number">0</span>])	<span class="comment"># take the root node</span></span><br><span class="line">        A[<span class="number">0</span>], A[<span class="number">-1</span>] = A[<span class="number">-1</span>], A[<span class="number">0</span>]  <span class="comment"># swap root and the last leaf</span></span><br><span class="line">        A = A[:<span class="number">-1</span>]	<span class="comment"># decrease the range of the list by one</span></span><br><span class="line">        max_heap(A, <span class="number">0</span>)</span><br><span class="line">    result.append(A[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
-<h4 id="Analysis-of-the-Heapsort"><a href="#Analysis-of-the-Heapsort" class="headerlink" title="Analysis of the Heapsort"></a>Analysis of the Heapsort</h4><h5 id="Time-complexity-of-building-a-max-heap"><a href="#Time-complexity-of-building-a-max-heap" class="headerlink" title="Time complexity of building a max heap"></a>Time complexity of building a max heap</h5><p>Given that building a max heap step is the bottom-up, the nodes in the second last layer compare once; the nodes in the third last layer compare twice; … ; the root node compares $\log n$ times. So the time complexity is that:<br>$$<br>T(n) = \sum_{k=0}^{\log n} \frac{n}{2^k}k<br>\label{T_heapsort}<br>$$<br>where ​    $\frac{n}{2^k}$ is the number of nodes in $k$ last layer.</p>
-<p>​        $k$ means that there needs $k$ comparisons in $k$ last layer.</p>
-<p>As $n \to \infty$, this time complexity could be approximated as:<br>$$<br>T(n) \approx \sum_{k=0}^{\infty} \frac{n}{2^k}k = \sum_{k=0}^{\infty} \frac{k}{2^k}n<br>$$<br>According to the nature of series that<br>$$<br>\sum_{k=0}^{\infty} k \cdot x^k = \frac{x}{(1-x)^2}<br>$$<br>the time complexity is now as:<br>$$<br>T(n) \approx \frac{2}{(1-2)^2} \cdot n = 2n = \Theta(n)<br>$$</p>
-<h5 id="Time-complexity-of-latter-part-in-heapsort"><a href="#Time-complexity-of-latter-part-in-heapsort" class="headerlink" title="Time complexity of latter part in heapsort"></a>Time complexity of latter part in heapsort</h5><p>Given that this algorithm calls the <code>max_heapify()</code> of root node for $n-1$ times, and the time complexity of <code>max_heapify(root)</code> is $\Theta(\log n)$, the time complexity of latter part in heapsort is $\Theta(n \log n)$.</p>
-<h5 id="Time-complexity-of-whole-algorithm"><a href="#Time-complexity-of-whole-algorithm" class="headerlink" title="Time complexity of whole algorithm"></a>Time complexity of whole algorithm</h5><p>$$<br>\begin{align}<br>T(n)<br>&amp; = \Theta(n) + \Theta(n \log n)    \nonumber\\<br>&amp; = \Theta(n \log n)    \nonumber<br>\end{align}<br>$$</p>
-<p>The time complexity of heap algorithm is $\Theta(n \log n)$.</p>
-<h3 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h3><h4 id="Notations"><a href="#Notations" class="headerlink" title="Notations"></a>Notations</h4><ul>
-<li>Input: $A[1, \cdots, n]$, each $A[i] \in { 1, 2, 3, \cdots, k}$</li>
-<li>Output: $B[1, \cdots, n]$ = sorting of $A$</li>
-<li>Auxiliary storage: $C[1, \cdots , k]$</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_heapify</span>(<span class="params">A, i</span>):</span></span><br><span class="line">    l, r = left(i), right(i)</span><br><span class="line">    largets = i</span><br><span class="line">    <span class="keyword">if</span> l &lt; <span class="built_in">len</span>(A) <span class="keyword">and</span> A[l] &gt;= A[largest]:</span><br><span class="line">        <span class="comment"># if left child exists and left child is larger</span></span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; <span class="built_in">len</span>(A) <span class="keyword">and</span> A[r] &gt;= A[largest]:</span><br><span class="line">        <span class="comment"># if right child exists and right child is larger</span></span><br><span class="line">        largest = r</span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        A[i], A[largest] = A[largest], A[i]</span><br><span class="line">        max_heapify(A, largest)</span><br></pre></td></tr></table></figure>
+<h5 id="build-max-heap">Build max heap</h5>
+<p>To build a max heap, a binary tree should run <code>max_heapify()</code> from its last parent node to the root node, which is called <strong>Bottom-up Build Max Heap</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_max_heap</span>(<span class="params">A</span>):</span></span><br><span class="line">    i = parent(A[-<span class="number">1</span>])</span><br><span class="line">   	<span class="keyword">while</span> i &gt;= <span class="number">0</span>:</span><br><span class="line">        max_heapify(A)</span><br><span class="line">        i += -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h5 id="heapsort-1">Heapsort</h5>
+<p>The algorithm is shown in <em>Algorithm</em>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapsort</span>(<span class="params">A</span>):</span></span><br><span class="line">    build_max_heap(A)</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(A) &gt; <span class="number">1</span>:</span><br><span class="line">        result.append(A[<span class="number">0</span>])	<span class="comment"># take the root node</span></span><br><span class="line">        A[<span class="number">0</span>], A[-<span class="number">1</span>] = A[-<span class="number">1</span>], A[<span class="number">0</span>]  <span class="comment"># swap root and the last leaf</span></span><br><span class="line">        A = A[:-<span class="number">1</span>]	<span class="comment"># decrease the range of the list by one</span></span><br><span class="line">        max_heap(A, <span class="number">0</span>)</span><br><span class="line">    result.append(A[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<h4 id="analysis-of-the-heapsort">Analysis of the Heapsort</h4>
+<h5 id="time-complexity-of-building-a-max-heap">Time complexity of building a max heap</h5>
+<p>Given that building a max heap step is the bottom-up, the nodes in the second last layer compare once; the nodes in the third last layer compare twice; ... ; the root node compares <span class="math inline">\(\log n\)</span> times. So the time complexity is that: <span class="math display">\[
+T(n) = \sum_{k=0}^{\log n} \frac{n}{2^k}k
+\label{T_heapsort}
+\]</span> where ​ <span class="math inline">\(\frac{n}{2^k}\)</span> is the number of nodes in <span class="math inline">\(k\)</span> last layer.</p>
+<p>​ <span class="math inline">\(k\)</span> means that there needs <span class="math inline">\(k\)</span> comparisons in <span class="math inline">\(k\)</span> last layer.</p>
+<p>As <span class="math inline">\(n \to \infty\)</span>, this time complexity could be approximated as: <span class="math display">\[
+T(n) \approx \sum_{k=0}^{\infty} \frac{n}{2^k}k = \sum_{k=0}^{\infty} \frac{k}{2^k}n
+\]</span> According to the nature of series that <span class="math display">\[
+\sum_{k=0}^{\infty} k \cdot x^k = \frac{x}{(1-x)^2}
+\]</span> the time complexity is now as: <span class="math display">\[
+T(n) \approx \frac{2}{(1-2)^2} \cdot n = 2n = \Theta(n)
+\]</span></p>
+<h5 id="time-complexity-of-latter-part-in-heapsort">Time complexity of latter part in heapsort</h5>
+<p>Given that this algorithm calls the <code>max_heapify()</code> of root node for <span class="math inline">\(n-1\)</span> times, and the time complexity of <code>max_heapify(root)</code> is <span class="math inline">\(\Theta(\log n)\)</span>, the time complexity of latter part in heapsort is <span class="math inline">\(\Theta(n \log n)\)</span>.</p>
+<h5 id="time-complexity-of-whole-algorithm">Time complexity of whole algorithm</h5>
+<p><span class="math display">\[
+\begin{align}
+T(n)
+&amp; = \Theta(n) + \Theta(n \log n)    \nonumber\\
+&amp; = \Theta(n \log n)    \nonumber
+\end{align}
+\]</span></p>
+<p>The time complexity of heap algorithm is <span class="math inline">\(\Theta(n \log n)\)</span>.</p>
+<h3 id="counting-sort">Counting Sort</h3>
+<h4 id="notations">Notations</h4>
+<ul>
+<li>Input: <span class="math inline">\(A[1, \cdots, n]\)</span>, each <span class="math inline">\(A[i] \in \{ 1, 2, 3, \cdots, k\}\)</span></li>
+<li>Output: <span class="math inline">\(B[1, \cdots, n]\)</span> = sorting of <span class="math inline">\(A\)</span></li>
+<li>Auxiliary storage: <span class="math inline">\(C[1, \cdots , k]\)</span></li>
 </ul>
-<h4 id="Pseudo-Code-2"><a href="#Pseudo-Code-2" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CountingSort(A):</span><br><span class="line">	<span class="keyword">for</span> i &lt;- i to k</span><br><span class="line">		C[i] &lt;- <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j &lt;- <span class="number">1</span> to n</span><br><span class="line">    	C[A[j]] &lt;- C[A[j]] + <span class="number">1</span>	<span class="comment">// C[i] = |&#123;key = i&#125;|</span></span><br><span class="line">    <span class="keyword">for</span> i &lt;- <span class="number">2</span> to k</span><br><span class="line">    	C[i] &lt;- C[i] + C[i<span class="number">-1</span>]	<span class="comment">// C[i] = |&#123;key &lt;= i&#125;|</span></span><br><span class="line">    <span class="keyword">for</span> j &lt;-n downto <span class="number">1</span></span><br><span class="line">        B[C[A[j]]] &lt;- A[j]</span><br><span class="line">        C[A[j]] &lt;- C[A[j]] - <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h4 id="Explanation-3"><a href="#Explanation-3" class="headerlink" title="Explanation"></a>Explanation</h4><ol>
-<li>The first step is the initialization for the counter $C[i]$. $C[i]$s are going to count occurrences of values, so to initialize them to be $0$s.</li>
-<li>Increment the counter $C[i]$ for that value $A[j]$. So the $C[i]$ will give us the number of elements in $A[j]$ that equal to $i$.</li>
-<li>The prefix sums (accumulate the $C[i]$) will make it that $C[i]$ will give us the number of elements in $A[j]$ that less than or equal to $i$.</li>
+<h4 id="pseudo-code-3">Pseudo Code</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CountingSort(A):</span><br><span class="line">	<span class="keyword">for</span> i &lt;- i to k</span><br><span class="line">		C[i] &lt;- <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j &lt;- <span class="number">1</span> to n</span><br><span class="line">    	C[A[j]] &lt;- C[A[j]] + <span class="number">1</span>	<span class="comment">// C[i] = |&#123;key = i&#125;|</span></span><br><span class="line">    <span class="keyword">for</span> i &lt;- <span class="number">2</span> to k</span><br><span class="line">    	C[i] &lt;- C[i] + C[i<span class="number">-1</span>]	<span class="comment">// C[i] = |&#123;key &lt;= i&#125;|</span></span><br><span class="line">    <span class="keyword">for</span> j &lt;-n downto <span class="number">1</span></span><br><span class="line">        B[C[A[j]]] &lt;- A[j]</span><br><span class="line">        C[A[j]] &lt;- C[A[j]] - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h4 id="explanation-3">Explanation</h4>
+<ol type="1">
+<li>The first step is the initialization for the counter <span class="math inline">\(C[i]\)</span>. <span class="math inline">\(C[i]\)</span>s are going to count occurrences of values, so to initialize them to be <span class="math inline">\(0\)</span>s.</li>
+<li>Increment the counter <span class="math inline">\(C[i]\)</span> for that value <span class="math inline">\(A[j]\)</span>. So the <span class="math inline">\(C[i]\)</span> will give us the number of elements in <span class="math inline">\(A[j]\)</span> that equal to <span class="math inline">\(i\)</span>.</li>
+<li>The prefix sums (accumulate the <span class="math inline">\(C[i]\)</span>) will make it that <span class="math inline">\(C[i]\)</span> will give us the number of elements in <span class="math inline">\(A[j]\)</span> that less than or equal to <span class="math inline">\(i\)</span>.</li>
 <li>Distribution step.</li>
 </ol>
 <blockquote>
-<p>Example: Sort $A = [4, 1, 3, 4, 3]$ using counting sort algorithm</p>
-<ol>
-<li><p>Initialization: $C = [0, 0, 0, 0]$</p>
-</li>
-<li><p>Increment the counter: $C = [1, 0, 2, 2]$</p>
-</li>
-<li><p>The prefix sums: $C’ = [1, 1, 3, 5]$</p>
-</li>
-<li><p>Distribution:  $j$ from $n$ to 1</p>
-<p>​    $A[j] = A[n] = 3$. $C[A[j]] = C[3] = 3$, which means there are 3 elements in $A$ that are less than or equal to $A[j]$. So the $A[j]$  should be put in the 3th place in the sorted list $B$, which is $B[C[A[j]]] = B[3] = A[j]$. Then decreasing the counter of $A[j]$ by 1, which is $C[A[j]] = C[A[j]] - 1$.</p>
-<p>​    The rest steps are similar, then we get: $B = [1, 3, 3, 4, 4]$.</p>
-</li>
+<p>Example: Sort <span class="math inline">\(A = [4, 1, 3, 4, 3]\)</span> using counting sort algorithm</p>
+<ol type="1">
+<li><p>Initialization: <span class="math inline">\(C = [0, 0, 0, 0]\)</span></p></li>
+<li><p>Increment the counter: <span class="math inline">\(C = [1, 0, 2, 2]\)</span></p></li>
+<li><p>The prefix sums: <span class="math inline">\(C&#39; = [1, 1, 3, 5]\)</span></p></li>
+<li><p>Distribution: <span class="math inline">\(j\)</span> from <span class="math inline">\(n\)</span> to 1</p>
+<p>​ <span class="math inline">\(A[j] = A[n] = 3\)</span>. <span class="math inline">\(C[A[j]] = C[3] = 3\)</span>, which means there are 3 elements in <span class="math inline">\(A\)</span> that are less than or equal to <span class="math inline">\(A[j]\)</span>. So the <span class="math inline">\(A[j]\)</span> should be put in the 3th place in the sorted list <span class="math inline">\(B\)</span>, which is <span class="math inline">\(B[C[A[j]]] = B[3] = A[j]\)</span>. Then decreasing the counter of <span class="math inline">\(A[j]\)</span> by 1, which is <span class="math inline">\(C[A[j]] = C[A[j]] - 1\)</span>.</p>
+<p>​ The rest steps are similar, then we get: <span class="math inline">\(B = [1, 3, 3, 4, 4]\)</span>.</p></li>
 </ol>
 </blockquote>
-<h4 id="Anaylysis"><a href="#Anaylysis" class="headerlink" title="Anaylysis"></a>Anaylysis</h4><p>The time complexity of this algorithm is $\mathbb{O}(k+n)$.<br>$$<br>T(n) =<br>\begin{cases}<br>\mathbb{O}(n)    &amp; \text{if $k = \mathbb{O}(n)$ } \\<br>\mathbb{O}(k)    &amp; \text{if $k \ge \mathbb{O}(n)$} \\<br>\end{cases}<br>$$</p>
+<h4 id="anaylysis">Anaylysis</h4>
+<p>The time complexity of this algorithm is <span class="math inline">\(\mathbb{O}(k+n)\)</span>. <span class="math display">\[
+T(n) =
+\begin{cases}
+\mathbb{O}(n)   &amp; \text{if $k = \mathbb{O}(n)$ } \\
+\mathbb{O}(k)   &amp; \text{if $k \ge \mathbb{O}(n)$} \\
+\end{cases}
+\]</span></p>
 <blockquote>
-<p>Note that there are two assumptions made to achieve the $\mathbb{O}(n)$ time complexity:</p>
-<ol>
+<p>Note that there are two assumptions made to achieve the <span class="math inline">\(\mathbb{O}(n)\)</span> time complexity:</p>
+<ol type="1">
 <li>All the number are integers.</li>
 <li>The range of the integers is pretty small.</li>
 </ol>
 <p>Actually in practice, counting sort is not very good on a cashe though it costs linear time, so counting sort or radix sort is not that fast an algorithm unless your numbers are really small. Something like quicksort can do better.</p>
 </blockquote>
 <p>This algorithm is a <strong>stable sort</strong>.</p>
-<h3 id="Radix-Sort"><a href="#Radix-Sort" class="headerlink" title="Radix Sort"></a>Radix Sort</h3><p>Radix sort is going to work for a much larger range of numbers in linear time. It sorts data with integer keys by grouping keys by the individual digits which share the same significant position.</p>
+<h3 id="radix-sort">Radix Sort</h3>
+<p>Radix sort is going to work for a much larger range of numbers in linear time. It sorts data with integer keys by grouping keys by the individual digits which share the same significant position.</p>
 <p>A positional notation is required, but because integers can represent strings of characters (e.g., names or dates) and specially formatted floating point numbers, radix sort is not limited to integers.</p>
 <p>Radix sorts can be implemented to start at either the <strong>least significant digist</strong> (LSD) or the <strong>most siginificant digit</strong> (MSD).</p>
-<h4 id="Least-significant-digit-LSD"><a href="#Least-significant-digit-LSD" class="headerlink" title="Least significant digit (LSD)"></a>Least significant digit (LSD)</h4><p>LSD radix sorts typically use the following sorting order: short keys come before longer keys, and then keys of the same length are sorted using stable sort (here is counting sort).</p>
-<center><br>    <img width="400px" src="https://raw.githubusercontent.com/pooyahatami/Algorithm-Sort-Radix/master/img/radix-sort-algorithms.jpg"><br><br>    Explanation of LSD<br></center>
-
-<h5 id="Pseudo-Code-3"><a href="#Pseudo-Code-3" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RadixSort(A, d):</span><br><span class="line">	<span class="keyword">for</span> i &lt;- <span class="number">1</span> to d:</span><br><span class="line">		sort <span class="built_in">array</span> A on digit i <span class="keyword">using</span> a stable sort.</span><br></pre></td></tr></table></figure>
-<h5 id="Analysis-of-LSD"><a href="#Analysis-of-LSD" class="headerlink" title="Analysis of LSD"></a>Analysis of LSD</h5><ul>
-<li>Use counting sort in each round, which means $\mathbb{O}(k+n)$ in each round.</li>
-<li>Suppose we have $n$ integers (binary intergers), and each integer has $b$ digits. (Range of intergers would be $(0,2^b-1)$)<ul>
-<li>If we take each digit as a round, the whole complexity would be $\mathbb{O}(b \times n)$. If $b$ is constant, it would be fine, but in general, $b$ is $\mathbb{O}(\log n)$ (e.g., 1000 (the binary format of 8) has $b=4$ digits, which means $b=\log_2 8+1$), so the whole complexity is $\mathbb{O}(n \log n)$.</li>
-<li>Split the interger into $b/r$ digits with each $r$ bits long, so the there are $b/r$ rounds, and range of each round is $(0, 2^r-1)$.</li>
+<h4 id="least-significant-digit-lsd">Least significant digit (LSD)</h4>
+<p>LSD radix sorts typically use the following sorting order: short keys come before longer keys, and then keys of the same length are sorted using stable sort (here is counting sort).</p>
+<center>
+<img width="400px" src="https://raw.githubusercontent.com/pooyahatami/Algorithm-Sort-Radix/master/img/radix-sort-algorithms.jpg"><br> Explanation of LSD
+</center>
+<h5 id="pseudo-code-4">Pseudo Code</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RadixSort(A, d):</span><br><span class="line">	<span class="keyword">for</span> i &lt;- <span class="number">1</span> to d:</span><br><span class="line">		sort <span class="built_in">array</span> A on digit i <span class="keyword">using</span> a stable sort.</span><br></pre></td></tr></table></figure>
+<h5 id="analysis-of-lsd">Analysis of LSD</h5>
+<ul>
+<li>Use counting sort in each round, which means <span class="math inline">\(\mathbb{O}(k+n)\)</span> in each round.</li>
+<li>Suppose we have <span class="math inline">\(n\)</span> integers (binary intergers), and each integer has <span class="math inline">\(b\)</span> digits. (Range of intergers would be <span class="math inline">\((0,2^b-1)\)</span>)
+<ul>
+<li>If we take each digit as a round, the whole complexity would be <span class="math inline">\(\mathbb{O}(b \times n)\)</span>. If <span class="math inline">\(b\)</span> is constant, it would be fine, but in general, <span class="math inline">\(b\)</span> is <span class="math inline">\(\mathbb{O}(\log n)\)</span> (e.g., 1000 (the binary format of 8) has <span class="math inline">\(b=4\)</span> digits, which means <span class="math inline">\(b=\log_2 8+1\)</span>), so the whole complexity is <span class="math inline">\(\mathbb{O}(n \log n)\)</span>.</li>
+<li>Split the interger into <span class="math inline">\(b/r\)</span> digits with each <span class="math inline">\(r\)</span> bits long, so the there are <span class="math inline">\(b/r\)</span> rounds, and range of each round is <span class="math inline">\((0, 2^r-1)\)</span>.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="Most-significant-digit-MSD"><a href="#Most-significant-digit-MSD" class="headerlink" title="Most significant digit (MSD)"></a>Most significant digit (MSD)</h4><p>PASS</p>
-<h2 id="Problem-Order-Statistics"><a href="#Problem-Order-Statistics" class="headerlink" title="Problem: Order Statistics"></a>Problem: Order Statistics</h2><p>Given $n$ elements in an array, find $k$th smallest element (the element of rank $k$).</p>
-<h3 id="Rand-Select-Algorithm"><a href="#Rand-Select-Algorithm" class="headerlink" title="Rand-Select Algorithm"></a>Rand-Select Algorithm</h3><p>This algorithm is a <strong>Randomized Divide and Conquer Algorithm</strong>, and is expected-case linear-time order statistics.</p>
-<h4 id="Pseudo-Code-4"><a href="#Pseudo-Code-4" class="headerlink" title="Pseudo Code"></a>Pseudo Code</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RandSelect(A, p, q, i):</span><br><span class="line">    <span class="comment">// find the ith smallest in A[p..q]</span></span><br><span class="line">    <span class="keyword">if</span> p = q:</span><br><span class="line">		<span class="keyword">return</span> A[p]</span><br><span class="line">    r &lt;- RandPartition(A, p, q)</span><br><span class="line">    k &lt;- r-p+<span class="number">1</span> <span class="comment">// k = rank(A[r]) in A[p...q]</span></span><br><span class="line">    <span class="keyword">if</span> i=k:</span><br><span class="line">		<span class="keyword">return</span> A[r]</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> i &lt; k :</span><br><span class="line">		<span class="keyword">return</span> RandSelect(A, p, r<span class="number">-1</span>, i)</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> i &gt; k:</span><br><span class="line">		<span class="keyword">return</span> RandSelect(A, r+<span class="number">1</span>, q, i-k)</span><br></pre></td></tr></table></figure>
-<h4 id="Animation-Explanation-1"><a href="#Animation-Explanation-1" class="headerlink" title="Animation Explanation"></a>Animation Explanation</h4><center><br>    <img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Selecting_quickselect_frames.gif"><br><br>    Animation of Random Selection Algorithm<br></center>
-
-<h4 id="Analysis-of-Rand-Select-Algorithm"><a href="#Analysis-of-Rand-Select-Algorithm" class="headerlink" title="Analysis of Rand-Select Algorithm"></a>Analysis of Rand-Select Algorithm</h4><p>Assuming elements in the array are distinct.</p>
-<h5 id="Lucky-Case"><a href="#Lucky-Case" class="headerlink" title="Lucky Case"></a>Lucky Case</h5><p>If the array is divided into $1/10$ and $9/10$ in each partition (actually could be any constant ratio), the time comlexity is as following:<br>$$<br>T(n) \le T\left(\frac{9}{10} n\right) + \Theta(n) = \Theta(n)<br>$$</p>
+<h4 id="most-significant-digit-msd">Most significant digit (MSD)</h4>
+<p>PASS</p>
+<h2 id="problem-order-statistics">Problem: Order Statistics</h2>
+<p>Given <span class="math inline">\(n\)</span> elements in an array, find <span class="math inline">\(k\)</span>th smallest element (the element of rank <span class="math inline">\(k\)</span>).</p>
+<h3 id="rand-select-algorithm">Rand-Select Algorithm</h3>
+<p>This algorithm is a <strong>Randomized Divide and Conquer Algorithm</strong>, and is expected-case linear-time order statistics.</p>
+<h4 id="pseudo-code-5">Pseudo Code</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RandSelect(A, p, q, i):</span><br><span class="line">    <span class="comment">// find the ith smallest in A[p..q]</span></span><br><span class="line">    <span class="keyword">if</span> p = q:</span><br><span class="line">		<span class="keyword">return</span> A[p]</span><br><span class="line">    r &lt;- RandPartition(A, p, q)</span><br><span class="line">    k &lt;- r-p+<span class="number">1</span> <span class="comment">// k = rank(A[r]) in A[p...q]</span></span><br><span class="line">    <span class="keyword">if</span> i=k:</span><br><span class="line">		<span class="keyword">return</span> A[r]</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> i &lt; k :</span><br><span class="line">		<span class="keyword">return</span> RandSelect(A, p, r<span class="number">-1</span>, i)</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> i &gt; k:</span><br><span class="line">		<span class="keyword">return</span> RandSelect(A, r+<span class="number">1</span>, q, i-k)</span><br></pre></td></tr></table></figure>
+<h4 id="animation-explanation-1">Animation Explanation</h4>
+<center>
+<img width="400px" src="https://upload.wikimedia.org/wikipedia/commons/0/04/Selecting_quickselect_frames.gif"><br> Animation of Random Selection Algorithm
+</center>
+<h4 id="analysis-of-rand-select-algorithm">Analysis of Rand-Select Algorithm</h4>
+<p>Assuming elements in the array are distinct.</p>
+<h5 id="lucky-case">Lucky Case</h5>
+<p>If the array is divided into <span class="math inline">\(1/10\)</span> and <span class="math inline">\(9/10\)</span> in each partition (actually could be any constant ratio), the time comlexity is as following: <span class="math display">\[
+T(n) \le T\left(\frac{9}{10} n\right) + \Theta(n) = \Theta(n)
+\]</span></p>
 <blockquote>
 <p>The recurrence could be solved using <em>master method</em>.</p>
 </blockquote>
-<h5 id="Unlucky-Case"><a href="#Unlucky-Case" class="headerlink" title="Unlucky Case"></a>Unlucky Case</h5><p>If the array is divided into $1$ and $n-1$ in each partition, the time complexity is as following:<br>$$<br>T(n) \le T(n-1) + \Theta(n) = \Theta(n^2)<br>$$</p>
-<h5 id="Expected-Case"><a href="#Expected-Case" class="headerlink" title="Expected Case"></a>Expected Case</h5><p>By adopting a similar analysis in <em>Analysis</em> in <em>Randomized Quicksort</em>, we get:<br>$$<br>\mathbb{E}(T(n)) = \Theta(n)<br>$$</p>
-<h3 id="Worst-case-linear-time-order-statistics"><a href="#Worst-case-linear-time-order-statistics" class="headerlink" title="Worst-case linear-time order statistics"></a>Worst-case linear-time order statistics</h3><p>The idea of this algorithm is to <strong>generate the pivot recursively</strong>. Specifically, we would recursively find the <strong>median</strong> of the array in linear time, and use it as the pivot to find the $i$th smallest element using <em>Rand-Select Algorithm</em>.</p>
-<h4 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h4><p>$\text{Select}(i, n)$:</p>
-<ol>
-<li><p>Divide the $n$ elements into $\lfloor n/5 \rfloor$ groups of $5$ elements each. Find the medium of each group ($\Theta(n)$).</p>
-</li>
-<li><p>Recursively select the median $x$ of the $\lfloor n/5 \rfloor$ group medians.</p>
-</li>
-<li><p>Partition with $x$ as pivot, and let $k = rank(x)$.</p>
-</li>
-<li><p>if $i=k$, then return $x$</p>
-<p>if $i &lt; k$,</p>
+<h5 id="unlucky-case">Unlucky Case</h5>
+<p>If the array is divided into <span class="math inline">\(1\)</span> and <span class="math inline">\(n-1\)</span> in each partition, the time complexity is as following: <span class="math display">\[
+T(n) \le T(n-1) + \Theta(n) = \Theta(n^2)
+\]</span></p>
+<h5 id="expected-case">Expected Case</h5>
+<p>By adopting a similar analysis in <em>Analysis</em> in <em>Randomized Quicksort</em>, we get: <span class="math display">\[
+\mathbb{E}(T(n)) = \Theta(n)
+\]</span></p>
+<h3 id="worst-case-linear-time-order-statistics">Worst-case linear-time order statistics</h3>
+<p>The idea of this algorithm is to <strong>generate the pivot recursively</strong>. Specifically, we would recursively find the <strong>median</strong> of the array in linear time, and use it as the pivot to find the <span class="math inline">\(i\)</span>th smallest element using <em>Rand-Select Algorithm</em>.</p>
+<h4 id="algorithm-1">Algorithm</h4>
+<p><span class="math inline">\(\text{Select}(i, n)\)</span>:</p>
+<ol type="1">
+<li><p>Divide the <span class="math inline">\(n\)</span> elements into <span class="math inline">\(\lfloor n/5 \rfloor\)</span> groups of <span class="math inline">\(5\)</span> elements each. Find the medium of each group (<span class="math inline">\(\Theta(n)\)</span>).</p></li>
+<li><p>Recursively select the median <span class="math inline">\(x\)</span> of the <span class="math inline">\(\lfloor n/5 \rfloor\)</span> group medians.</p></li>
+<li><p>Partition with <span class="math inline">\(x\)</span> as pivot, and let <span class="math inline">\(k = rank(x)\)</span>.</p></li>
+<li><p>if <span class="math inline">\(i=k\)</span>, then return <span class="math inline">\(x\)</span></p>
+<p>if <span class="math inline">\(i &lt; k\)</span>,</p>
 <ul>
-<li>then return recursively Select $i$th smallest element in the lower part of the array.</li>
-<li>else return recursively Select $(i-k)$th smallest element in the upper part of the array.</li>
-</ul>
-</li>
+<li>then return recursively Select <span class="math inline">\(i\)</span>th smallest element in the lower part of the array.</li>
+<li>else return recursively Select <span class="math inline">\((i-k)\)</span>th smallest element in the upper part of the array.</li>
+</ul></li>
 </ol>
-<center><br>    <img width="500px" src="https://i.stack.imgur.com/IVK74.png"><br></center>
-
-
-
-<h4 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h4><p>The time comlexity of this algorithm is $\Theta(n)$.</p>
-<h2 id="Problem-Hashing"><a href="#Problem-Hashing" class="headerlink" title="Problem: Hashing"></a>Problem: Hashing</h2><h3 id="Symbol-table-Problem"><a href="#Symbol-table-Problem" class="headerlink" title="Symbol-table Problem"></a>Symbol-table Problem</h3><p>Table $S$ holding $n$ records.</p>
-<p><center><br>    <img width="400px" src="https://images.slideplayer.com/27/8903843/slides/slide_2.jpg"><br><br>    Table S holding n records.<br></center></p>
-<h3 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h3><ul>
-<li><p>Insert($S, x$) :  $S \gets S \bigcup {x}$</p>
-</li>
-<li><p>Delete($S, x$):  $S \gets S - {x}$</p>
-</li>
-<li><p>Search($S, k$): return $x$, such that the key of $x$ is equal to $k$</p>
-<p>​            return Null if there is no such $x$</p>
-</li>
+<center>
+<img width="500px" src="https://i.stack.imgur.com/IVK74.png">
+</center>
+<h4 id="analysis-1">Analysis</h4>
+<p>The time comlexity of this algorithm is <span class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="problem-hashing">Problem: Hashing</h2>
+<h3 id="symbol-table-problem">Symbol-table Problem</h3>
+<p>Table <span class="math inline">\(S\)</span> holding <span class="math inline">\(n\)</span> records.</p>
+<center>
+<img width="400px" src="https://images.slideplayer.com/27/8903843/slides/slide_2.jpg"><br> Table S holding n records.
+</center>
+<h3 id="operations">Operations</h3>
+<ul>
+<li><p>Insert(<span class="math inline">\(S, x\)</span>) : <span class="math inline">\(S \gets S \bigcup \{x\}\)</span></p></li>
+<li><p>Delete(<span class="math inline">\(S, x\)</span>): <span class="math inline">\(S \gets S - \{x\}\)</span></p></li>
+<li><p>Search(<span class="math inline">\(S, k\)</span>): return <span class="math inline">\(x\)</span>, such that the key of <span class="math inline">\(x\)</span> is equal to <span class="math inline">\(k\)</span></p>
+<p>​ return Null if there is no such <span class="math inline">\(x\)</span></p></li>
 </ul>
 <blockquote>
 <p>“Insert” and “Delete” make it a dynamic set.</p>
 </blockquote>
-<h3 id="Direct-access-Table"><a href="#Direct-access-Table" class="headerlink" title="Direct-access Table"></a>Direct-access Table</h3><p>Suppose keys are drawn from $u = {0, 1, \cdots, m-1}$, and assume that keys are distinct.</p>
-<p>Set up array $T[0, \cdots, m-1]$ to represent the dynamic set $S$, such that<br>$$<br>T[k] =<br>\begin{cases}<br>x &amp; \text{if } x \in S \text{ and key[$x$]}=k     \\<br>\text{Null} &amp; \text{otherwise}<br>\end{cases}<br>$$<br>All operations take $\Theta(1)$ time.</p>
+<h3 id="direct-access-table">Direct-access Table</h3>
+<p>Suppose keys are drawn from <span class="math inline">\(u = \{0, 1, \cdots, m-1\}\)</span>, and assume that keys are distinct.</p>
+<p>Set up array <span class="math inline">\(T[0, \cdots, m-1]\)</span> to represent the dynamic set <span class="math inline">\(S\)</span>, such that <span class="math display">\[
+T[k] =
+\begin{cases}
+x &amp; \text{if } x \in S \text{ and key[$x$]}=k   \\
+\text{Null} &amp; \text{otherwise}
+\end{cases}
+\]</span> All operations take <span class="math inline">\(\Theta(1)\)</span> time.</p>
 <blockquote>
-<p>The main problem of direct-access table is that if there are not many data in this table, the table would have so many empty elements (Null). For example, a 64-bits direct-access table would have $2^{64}$ keys position to store data, but actually there may be only 1000 samples, costing huge waste of space.</p>
+<p>The main problem of direct-access table is that if there are not many data in this table, the table would have so many empty elements (Null). For example, a 64-bits direct-access table would have <span class="math inline">\(2^{64}\)</span> keys position to store data, but actually there may be only 1000 samples, costing huge waste of space.</p>
 <p>Then, hashing table is a method to avoid this.</p>
 </blockquote>
-<h3 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h3><p>Hashing is to use a function $H$ which maps the keys “randomly” into slots of table $T$. (Here we call each of the array indexes a slot.)</p>
-<p> <center><br>     <img width="350px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg/240px-Hash_table_4_1_1_0_0_0_0_LL.svg.png"><br><br>     The principle of Hashing.<br> </center><br>When a record to be inserted maps to an already occupied slot, a <strong>collision</strong> occurs. There are several ways below could solve it.</p>
-<h3 id="Choosing-a-Hash-Function"><a href="#Choosing-a-Hash-Function" class="headerlink" title="Choosing a Hash Function"></a>Choosing a Hash Function</h3><p>The requirements of a good hash function are as follows:</p>
+<h3 id="hashing">Hashing</h3>
+<p>Hashing is to use a function <span class="math inline">\(H\)</span> which maps the keys “randomly” into slots of table <span class="math inline">\(T\)</span>. (Here we call each of the array indexes a slot.)</p>
+<center>
+<img width="350px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hash_table_4_1_1_0_0_0_0_LL.svg/240px-Hash_table_4_1_1_0_0_0_0_LL.svg.png"><br> The principle of Hashing.
+</center>
+<p>When a record to be inserted maps to an already occupied slot, a <strong>collision</strong> occurs. There are several ways below could solve it.</p>
+<h3 id="choosing-a-hash-function">Choosing a Hash Function</h3>
+<p>The requirements of a good hash function are as follows:</p>
 <ul>
-<li>Satisfies (approximately) the assumption of simple uniform hashing: each key is equally likely to hash to any of the $m$ slots. The hash function shouldn’t bias towards particular slots</li>
+<li>Satisfies (approximately) the assumption of simple uniform hashing: each key is equally likely to hash to any of the <span class="math inline">\(m\)</span> slots. The hash function shouldn’t bias towards particular slots</li>
 <li>Does not hash similar keys to the same splot (e.g. compiler’s symbol table shouldn’t hash variables <code>i</code> and <code>j</code> to the same slot since they are used in conjunction a lot)</li>
-<li>A good hash function is quick to calculate, and should have $\Theta(1)$ runtime.</li>
-<li>A good hash function is deterministic. $h(k)$ should always return the same value for a given $k$.</li>
+<li>A good hash function is quick to calculate, and should have <span class="math inline">\(\Theta(1)\)</span> runtime.</li>
+<li>A good hash function is deterministic. <span class="math inline">\(h(k)\)</span> should always return the same value for a given <span class="math inline">\(k\)</span>.</li>
 </ul>
-<h4 id="Division-Method"><a href="#Division-Method" class="headerlink" title="Division Method"></a>Division Method</h4><p>$$<br>h(k) = k \text{ mod } m<br>$$</p>
+<h4 id="division-method">Division Method</h4>
+<p><span class="math display">\[
+h(k) = k \text{ mod } m
+\]</span></p>
 <ul>
-<li><p>$h(k)$ could map the universe of keys to a slot using it.</p>
-</li>
-<li><p>$m$ should not be a power of 2 or 10. If $m = 2^p$ or $10^p$, then the $h(k)$ only looks at the $p$ lower bits of k, completely ignoring the rest of the bits in $k$.</p>
+<li><p><span class="math inline">\(h(k)\)</span> could map the universe of keys to a slot using it.</p></li>
+<li><p><span class="math inline">\(m\)</span> should not be a power of 2 or 10. If <span class="math inline">\(m = 2^p\)</span> or <span class="math inline">\(10^p\)</span>, then the <span class="math inline">\(h(k)\)</span> only looks at the <span class="math inline">\(p\)</span> lower bits of k, completely ignoring the rest of the bits in <span class="math inline">\(k\)</span>.</p>
 <blockquote>
-<p>e.g.  $k = 11000010100010$, which is a binary number. and $m = 2^6$, then $h(k)  = k \text{ mod } m = 100010$, which is the 6 lower bits of $k$.</p>
-<p>$k = 123456789$ and $m = 10^3$, then $h(k) = k \text{ mod } m = 789$, which is the 3 lower bits of $k$.</p>
-<p>They all ignore the rest of the bits in $k$.</p>
-</blockquote>
-</li>
-<li><p>A good choice for $m$ with the division method is a prime number, not too close to a power of 2 or 10.</p>
-</li>
+<p>e.g. <span class="math inline">\(k = 11000010100010\)</span>, which is a binary number. and <span class="math inline">\(m = 2^6\)</span>, then <span class="math inline">\(h(k) = k \text{ mod } m = 100010\)</span>, which is the 6 lower bits of <span class="math inline">\(k\)</span>.</p>
+<p><span class="math inline">\(k = 123456789\)</span> and <span class="math inline">\(m = 10^3\)</span>, then <span class="math inline">\(h(k) = k \text{ mod } m = 789\)</span>, which is the 3 lower bits of <span class="math inline">\(k\)</span>.</p>
+<p>They all ignore the rest of the bits in <span class="math inline">\(k\)</span>.</p>
+</blockquote></li>
+<li><p>A good choice for <span class="math inline">\(m\)</span> with the division method is a prime number, not too close to a power of 2 or 10.</p></li>
 </ul>
-<h4 id="Multiplication-Method"><a href="#Multiplication-Method" class="headerlink" title="Multiplication Method"></a>Multiplication Method</h4><p>$$<br>h(k) = \lfloor m(k A \text{ mod } 1) \rfloor<br>$$</p>
+<h4 id="multiplication-method">Multiplication Method</h4>
+<p><span class="math display">\[
+h(k) = \lfloor m(k A \text{ mod } 1) \rfloor
+\]</span></p>
 <ul>
-<li>where $0 &lt; A &lt; 1$ and $(kA \text{ mod } 1)$ refers to the fractional part of $kA$. Since $0 &lt; (kA \text{ mod } 1) &lt; 1$, the range of $h(k)$ is from $0$ to $m$.</li>
-<li>The advantage of the multiplication method is it works equally well with any size $m$.</li>
-<li>$A$ should be chosen carefully.<ul>
-<li>Rational numbers should not be chosen for $A$.</li>
-<li>A good choice for $A$ is $\frac{\sqrt{5}-1}{2}$.</li>
-</ul>
-</li>
+<li>where <span class="math inline">\(0 &lt; A &lt; 1\)</span> and <span class="math inline">\((kA \text{ mod } 1)\)</span> refers to the fractional part of <span class="math inline">\(kA\)</span>. Since <span class="math inline">\(0 &lt; (kA \text{ mod } 1) &lt; 1\)</span>, the range of <span class="math inline">\(h(k)\)</span> is from <span class="math inline">\(0\)</span> to <span class="math inline">\(m\)</span>.</li>
+<li>The advantage of the multiplication method is it works equally well with any size <span class="math inline">\(m\)</span>.</li>
+<li><span class="math inline">\(A\)</span> should be chosen carefully.
+<ul>
+<li>Rational numbers should not be chosen for <span class="math inline">\(A\)</span>.</li>
+<li>A good choice for <span class="math inline">\(A\)</span> is <span class="math inline">\(\frac{\sqrt{5}-1}{2}\)</span>.</li>
+</ul></li>
 <li>Faster than <em>Division Method</em>.</li>
 </ul>
-<h3 id="Resolving-Collisions-in-Hashing"><a href="#Resolving-Collisions-in-Hashing" class="headerlink" title="Resolving Collisions in Hashing"></a>Resolving Collisions in Hashing</h3><h4 id="By-Chaining"><a href="#By-Chaining" class="headerlink" title="By Chaining"></a>By Chaining</h4><p>The idea is to link collision records in the same slot into a linked list.</p>
-<p><center><br>    <img width="350px" src="http://www.cs.cmu.edu/~clo/www/CMU/DataStructures/Lessons/lesson11_2_files/image010.jpg"><br><br>    Resolving collision by chaining.<br></center></p>
-<h5 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h5><ul>
+<h3 id="resolving-collisions-in-hashing">Resolving Collisions in Hashing</h3>
+<h4 id="by-chaining">By Chaining</h4>
+<p>The idea is to link collision records in the same slot into a linked list.</p>
+<center>
+<img width="350px" src="http://www.cs.cmu.edu/~clo/www/CMU/DataStructures/Lessons/lesson11_2_files/image010.jpg"><br> Resolving collision by chaining.
+</center>
+<h5 id="analysis-2">Analysis</h5>
+<ul>
 <li><p><strong>Worst-case</strong>: All the keys hash to the same slot, so there is altogether one long linked list.</p>
 <ul>
-<li>Access data takes $\Theta(n)$ time.</li>
-</ul>
-</li>
-<li><p><strong>Average-case</strong>: Adopting the assumption of simple uniform hashing, which means each key $k \in S$ is equally likely to be hashed to any slot in $T$, independent of where other records, other keys are hashed.</p>
-<p>Def. The load factor of a hash table with $n$ keys and $m$ slots is $\alpha = n / m = \text{average num. keys per slot}$ .</p>
+<li>Access data takes <span class="math inline">\(\Theta(n)\)</span> time.</li>
+</ul></li>
+<li><p><strong>Average-case</strong>: Adopting the assumption of simple uniform hashing, which means each key <span class="math inline">\(k \in S\)</span> is equally likely to be hashed to any slot in <span class="math inline">\(T\)</span>, independent of where other records, other keys are hashed.</p>
+<p>Def. The load factor of a hash table with <span class="math inline">\(n\)</span> keys and <span class="math inline">\(m\)</span> slots is <span class="math inline">\(\alpha = n / m = \text{average num. keys per slot}\)</span> .</p>
 <ul>
-<li><p>Expected unsucessful search time: Time to search an element doesn’t exist in hash table.<br>$$<br>T = \Theta(1 + \alpha)<br>$$<br>where $\Theta(1)$ is to hash and access the corresponding slot, and $\Theta(\alpha)$ is to search the element wanted in that slot. (Because the average number of keys per slot is $\alpha$, and the slot is the structure of linked list,  the time to search an element in a linked list is $\Theta(\text{length of linked list}) = \Theta(\alpha)$).</p>
-</li>
-<li><p>Expected search time = $\Theta(1)$ if $\alpha = \Theta(1)$, or equivalently $n = \Theta(m)$.</p>
-</li>
-<li>Expeted successful search time: Time to search an element which exists in the hash table is also $\Theta(1+ \alpha)$.</li>
+<li><p>Expected unsucessful search time: Time to search an element doesn’t exist in hash table. <span class="math display">\[
+T = \Theta(1 + \alpha)
+\]</span> where <span class="math inline">\(\Theta(1)\)</span> is to hash and access the corresponding slot, and <span class="math inline">\(\Theta(\alpha)\)</span> is to search the element wanted in that slot. (Because the average number of keys per slot is <span class="math inline">\(\alpha\)</span>, and the slot is the structure of linked list, the time to search an element in a linked list is <span class="math inline">\(\Theta(\text{length of linked list}) = \Theta(\alpha)\)</span>).</p></li>
+<li><p>Expected search time = <span class="math inline">\(\Theta(1)\)</span> if <span class="math inline">\(\alpha = \Theta(1)\)</span>, or equivalently <span class="math inline">\(n = \Theta(m)\)</span>.</p></li>
+<li><p>Expeted successful search time: Time to search an element which exists in the hash table is also <span class="math inline">\(\Theta(1+ \alpha)\)</span>.</p></li>
 </ul>
 <blockquote>
-<p>The reason why hashing table is so popular is that the operations of it (e.g., insertion, deletion, searching) takes $\Theta(1)$ time, if the number of slots $m$ in hasing table is not too small compared to the number of keys $n$.</p>
-</blockquote>
-</li>
+<p>The reason why hashing table is so popular is that the operations of it (e.g., insertion, deletion, searching) takes <span class="math inline">\(\Theta(1)\)</span> time, if the number of slots <span class="math inline">\(m\)</span> in hasing table is not too small compared to the number of keys <span class="math inline">\(n\)</span>.</p>
+</blockquote></li>
 </ul>
-<h4 id="By-Open-Addressing"><a href="#By-Open-Addressing" class="headerlink" title="By Open Addressing"></a>By Open Addressing</h4><p>Resolving collisions by open addressing has no requirement for links. The key idea of it is to <strong>probe table systematically until an empty slot is found</strong>.<br>$$<br>\begin{align}<br>&amp; h: U \times {0,1, \cdots, m-1 } \to { 0, 1, \cdots, m-1 } \\<br>\end{align}<br>$$<br>where $U$ is the universe of keys, the first ${0,1,\cdots,m-1}$ is the probe number, and the second ${0,1,\cdots,m-1}$ is the slot.</p>
+<h4 id="by-open-addressing">By Open Addressing</h4>
+<p>Resolving collisions by open addressing has no requirement for links. The key idea of it is to <strong>probe table systematically until an empty slot is found</strong>. <span class="math display">\[
+\begin{align}
+&amp; h: U \times \{0,1, \cdots, m-1 \} \to \{ 0, 1, \cdots, m-1 \} \\
+\end{align}
+\]</span> where <span class="math inline">\(U\)</span> is the universe of keys, the first <span class="math inline">\(\{0,1,\cdots,m-1\}\)</span> is the probe number, and the second <span class="math inline">\(\{0,1,\cdots,m-1\}\)</span> is the slot.</p>
 <ul>
-<li>For each key $k$, there exists a <strong>probe sequence</strong>:</li>
+<li>For each key <span class="math inline">\(k\)</span>, there exists a <strong>probe sequence</strong>:</li>
 </ul>
-<p>$$<br>&lt; h(k, p_0), h(k, p_1), \cdots, h(k, p_i) &gt;<br>$$</p>
-<p>where $p_0, p_1, \cdots , p_i$ are the probe numbers for each hashing, and there are $i$ steps for finding an empty slot.</p>
+<p><span class="math display">\[
+&lt; h(k, p_0), h(k, p_1), \cdots, h(k, p_i) &gt;
+\]</span></p>
+<p>where <span class="math inline">\(p_0, p_1, \cdots , p_i\)</span> are the probe numbers for each hashing, and there are <span class="math inline">\(i\)</span> steps for finding an empty slot.</p>
 <ul>
-<li>Probe sequence should be permutation. In other words, it should just be the numbers from $0$ to $m-1$ in some random order (rearranged).</li>
-<li>Given that the hashing table may fill up, the number of the slots $m$ must be bigger than the number of keys $n$, which is $n \le m$.</li>
+<li>Probe sequence should be permutation. In other words, it should just be the numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(m-1\)</span> in some random order (rearranged).</li>
+<li>Given that the hashing table may fill up, the number of the slots <span class="math inline">\(m\)</span> must be bigger than the number of keys <span class="math inline">\(n\)</span>, which is <span class="math inline">\(n \le m\)</span>.</li>
 <li>Deletion is difficult.</li>
 </ul>
 <blockquote>
-<p>Ex: Insert $k = 496$, then the probe sequence could be:<br>$$<br>&lt; h(496. 6), h(496,1), h(496, 2) &gt; \nonumber<br>$$</p>
+<p>Ex: Insert <span class="math inline">\(k = 496\)</span>, then the probe sequence could be: <span class="math display">\[
+&lt; h(496. 6), h(496,1), h(496, 2) &gt; \nonumber
+\]</span></p>
 </blockquote>
 <ul>
-<li>Searching is using the same probe sequence as insertion.<ul>
+<li>Searching is using the same probe sequence as insertion.
+<ul>
 <li>If it’s successful, it finds the record.</li>
 <li>If it’s unsuccessful, it finds the Null.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5 id="Probing-Strategies"><a href="#Probing-Strategies" class="headerlink" title="Probing Strategies"></a>Probing Strategies</h5><ul>
-<li><p><strong>Linear Probing</strong> —— $h(k, i) = (h(k, 0) + i) \text{ mod } m$</p>
+<h5 id="probing-strategies">Probing Strategies</h5>
+<ul>
+<li><p><strong>Linear Probing</strong> —— <span class="math inline">\(h(k, i) = (h(k, 0) + i) \text{ mod } m\)</span></p>
 <ul>
 <li><p>Key idea:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">slot = (h(k,<span class="number">0</span>) + i) % m	 <span class="comment"># here slot = h(k,0)</span></span><br><span class="line"><span class="keyword">while</span> slot <span class="keyword">is</span> full:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    slot = (h(k,<span class="number">0</span>) + i) % m</span><br><span class="line">    <span class="keyword">if</span> slot <span class="keyword">is</span> empty:</span><br><span class="line">        probe ends</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Key problem: “Primary Clustering”, which is some regions of the hash table get very full. Then, anything that hashes into that region has to look through all the slots there.</p>
-</li>
-</ul>
-</li>
-<li><p><strong>Double Hashing</strong> —— $h(k, i) = (h_1(k) + i \times h_2(k)) \text{ mod } m$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">slot = (h(k,<span class="number">0</span>) + i) % m	 <span class="comment"># here slot = h(k,0)</span></span><br><span class="line"><span class="keyword">while</span> slot <span class="keyword">is</span> full:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    slot = (h(k,<span class="number">0</span>) + i) % m</span><br><span class="line">    <span class="keyword">if</span> slot <span class="keyword">is</span> empty:</span><br><span class="line">        probe ends</span><br></pre></td></tr></table></figure></li>
+<li><p>Key problem: “Primary Clustering”, which is some regions of the hash table get very full. Then, anything that hashes into that region has to look through all the slots there.</p></li>
+</ul></li>
+<li><p><strong>Double Hashing</strong> —— <span class="math inline">\(h(k, i) = (h_1(k) + i \times h_2(k)) \text{ mod } m\)</span></p>
 <ul>
 <li><p>Key idea:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">slot = (h1(k) + i*h2(k)) % m	<span class="comment"># here slot = h1(k)</span></span><br><span class="line"><span class="keyword">while</span> slot <span class="keyword">is</span> full:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">	slot = (h1(k) + i*h2(k)) % m</span><br><span class="line">    <span class="keyword">if</span> slot <span class="keyword">is</span> empty:</span><br><span class="line">        probe ends</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>This is an excellent method.</p>
-</li>
-<li>Usually pick $m=2^r$ and $h_2(k)$ should be odd.</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">slot = (h1(k) + i*h2(k)) % m	<span class="comment"># here slot = h1(k)</span></span><br><span class="line"><span class="keyword">while</span> slot <span class="keyword">is</span> full:</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">	slot = (h1(k) + i*h2(k)) % m</span><br><span class="line">    <span class="keyword">if</span> slot <span class="keyword">is</span> empty:</span><br><span class="line">        probe ends</span><br></pre></td></tr></table></figure></li>
+<li><p>This is an excellent method.</p></li>
+<li><p>Usually pick <span class="math inline">\(m=2^r\)</span> and <span class="math inline">\(h_2(k)\)</span> should be odd.</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5 id="Analysis-of-Open-Addressing"><a href="#Analysis-of-Open-Addressing" class="headerlink" title="Analysis of Open Addressing"></a>Analysis of Open Addressing</h5><ul>
+<h5 id="analysis-of-open-addressing">Analysis of Open Addressing</h5>
+<ul>
 <li><p><strong>Assumption of uniform hashing</strong></p>
-<p>Each key is equally likely to have any one of the $m!$ permutations as its probe sequence, independent of other keys.</p>
-</li>
-<li><p><strong>Theorem</strong><br>$$<br>\begin{align}<br>\mathbb{E}\left[\text{num. of probes}\right] \le \frac{1}{1-\alpha} \nonumber\\<br>\text{if $\alpha &lt; 1$, (i.e, $n &lt; m$) } \nonumber<br>\end{align}<br>$$</p>
-<p>where $\alpha = n/m$, which is the load factor.</p>
-</li>
-<li><p>If $\alpha &lt; 1$ as a constant, then probing takes $\Theta(1)$ time.</p>
+<p>Each key is equally likely to have any one of the <span class="math inline">\(m!\)</span> permutations as its probe sequence, independent of other keys.</p></li>
+<li><p><strong>Theorem</strong> <span class="math display">\[
+\begin{align}
+\mathbb{E}\left[\text{num. of probes}\right] \le \frac{1}{1-\alpha} \nonumber\\
+\text{if $\alpha &lt; 1$, (i.e, $n &lt; m$) } \nonumber
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\alpha = n/m\)</span>, which is the load factor.</p></li>
+<li><p>If <span class="math inline">\(\alpha &lt; 1\)</span> as a constant, then probing takes <span class="math inline">\(\Theta(1)\)</span> time.</p>
 <blockquote>
-<p>For example,  </p>
-<p>​    Hashing table is 50% full $\to \frac{1}{1-0.5} = 2 $ probes;</p>
-<p>​    Hashing table is 90% full $\to \frac{1}{1-0.9} = 10 $ probes.</p>
-</blockquote>
-</li>
+<p>For example,</p>
+<p>​ Hashing table is 50% full $ = 2 $ probes;</p>
+<p>​ Hashing table is 90% full $ = 10 $ probes.</p>
+</blockquote></li>
 </ul>
-<h3 id="Weakness-of-Hashing"><a href="#Weakness-of-Hashing" class="headerlink" title="Weakness of Hashing"></a>Weakness of Hashing</h3><p>For any choice of hash function, there always exists some bad sets of keys that all hash to the same slot.</p>
+<h3 id="weakness-of-hashing">Weakness of Hashing</h3>
+<p>For any choice of hash function, there always exists some bad sets of keys that all hash to the same slot.</p>
 <p>To overcome this, one way is to choose hash function randomly, which is called <strong>Universal Hashing</strong>.</p>
-<h3 id="Universal-Hashing"><a href="#Universal-Hashing" class="headerlink" title="Universal Hashing"></a>Universal Hashing</h3><p><strong>Def</strong>. Let $U$ be a universe of keys, and let $H$ be a finite collection of hash functions, mapping $U$ to slots ${0,1,\cdots,m-1}$.</p>
-<p>We say $H$ is universal, if $\forall x, y \in U$, where $x \neq y$. Then the following is true.<br>$$<br>|{h \in H: h(x) = h(y)}| = \frac{|H|}{m}<br>$$<br>​    which means that if a hash function $h$ is chosen randomly from $H$, the probability of collision between $x$ and $y$ is $1/m$. So that if there are $|H|$ hash functions to make $h(x) = h(y)$, the probability of collision between $x$ and $y$ for all hash functions in $H$ is $\frac{|H|}{m}$.</p>
-<h1 id="Algorithm-Design"><a href="#Algorithm-Design" class="headerlink" title="Algorithm Design"></a>Algorithm Design</h1><h2 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide and Conquer"></a>Divide and Conquer</h2><ol>
+<h3 id="universal-hashing">Universal Hashing</h3>
+<p><strong>Def</strong>. Let <span class="math inline">\(U\)</span> be a universe of keys, and let <span class="math inline">\(H\)</span> be a finite collection of hash functions, mapping <span class="math inline">\(U\)</span> to slots <span class="math inline">\(\{0,1,\cdots,m-1\}\)</span>.</p>
+<p>We say <span class="math inline">\(H\)</span> is universal, if <span class="math inline">\(\forall x, y \in U\)</span>, where <span class="math inline">\(x \neq y\)</span>. Then the following is true. <span class="math display">\[
+|\{h \in H: h(x) = h(y)\}| = \frac{|H|}{m}
+\]</span> ​ which means that if a hash function <span class="math inline">\(h\)</span> is chosen randomly from <span class="math inline">\(H\)</span>, the probability of collision between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is <span class="math inline">\(1/m\)</span>. So that if there are <span class="math inline">\(|H|\)</span> hash functions to make <span class="math inline">\(h(x) = h(y)\)</span>, the probability of collision between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for all hash functions in <span class="math inline">\(H\)</span> is <span class="math inline">\(\frac{|H|}{m}\)</span>.</p>
+<h1 id="algorithm-design">Algorithm Design</h1>
+<h2 id="divide-and-conquer-1">Divide and Conquer</h2>
+<ol type="1">
 <li><strong>Divide</strong> the problem (instance) into one or more subproblems.</li>
 <li><strong>Conquer</strong> each subproblem recursively.</li>
 <li><strong>Combine</strong> solutions to the whole problem.</li>
 </ol>
-<h3 id="Example-1-Binary-Search"><a href="#Example-1-Binary-Search" class="headerlink" title="Example 1: Binary Search"></a>Example 1: Binary Search</h3><p>The goal is to find $x$ in a sorted array.</p>
-<ol>
-<li><strong>Divide</strong>: compare $x$ with the middle element in the sorted array.</li>
+<h3 id="example-1-binary-search">Example 1: Binary Search</h3>
+<p>The goal is to find <span class="math inline">\(x\)</span> in a sorted array.</p>
+<ol type="1">
+<li><strong>Divide</strong>: compare <span class="math inline">\(x\)</span> with the middle element in the sorted array.</li>
 <li><strong>Conquer</strong>: recurse in one subarray</li>
-<li><strong>Combine</strong>: don’t do anything.</li>
+<li><strong>Combine</strong>: don't do anything.</li>
 </ol>
-<p>The time complexity is $T(n) = 1 \cdot T(n/2) + \Theta(1)$. By applying <em>Master Method</em>, the time complexity is solved to be $\Theta(\log n)$.</p>
-<h3 id="Example-2-Powering-a-number"><a href="#Example-2-Powering-a-number" class="headerlink" title="Example 2: Powering a number"></a>Example 2: Powering a number</h3><p>Given a number $x$ and an integer $n \ge 0$, compute $x^n$.<br>$$<br>x^n =<br>\begin{cases}<br>x^{n/2} \cdot x^{n/2} &amp; \text{if $n$ is even}    \\<br>x^{\frac{n-1}{2}} \cdot x^{\frac{n-1}{2}} \cdot x &amp; \text{if $n$ is odd}<br>\end{cases}<br>\label{power}<br>$$<br>The time complexity is $T(n) = T(n/2) + \Theta(1)$. By applying <em>Master Method</em>, the time comlexity is solved to be $\Theta(\log n)$.</p>
-<h3 id="Example-3-Fibonacci-number"><a href="#Example-3-Fibonacci-number" class="headerlink" title="Example 3: Fibonacci number"></a>Example 3: Fibonacci number</h3><p>$$<br>F_n =<br>\begin{cases}<br>0 &amp; \text{if $n=0$}    \\<br>1 &amp; \text{if $n=1$}    \\<br>F_{n-1} + F_{n-2} &amp; \text{if $n \ge 2$}<br>\end{cases}<br>\label{fib}<br>$$</p>
-<h4 id="Naive-recursive-algorithm"><a href="#Naive-recursive-algorithm" class="headerlink" title="Naive recursive algorithm"></a>Naive recursive algorithm</h4><p>Just directly using the recursive formula in $(\ref{fib}$).</p>
-<p>Time complexity: $\Omega(\psi^n)$, where $\psi = \frac{1+\sqrt{5}}{2}$ (the golden ratio). This costs exponential time, which means it will spend a long time.</p>
+<p>The time complexity is <span class="math inline">\(T(n) = 1 \cdot T(n/2) + \Theta(1)\)</span>. By applying <em>Master Method</em>, the time complexity is solved to be <span class="math inline">\(\Theta(\log n)\)</span>.</p>
+<h3 id="example-2-powering-a-number">Example 2: Powering a number</h3>
+<p>Given a number <span class="math inline">\(x\)</span> and an integer <span class="math inline">\(n \ge 0\)</span>, compute <span class="math inline">\(x^n\)</span>. <span class="math display">\[
+x^n =
+\begin{cases}
+x^{n/2} \cdot x^{n/2} &amp; \text{if $n$ is even}   \\
+x^{\frac{n-1}{2}} \cdot x^{\frac{n-1}{2}} \cdot x &amp; \text{if $n$ is odd}
+\end{cases}
+\label{power}
+\]</span> The time complexity is <span class="math inline">\(T(n) = T(n/2) + \Theta(1)\)</span>. By applying <em>Master Method</em>, the time comlexity is solved to be <span class="math inline">\(\Theta(\log n)\)</span>.</p>
+<h3 id="example-3-fibonacci-number">Example 3: Fibonacci number</h3>
+<p><span class="math display">\[
+F_n =
+\begin{cases}
+0 &amp; \text{if $n=0$} \\
+1 &amp; \text{if $n=1$} \\
+F_{n-1} + F_{n-2} &amp; \text{if $n \ge 2$}
+\end{cases}
+\label{fib}
+\]</span></p>
+<h4 id="naive-recursive-algorithm">Naive recursive algorithm</h4>
+<p>Just directly using the recursive formula in <span class="math inline">\((\ref{fib}\)</span>).</p>
+<p>Time complexity: <span class="math inline">\(\Omega(\psi^n)\)</span>, where <span class="math inline">\(\psi = \frac{1+\sqrt{5}}{2}\)</span> (the golden ratio). This costs exponential time, which means it will spend a long time.</p>
 <blockquote>
 <p>Exponential time is bad, polynomial time is good.</p>
 </blockquote>
-<h4 id="Bottom-up-algorithm"><a href="#Bottom-up-algorithm" class="headerlink" title="Bottom-up algorithm"></a>Bottom-up algorithm</h4><p>Compute for $F_1, F_2, F_3, \cdots, F_n$ one by one:</p>
-<p>Time complexity: $\Theta(n)$</p>
-<h4 id="Naive-recursive-squaring-algorithm"><a href="#Naive-recursive-squaring-algorithm" class="headerlink" title="Naive recursive squaring algorithm"></a>Naive recursive squaring algorithm</h4><p>$F_n = \frac{\psi^n}{\sqrt{5}}$ rounded to its nearest integer, where $\psi = \frac{1+\sqrt{5}}{2}$ (the golden ratio). Given that the $\psi^n$ will cost $\Theta(\log n)$ time by using ($\ref{power}$), this algorithm’s time complexity is also  $\Theta(\log n)$.</p>
-<h4 id="Recursive-squaring-algorithm"><a href="#Recursive-squaring-algorithm" class="headerlink" title="Recursive squaring algorithm"></a>Recursive squaring algorithm</h4><p>Theorem:<br>$$<br>\begin{align}<br>\begin{pmatrix}<br>F_{n+1} &amp; F_{n}    \\<br>F_{n} &amp; F_{n-1}<br>\end{pmatrix}<br>=<br>\begin{pmatrix}<br>1 &amp; 1 \\<br>1 &amp; 0<br>\end{pmatrix}<br>^n<br>\end{align}<br>\label{fib_matrix}<br>$$</p>
-<p>The fibonacci number is solved by ($\ref{fib_matrix}$), which spends $\Theta(\log n )$ time for powering the $2 \times 2$ matrix (each multiplication of a $2 \times 2$ matrix costs the constant time).</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/13/mysql-commands-md/" rel="next" title="MySQL Learning Notes">
-                <i class="fa fa-chevron-left"></i> MySQL Learning Notes
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
+<h4 id="bottom-up-algorithm">Bottom-up algorithm</h4>
+<p>Compute for <span class="math inline">\(F_1, F_2, F_3, \cdots, F_n\)</span> one by one:</p>
+<p>Time complexity: <span class="math inline">\(\Theta(n)\)</span></p>
+<h4 id="naive-recursive-squaring-algorithm">Naive recursive squaring algorithm</h4>
+<p><span class="math inline">\(F_n = \frac{\psi^n}{\sqrt{5}}\)</span> rounded to its nearest integer, where <span class="math inline">\(\psi = \frac{1+\sqrt{5}}{2}\)</span> (the golden ratio). Given that the <span class="math inline">\(\psi^n\)</span> will cost <span class="math inline">\(\Theta(\log n)\)</span> time by using (<span class="math inline">\(\ref{power}\)</span>), this algorithm's time complexity is also <span class="math inline">\(\Theta(\log n)\)</span>.</p>
+<h4 id="recursive-squaring-algorithm">Recursive squaring algorithm</h4>
+<p>Theorem: <span class="math display">\[
+\begin{align}
+\begin{pmatrix}
+F_{n+1} &amp; F_{n} \\
+F_{n} &amp; F_{n-1}
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; 0
+\end{pmatrix}
+^n
+\end{align}
+\label{fib_matrix}
+\]</span></p>
+<p>The fibonacci number is solved by (<span class="math inline">\(\ref{fib_matrix}\)</span>), which spends <span class="math inline">\(\Theta(\log n )\)</span> time for powering the <span class="math inline">\(2 \times 2\)</span> matrix (each multiplication of a <span class="math inline">\(2 \times 2\)</span> matrix costs the constant time).</p>
 
         </div>
+
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Tishacy">
-            
-              <p class="site-author-name" itemprop="name">Tishacy</p>
-              <p class="site-description motion-element" itemprop="description">dive into code</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
+            <section class="post-copyright">
                 
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/Tishacy" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Tishacy</span>
+                    </p>
                 
-                  <span class="links-of-author-item">
-                    <a href="tishacy@gmail.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
                 
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://tishacy.github.io/2019/04/25/algorithm-introduction-notes/">https://tishacy.github.io/2019/04/25/algorithm-introduction-notes/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/algorithm/"># algorithm</a>
+                    
+                        
+                </span>
             </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-to-Algorithms"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Running-time"><span class="nav-number">1.1.</span> <span class="nav-text">Running time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kinds-of-analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Kinds of analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIG-IDEA-of-Algorithm-Analysis"><span class="nav-number">1.3.</span> <span class="nav-text">BIG IDEA of Algorithm Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asymptotic-Notations"><span class="nav-number">1.4.</span> <span class="nav-text">Asymptotic Notations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mathbb-O-notation"><span class="nav-number">1.4.1.</span> <span class="nav-text">$\mathbb{O}$-notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Omega-notation"><span class="nav-number">1.4.2.</span> <span class="nav-text">$\Omega$-notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theta-notation"><span class="nav-number">1.4.3.</span> <span class="nav-text">$\Theta$-notation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#In-Engineering"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">In Engineering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#In-Mathematics"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">In Mathematics</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Notations"><span class="nav-number">1.4.4.</span> <span class="nav-text">Other Notations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solving-Recurrences"><span class="nav-number">1.5.</span> <span class="nav-text">Solving Recurrences</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Substitution-Method"><span class="nav-number">1.5.1.</span> <span class="nav-text">Substitution Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recursion-tree-Method"><span class="nav-number">1.5.2.</span> <span class="nav-text">Recursion-tree Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Master-Method"><span class="nav-number">1.5.3.</span> <span class="nav-text">Master Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Sorting"><span class="nav-number">1.6.</span> <span class="nav-text">Problem: Sorting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sorting-Model"><span class="nav-number">1.6.1.</span> <span class="nav-text">Sorting Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-Sorting-Model"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">Comparison Sorting Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Theorem"><span class="nav-number">1.6.1.1.1.</span> <span class="nav-text">Theorem</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-comparison-Sorting-Model"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">Non-comparison Sorting Model</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insertion-Sort"><span class="nav-number">1.6.2.</span> <span class="nav-text">Insertion Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pseudo-Code"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explanation"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Insertion-Sort-Analysis"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">Insertion Sort Analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">1.6.3.</span> <span class="nav-text">Merge Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Explanation-1"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-in-Python"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">Code in Python:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-of-Merge-Sort"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">Analysis of Merge Sort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quicksort"><span class="nav-number">1.6.4.</span> <span class="nav-text">Quicksort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Divide-and-conquer"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">Divide and conquer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pseudo-Code-1"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">Pseudo Code</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Partition"><span class="nav-number">1.6.4.2.1.</span> <span class="nav-text">Partition</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#QuickSort"><span class="nav-number">1.6.4.2.2.</span> <span class="nav-text">QuickSort</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Animation-Explanation"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">Animation Explanation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-of-Quicksort-Algorithm"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">Analysis of Quicksort Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Worst-case-time"><span class="nav-number">1.6.4.4.1.</span> <span class="nav-text">Worst case time</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Best-case-time-for-intuition-only"><span class="nav-number">1.6.4.4.2.</span> <span class="nav-text">Best case time (for intuition only)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Average-case-time"><span class="nav-number">1.6.4.4.3.</span> <span class="nav-text">Average case time</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Randomized-Quicksort"><span class="nav-number">1.6.4.5.</span> <span class="nav-text">Randomized Quicksort</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Advantages"><span class="nav-number">1.6.4.5.1.</span> <span class="nav-text">Advantages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Analysis"><span class="nav-number">1.6.4.5.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-code"><span class="nav-number">1.6.4.5.3.</span> <span class="nav-text">Pseudo code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heapsort"><span class="nav-number">1.6.5.</span> <span class="nav-text">Heapsort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explanation-2"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">Explanation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Animation"><span class="nav-number">1.6.5.2.1.</span> <span class="nav-text">Animation</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-in-Python-1"><span class="nav-number">1.6.5.3.</span> <span class="nav-text">Code in Python</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Basic-knowledge-of-a-heap"><span class="nav-number">1.6.5.3.1.</span> <span class="nav-text">Basic knowledge of a heap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Max-heapify"><span class="nav-number">1.6.5.3.2.</span> <span class="nav-text">Max heapify</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Build-max-heap"><span class="nav-number">1.6.5.3.3.</span> <span class="nav-text">Build max heap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Heapsort-1"><span class="nav-number">1.6.5.3.4.</span> <span class="nav-text">Heapsort</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-of-the-Heapsort"><span class="nav-number">1.6.5.4.</span> <span class="nav-text">Analysis of the Heapsort</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Time-complexity-of-building-a-max-heap"><span class="nav-number">1.6.5.4.1.</span> <span class="nav-text">Time complexity of building a max heap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Time-complexity-of-latter-part-in-heapsort"><span class="nav-number">1.6.5.4.2.</span> <span class="nav-text">Time complexity of latter part in heapsort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Time-complexity-of-whole-algorithm"><span class="nav-number">1.6.5.4.3.</span> <span class="nav-text">Time complexity of whole algorithm</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Counting-Sort"><span class="nav-number">1.6.6.</span> <span class="nav-text">Counting Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Notations"><span class="nav-number">1.6.6.1.</span> <span class="nav-text">Notations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pseudo-Code-2"><span class="nav-number">1.6.6.2.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explanation-3"><span class="nav-number">1.6.6.3.</span> <span class="nav-text">Explanation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Anaylysis"><span class="nav-number">1.6.6.4.</span> <span class="nav-text">Anaylysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Radix-Sort"><span class="nav-number">1.6.7.</span> <span class="nav-text">Radix Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Least-significant-digit-LSD"><span class="nav-number">1.6.7.1.</span> <span class="nav-text">Least significant digit (LSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pseudo-Code-3"><span class="nav-number">1.6.7.1.1.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Analysis-of-LSD"><span class="nav-number">1.6.7.1.2.</span> <span class="nav-text">Analysis of LSD</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Most-significant-digit-MSD"><span class="nav-number">1.6.7.2.</span> <span class="nav-text">Most significant digit (MSD)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Order-Statistics"><span class="nav-number">1.7.</span> <span class="nav-text">Problem: Order Statistics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rand-Select-Algorithm"><span class="nav-number">1.7.1.</span> <span class="nav-text">Rand-Select Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pseudo-Code-4"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">Pseudo Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Animation-Explanation-1"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">Animation Explanation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-of-Rand-Select-Algorithm"><span class="nav-number">1.7.1.3.</span> <span class="nav-text">Analysis of Rand-Select Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Lucky-Case"><span class="nav-number">1.7.1.3.1.</span> <span class="nav-text">Lucky Case</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unlucky-Case"><span class="nav-number">1.7.1.3.2.</span> <span class="nav-text">Unlucky Case</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Expected-Case"><span class="nav-number">1.7.1.3.3.</span> <span class="nav-text">Expected Case</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Worst-case-linear-time-order-statistics"><span class="nav-number">1.7.2.</span> <span class="nav-text">Worst-case linear-time order statistics</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Algorithm-1"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-1"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">Analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Hashing"><span class="nav-number">1.8.</span> <span class="nav-text">Problem: Hashing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol-table-Problem"><span class="nav-number">1.8.1.</span> <span class="nav-text">Symbol-table Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operations"><span class="nav-number">1.8.2.</span> <span class="nav-text">Operations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-access-Table"><span class="nav-number">1.8.3.</span> <span class="nav-text">Direct-access Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashing"><span class="nav-number">1.8.4.</span> <span class="nav-text">Hashing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choosing-a-Hash-Function"><span class="nav-number">1.8.5.</span> <span class="nav-text">Choosing a Hash Function</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Division-Method"><span class="nav-number">1.8.5.1.</span> <span class="nav-text">Division Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiplication-Method"><span class="nav-number">1.8.5.2.</span> <span class="nav-text">Multiplication Method</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resolving-Collisions-in-Hashing"><span class="nav-number">1.8.6.</span> <span class="nav-text">Resolving Collisions in Hashing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#By-Chaining"><span class="nav-number">1.8.6.1.</span> <span class="nav-text">By Chaining</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Analysis-2"><span class="nav-number">1.8.6.1.1.</span> <span class="nav-text">Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#By-Open-Addressing"><span class="nav-number">1.8.6.2.</span> <span class="nav-text">By Open Addressing</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Probing-Strategies"><span class="nav-number">1.8.6.2.1.</span> <span class="nav-text">Probing Strategies</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Analysis-of-Open-Addressing"><span class="nav-number">1.8.6.2.2.</span> <span class="nav-text">Analysis of Open Addressing</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Weakness-of-Hashing"><span class="nav-number">1.8.7.</span> <span class="nav-text">Weakness of Hashing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Universal-Hashing"><span class="nav-number">1.8.8.</span> <span class="nav-text">Universal Hashing</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm-Design"><span class="nav-number">2.</span> <span class="nav-text">Algorithm Design</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Divide-and-Conquer"><span class="nav-number">2.1.</span> <span class="nav-text">Divide and Conquer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-1-Binary-Search"><span class="nav-number">2.1.1.</span> <span class="nav-text">Example 1: Binary Search</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-2-Powering-a-number"><span class="nav-number">2.1.2.</span> <span class="nav-text">Example 2: Powering a number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-3-Fibonacci-number"><span class="nav-number">2.1.3.</span> <span class="nav-text">Example 3: Fibonacci number</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Naive-recursive-algorithm"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Naive recursive algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bottom-up-algorithm"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Bottom-up algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Naive-recursive-squaring-algorithm"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">Naive recursive squaring algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-squaring-algorithm"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">Recursive squaring algorithm</span></a></li></ol></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
         </section>
-      <!--/noindex-->
-      
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2018/12/13/mysql-commands-md/">MySQL Learning Notes</a>
+            
+        </section>
 
-      
 
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Tishacy</span>
-
-  
+    </article>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  
-
-
-  
-
-  
-
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Tishacy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
 </body>
 </html>
