@@ -1,5 +1,8 @@
 ---
-title: tags
-date: 2019-04-25 00:21:35
-type: "tags"
+title: Tags
+layout: "Tags"
 ---
+
+- [Algorithm](/tags/algorithm/)
+- [Databases](/tags/database/)
+- [Linux](/tags/linux)

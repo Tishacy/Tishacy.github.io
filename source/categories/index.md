@@ -1,5 +1,8 @@
 ---
-title: categories
-date: 2019-04-25 00:21:07
-type: "categories"
+title: Categories
+layout: "Categories"
 ---
+
+- [Algorithm](/categories/algorithm/)
+- [Databases](/categories/database/)
+- [Linux](/categories/linux)

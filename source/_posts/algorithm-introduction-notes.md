@@ -9,7 +9,7 @@ categories: algorithm
 
 # Introduction to Algorithms
 
-![](https://cdn-images-1.medium.com/max/1200/1*9QRFQdpO2f59GsN2KsE9XA.png)
+![](https://i.loli.net/2021/03/29/8XtkCW9yaA36ZzM.png)
 
 >If you want to be a good programmer, you can just program every day for two years, and you'll be an excellent programmer. If you want to be a world-class programmer, you can program every day for ten years, or you can program every day for two years and take an algorithm class.
 >
